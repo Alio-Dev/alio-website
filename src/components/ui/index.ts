@@ -30,3 +30,5 @@ export * from './Charts';
 export * from './AppShell';
 export * from './MapSurface';
 export * from './BrandIcon';
+export * from './OfficialLogo';
+export * from './ThemeToggle';

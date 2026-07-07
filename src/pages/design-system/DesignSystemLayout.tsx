@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, Moon, Search, Sun, X, ArrowUpRight } from 'lucide-react';
 import { cn } from '../../lib/cn';
-import { ThemeProvider, useTheme } from '../../design-system/ThemeProvider';
+import { useTheme } from '../../design-system/ThemeProvider';
 import { ToastProvider } from '../../components/ui/Toast';
 import { NAV, BASE } from './nav';
 import { SearchDialog } from './components/SearchDialog';
@@ -159,11 +159,11 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
 }
 
 export function DesignSystemLayout({ children }: { children: React.ReactNode }) {
+  // ThemeProvider lives at the app root (main.tsx) so the whole site themes
+  // together; the docs only add the toast layer on top.
   return (
-    <ThemeProvider>
-      <ToastProvider>
-        <LayoutInner>{children}</LayoutInner>
-      </ToastProvider>
-    </ThemeProvider>
+    <ToastProvider>
+      <LayoutInner>{children}</LayoutInner>
+    </ToastProvider>
   );
 }

@@ -3,12 +3,20 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import { siFacebook, siX, siYoutube } from 'simple-icons';
 import { useLanguage } from '../hooks/useLanguage';
 import { BrandIcon, type SimpleIcon } from './ui/BrandIcon';
+import { OfficialLogo } from './ui/OfficialLogo';
 
-// lucide v1 removed brand/social icons; brand glyphs now come from simple-icons.
-// LinkedIn was also removed from simple-icons (trademark) — rendered as an
-// interim mark; drop in an official LinkedIn SVG in the Phase 3 footer rebuild.
-const socialLinks: { label: string; href: string; icon: SimpleIcon | null }[] = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/alioanalytics/', icon: null },
+// Brand glyphs come from simple-icons where available. LinkedIn, AWS and
+// Microsoft are trademarked marks that simple-icons no longer ships, so they
+// load the vendor's official asset from /public/brand (see brand-assets.ts),
+// with an accessible interim mark as fallback until the file is added.
+// `officialSrc` = path under /public to the vendor's own SVG.
+const socialLinks: {
+  label: string;
+  href: string;
+  icon: SimpleIcon | null;
+  officialSrc?: string;
+}[] = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/alioanalytics/', icon: null, officialSrc: '/brand/social/linkedin.svg' },
   { label: 'Facebook', href: 'https://www.facebook.com/alioanalytics', icon: siFacebook },
   { label: 'X', href: 'https://twitter.com/alioanalytics', icon: siX },
   { label: 'YouTube', href: 'https://www.youtube.com/@alioanalytics', icon: siYoutube },
@@ -45,7 +53,7 @@ const Footer: React.FC = () => {
               {t.footer.tagline}
             </p>
             <div className="flex space-x-4 mt-4">
-              {socialLinks.map(({ icon, href, label }) => (
+              {socialLinks.map(({ icon, href, label, officialSrc }) => (
                 <a
                   key={label}
                   href={href}
@@ -57,11 +65,18 @@ const Footer: React.FC = () => {
                 >
                   {icon ? (
                     <BrandIcon icon={icon} size={22} />
-                  ) : (
-                    <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-sm border border-current text-[11px] font-bold leading-none">
-                      in
-                    </span>
-                  )}
+                  ) : officialSrc ? (
+                    <OfficialLogo
+                      src={officialSrc}
+                      alt={label}
+                      height={22}
+                      fallback={
+                        <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-sm border border-current text-[11px] font-bold leading-none">
+                          in
+                        </span>
+                      }
+                    />
+                  ) : null}
                 </a>
               ))}
             </div>
@@ -106,17 +121,27 @@ const Footer: React.FC = () => {
           <p className="text-xs text-blue-100">© 2025 Alio Analytics. {currentLanguage === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}</p>
           <div className="flex items-center space-x-4 mt-2 md:mt-0">
             <span className="text-xs text-blue-100 mr-2">{currentLanguage === 'pt' ? 'Nossos Parceiros:' : 'Our Partners:'}</span>
-            {/* Partner marks: AWS & Microsoft are trademarked and were removed
-               from simple-icons — swap these badges for official partner logo
-               assets during the Phase 3 footer rebuild. */}
-            {['AWS', 'Microsoft'].map((partner) => (
-              <span
-                key={partner}
-                className="rounded-md border border-white/25 px-2 py-1 text-xs font-semibold text-white transition-colors hover:border-white/60"
-                title={partner}
-              >
-                {partner}
-              </span>
+            {/* Partner marks are trademarked vendor assets: load the official
+               SVG from /public/brand/partners, falling back to a text badge
+               until the file is added (see brand-assets.ts for the file list). */}
+            {[
+              { name: 'AWS', src: '/brand/partners/aws.svg' },
+              { name: 'Microsoft', src: '/brand/partners/microsoft.svg' },
+            ].map((partner) => (
+              <OfficialLogo
+                key={partner.name}
+                src={partner.src}
+                alt={partner.name}
+                height={20}
+                fallback={
+                  <span
+                    className="rounded-md border border-white/25 px-2 py-1 text-xs font-semibold text-white transition-colors hover:border-white/60"
+                    title={partner.name}
+                  >
+                    {partner.name}
+                  </span>
+                }
+              />
             ))}
           </div>
         </div>

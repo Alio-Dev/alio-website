@@ -1,598 +1,393 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X, Code, BarChart3, Map, Palette, ArrowRight, Phone, Mail, MapPin, CheckCircle, Smartphone, Shield, Settings, Image, type LucideIcon } from 'lucide-react';
+import {
+  ChevronDown, Menu, X, Code, BarChart3, Map, Palette, ArrowRight,
+  Phone, Mail, MapPin, CheckCircle, Smartphone, Shield, Settings, Image,
+  type LucideIcon,
+} from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import ContactModal from '../components/ContactModal';
 import ScreenshotsModal from '../components/ScreenshotsModal';
 import Footer from '../components/Footer';
+import { Button } from '../components/ui/Button';
+import { Card } from '../components/ui/Card';
+import { ThemeToggle } from '../components/ui/ThemeToggle';
+import { cn } from '../lib/cn';
 
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [isScreenshotsModalOpen, setIsScreenshotsModalOpen] = useState(false);
   const [selectedApp, setSelectedApp] = useState('');
-  const [scrollY, setScrollY] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   const { t, currentLanguage } = useLanguage();
+  const isPt = currentLanguage === 'pt';
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const services = [
-    {
-      icon: Code,
-      title: t.services.digitalSolutions.title,
-      description: t.services.digitalSolutions.description,
-      features: t.services.digitalSolutions.features,
-      link: '/services/digital-solutions'
-    },
-    {
-      icon: Smartphone,
-      title: t.services.webMobileDev.title,
-      description: t.services.webMobileDev.description,
-      features: t.services.webMobileDev.features,
-      link: '/services/web-mobile'
-    },
-    {
-      icon: Shield,
-      title: t.services.itServices.title,
-      description: t.services.itServices.description,
-      features: t.services.itServices.features,
-      link: '/services/it-services'
-    },
-    {
-      icon: BarChart3,
-      title: t.services.analytics.title,
-      description: t.services.analytics.description,
-      features: t.services.analytics.features,
-      link: '/services/analytics'
-    },
-    {
-      icon: Palette,
-      title: t.services.design.title,
-      description: t.services.design.description,
-      features: t.services.design.features,
-      link: '/services/design'
-    },
-    {
-      icon: Map,
-      title: t.services.gis.title,
-      description: t.services.gis.description,
-      features: t.services.gis.features,
-      link: '/services/gis'
-    }
+    { icon: Code, ...t.services.digitalSolutions, link: '/services/digital-solutions' },
+    { icon: Smartphone, ...t.services.webMobileDev, link: '/services/web-mobile' },
+    { icon: Shield, ...t.services.itServices, link: '/services/it-services' },
+    { icon: BarChart3, ...t.services.analytics, link: '/services/analytics' },
+    { icon: Palette, ...t.services.design, link: '/services/design' },
+    { icon: Map, ...t.services.gis, link: '/services/gis' },
   ];
 
   const solutions: Array<{
-    logo?: string;
-    icon?: LucideIcon;
-    title: string;
-    subtitle: string;
-    description: string;
-    features: string[];
-    status: string;
-    gradient: string;
-    delay: string;
-    comingSoon: boolean;
+    logo?: string; icon?: LucideIcon; title: string; subtitle: string;
+    description: string; features: string[]; status: string; gradient: string; comingSoon: boolean;
   }> = [
-    {
-      logo: '/kelesa.png',
-      title: t.solutions.kelesaKlean.title,
-      subtitle: t.solutions.kelesaKlean.subtitle,
-      description: t.solutions.kelesaKlean.description,
-      features: t.solutions.kelesaKlean.features.slice(0, 4),
-      status: t.solutions.kelesaKlean.status,
-      gradient: 'from-green-600 to-emerald-700',
-      delay: '0s',
-      comingSoon: true
-    },
-    {
-      logo: '/okwenda.png',
-      title: t.solutions.okwenda.title,
-      subtitle: t.solutions.okwenda.subtitle,
-      description: t.solutions.okwenda.description,
-      features: t.solutions.okwenda.features.slice(0, 4),
-      status: t.solutions.okwenda.status,
-      gradient: 'from-blue-600 to-cyan-700',
-      delay: '0.1s',
-      comingSoon: true
-    },
-    {
-      logo: '/Mwenhu.png',
-      title: t.solutions.mwenhu.title,
-      subtitle: t.solutions.mwenhu.subtitle,
-      description: t.solutions.mwenhu.description,
-      features: t.solutions.mwenhu.features.slice(0, 4),
-      status: t.solutions.mwenhu.status,
-      gradient: 'from-red-500 to-pink-600',
-      delay: '0.2s',
-      comingSoon: true
-    },
-    {
-      icon: Settings,
-      title: t.solutions.customSolutions.title,
-      subtitle: "Desenvolvimento Sob Medida",
-      description: t.solutions.customSolutions.description,
-      features: t.solutions.customSolutions.features,
-      status: "Disponível",
-      gradient: 'from-purple-600 to-indigo-700',
-      delay: '0.3s',
-      comingSoon: false
-    }
+    { logo: '/kelesa.png', ...t.solutions.kelesaKlean, features: t.solutions.kelesaKlean.features.slice(0, 4), gradient: 'from-green-600 to-emerald-700', comingSoon: true },
+    { logo: '/okwenda.png', ...t.solutions.okwenda, features: t.solutions.okwenda.features.slice(0, 4), gradient: 'from-blue-600 to-cyan-700', comingSoon: true },
+    { logo: '/Mwenhu.png', ...t.solutions.mwenhu, features: t.solutions.mwenhu.features.slice(0, 4), gradient: 'from-red-500 to-pink-600', comingSoon: true },
+    { icon: Settings, title: t.solutions.customSolutions.title, subtitle: isPt ? 'Desenvolvimento Sob Medida' : 'Bespoke Development', description: t.solutions.customSolutions.description, features: t.solutions.customSolutions.features, status: isPt ? 'Disponível' : 'Available', gradient: 'from-purple-600 to-indigo-700', comingSoon: false },
   ];
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };
+  const openContactModal = () => setIsContactModalOpen(true);
+  const openScreenshotsModal = (name: string) => { setSelectedApp(name); setIsScreenshotsModalOpen(true); };
 
-  const openContactModal = () => {
-    setIsContactModalOpen(true);
-  };
-
-  const openScreenshotsModal = (appName: string) => {
-    setSelectedApp(appName);
-    setIsScreenshotsModalOpen(true);
-  };
-
-  const closeScreenshotsModal = () => {
-    setIsScreenshotsModalOpen(false);
-    setSelectedApp('');
-  };
+  const navLinks = [
+    { id: 'home', label: t.nav.home },
+    { id: 'services', label: t.nav.services },
+    { id: 'solutions', label: t.nav.solutions },
+    { id: 'about', label: t.nav.about },
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrollY > 50 ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <img 
-                src="/Alio.svg" 
-                alt="Alio Analytics Logo" 
-                className="h-8 w-auto"
-              />
-              <div className="text-xl font-bold bg-gradient-to-r from-blue-700 to-teal-600 bg-clip-text text-transparent hidden sm:inline">
-                Alio Analytics
-              </div>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <div className="flex items-baseline space-x-8">
-                <button onClick={() => scrollToSection('home')} className={`${scrollY <= 50 ? 'text-orange-500' : 'text-gray-900 hover:text-blue-700'} px-3 py-2 text-sm font-medium transition-colors`}>
-                  {t.nav.home}
-                </button>
-                <button onClick={() => scrollToSection('services')} className={`${scrollY <= 50 ? 'text-orange-500' : 'text-gray-900 hover:text-blue-700'} px-3 py-2 text-sm font-medium transition-colors`}>
-                  {t.nav.services}
-                </button>
-                <button onClick={() => scrollToSection('solutions')} className={`${scrollY <= 50 ? 'text-orange-500' : 'text-gray-900 hover:text-blue-700'} px-3 py-2 text-sm font-medium transition-colors`}>
-                  {t.nav.solutions}
-                </button>
-                <button onClick={() => scrollToSection('about')} className={`${scrollY <= 50 ? 'text-orange-500' : 'text-gray-900 hover:text-blue-700'} px-3 py-2 text-sm font-medium transition-colors`}>
-                  {t.nav.about}
-                </button>
-                <button onClick={openContactModal} className="bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-800 transition-colors">
-                  {t.nav.contact}
-                </button>
-              </div>
-              <LanguageSwitcher textColorClass={scrollY <= 50 ? 'text-orange-500' : 'text-gray-900 hover:text-blue-700'} />
-            </div>
+    <div className="min-h-screen bg-bg font-sans text-primary">
+      {/* ---------- Navigation ---------- */}
+      <nav
+        className={cn(
+          'fixed inset-x-0 top-0 z-sticky transition-colors duration-300',
+          scrolled ? 'bg-bg/90 backdrop-blur-md shadow-sm border-b border-border-subtle' : 'bg-transparent',
+        )}
+      >
+        <div className="mx-auto flex h-16 max-w-container items-center justify-between px-4 sm:px-6 lg:px-8">
+          <button onClick={() => scrollToSection('home')} className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded-md" aria-label="Alio Analytics home">
+            <img src="/Alio.svg" alt="Alio Analytics" className="h-8 w-auto" />
+            <span className={cn('hidden font-display text-h6 sm:inline', scrolled ? 'text-primary' : 'text-white')}>
+              Alio Analytics
+            </span>
+          </button>
 
-            {/* Mobile menu button */}
-            <div className="md:hidden flex items-center space-x-2">
-              <LanguageSwitcher textColorClass={scrollY <= 50 ? 'text-orange-500' : 'text-gray-900 hover:text-blue-700'} />
+          {/* Desktop */}
+          <div className="hidden items-center gap-2 md:flex">
+            {navLinks.map((l) => (
               <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-900 hover:text-blue-700 p-2"
+                key={l.id}
+                onClick={() => scrollToSection(l.id)}
+                className={cn(
+                  'rounded-md px-3 py-2 text-body-s font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus',
+                  scrolled ? 'text-secondary hover:text-brand' : 'text-white/90 hover:text-white',
+                )}
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {l.label}
               </button>
+            ))}
+            <div className="mx-1 flex items-center gap-1">
+              <LanguageSwitcher textColorClass={scrolled ? 'text-secondary hover:text-brand' : 'text-white/90 hover:text-white'} />
+              <ThemeToggle className={scrolled ? 'text-secondary hover:bg-bg-subtle hover:text-primary' : 'text-white/90 hover:bg-white/10'} />
             </div>
+            <Button size="sm" onClick={openContactModal}>{t.nav.contact}</Button>
+          </div>
+
+          {/* Mobile */}
+          <div className="flex items-center gap-1 md:hidden">
+            <LanguageSwitcher textColorClass={scrolled ? 'text-secondary' : 'text-white/90'} />
+            <ThemeToggle className={scrolled ? 'text-secondary hover:bg-bg-subtle' : 'text-white/90 hover:bg-white/10'} />
+            <button
+              onClick={() => setIsMenuOpen((o) => !o)}
+              className={cn('rounded-md p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus', scrolled ? 'text-primary' : 'text-white')}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t animate-slide-down">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <button onClick={() => scrollToSection('home')} className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-700 w-full text-left">
-                {t.nav.home}
-              </button>
-              <button onClick={() => scrollToSection('services')} className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-700 w-full text-left">
-                {t.nav.services}
-              </button>
-              <button onClick={() => scrollToSection('solutions')} className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-700 w-full text-left">
-                {t.nav.solutions}
-              </button>
-              <button onClick={() => scrollToSection('about')} className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-700 w-full text-left">
-                {t.nav.about}
-              </button>
-              <button onClick={openContactModal} className="block px-3 py-2 text-base font-medium bg-blue-700 text-white rounded-lg mx-3 text-center">
-                {t.nav.contact}
-              </button>
+          <div className="border-t border-border-subtle bg-bg md:hidden">
+            <div className="space-y-1 px-3 py-3">
+              {navLinks.map((l) => (
+                <button key={l.id} onClick={() => scrollToSection(l.id)} className="block w-full rounded-md px-3 py-2 text-left text-body-m font-medium text-secondary hover:bg-bg-subtle hover:text-brand">
+                  {l.label}
+                </button>
+              ))}
+              <Button fullWidth onClick={openContactModal} className="mt-2">{t.nav.contact}</Button>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
-      />
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
+      <ScreenshotsModal isOpen={isScreenshotsModalOpen} onClose={() => { setIsScreenshotsModalOpen(false); setSelectedApp(''); }} appName={selectedApp} onContactClick={openContactModal} />
 
-      {/* Screenshots Modal */}
-      <ScreenshotsModal 
-        isOpen={isScreenshotsModalOpen} 
-        onClose={closeScreenshotsModal}
-        appName={selectedApp}
-        onContactClick={openContactModal}
-      />
-
-      {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="/hero_section_background.png" alt="Hero Background" className="w-full h-full object-cover" />
-        </div>
-        <div className="absolute inset-0 bg-black/20"></div>
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-teal-400/20 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-teal-400/20 to-blue-400/20 rounded-full blur-3xl animate-float-delayed"></div>
+      {/* ---------- Hero ---------- */}
+      <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden">
+        <img src="/hero_section_background.png" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-primary-950/60" />
+        <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div className="animate-float absolute -right-40 -top-40 h-80 w-80 rounded-full bg-gradient-brand opacity-20 blur-3xl" />
+          <div className="animate-float-delayed absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-gradient-brand opacity-20 blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 mx-auto max-w-container px-4 text-center sm:px-6 lg:px-8">
           <div className="animate-fade-in-up">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+            <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-white md:text-6xl lg:text-display-xl">
               {t.hero.title}
-              <span className="block bg-gradient-to-r from-orange-400 to-orange-300 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-accent-400 to-accent-300 bg-clip-text text-transparent">
                 {t.hero.subtitle}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-4xl mx-auto leading-relaxed">
+            <p className="mx-auto mb-8 max-w-3xl text-body-l text-neutral-200 md:text-xl">
               {t.hero.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => scrollToSection('services')}
-                className="bg-orange-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
-              >
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+              <Button size="lg" onClick={() => scrollToSection('services')} rightIcon={<ArrowRight size={20} />}>
                 {t.hero.exploreServices}
-                <ArrowRight size={20} />
-              </button>
-              <button 
-                onClick={openContactModal}
-                className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 transform hover:scale-105"
-              >
+              </Button>
+              <Button size="lg" variant="outline" onClick={openContactModal} className="border-white/70 bg-transparent text-white hover:bg-white hover:text-primary-900">
                 {t.hero.getStarted}
-              </button>
+              </Button>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown size={32} className="text-white/70" />
-        </div>
+        <button onClick={() => scrollToSection('services')} aria-label="Scroll to content" className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white/70 hover:text-white">
+          <ChevronDown size={32} />
+        </button>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">
-              {t.services.title}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t.services.description}
-            </p>
+      {/* ---------- Services ---------- */}
+      <section id="services" className="bg-bg-subtle py-20">
+        <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 font-display text-h2 text-primary md:text-display-m">{t.services.title}</h2>
+            <p className="mx-auto max-w-3xl text-body-l text-secondary">{t.services.description}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Link
-                key={index}
-                to={service.link}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 animate-slide-in-up"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="flex items-center mb-6">
-                  <div className="bg-gradient-to-r from-blue-700 to-teal-600 p-3 rounded-xl text-white group-hover:scale-110 transition-transform duration-300">
-                    <service.icon size={32} />
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, i) => (
+              <Link key={i} to={service.link} className="group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded-lg">
+                <Card interactive padding="lg" className="flex h-full flex-col">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-brand-135 text-white transition-transform duration-300 group-hover:scale-110">
+                    <service.icon size={28} />
                   </div>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-700 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed text-sm">
-                  {service.description}
-                </p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-gray-700 text-sm">
-                      <CheckCircle size={14} className="text-green-500 mr-3 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 flex items-center text-blue-700 font-semibold group-hover:text-blue-800 transition-colors">
-                  Saiba mais
-                  <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </div>
+                  <h3 className="mb-3 font-display text-h5 text-primary transition-colors group-hover:text-brand">{service.title}</h3>
+                  <p className="mb-6 text-body-s text-tertiary">{service.description}</p>
+                  <ul className="mb-6 space-y-2">
+                    {service.features.map((f, fi) => (
+                      <li key={fi} className="flex items-center gap-3 text-body-s text-secondary">
+                        <CheckCircle size={14} className="shrink-0 text-success-500" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto flex items-center gap-2 text-body-s font-semibold text-brand">
+                    {isPt ? 'Saiba mais' : 'Learn more'}
+                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  </div>
+                </Card>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Solutions Section */}
-      <section id="solutions" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">
+      {/* ---------- Solutions ---------- */}
+      <section id="solutions" className="bg-bg py-20">
+        <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 font-display text-h2 text-primary md:text-display-m">
               {t.solutions.title}
-              <span className="block bg-gradient-to-r from-blue-700 to-teal-600 bg-clip-text text-transparent">
-                {t.solutions.subtitle}
-              </span>
+              <span className="block bg-gradient-brand bg-clip-text text-transparent">{t.solutions.subtitle}</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              {t.solutions.description}
-            </p>
+            <p className="mx-auto max-w-3xl text-body-l text-secondary">{t.solutions.description}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {solutions.map((solution, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-slide-in-up"
-                style={{ animationDelay: solution.delay }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${solution.gradient} opacity-90`}></div>
+          <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+            {solutions.map((s, i) => (
+              <div key={i} className={cn('group relative overflow-hidden rounded-2xl bg-gradient-to-br shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-xl', s.gradient)}>
                 <div className="relative p-8 text-white">
-                  {/* Status Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      solution.comingSoon 
-                        ? 'bg-orange-500/20 text-orange-200 border border-orange-300/30' 
-                        : 'bg-green-500/20 text-green-200 border border-green-300/30'
-                    }`}>
-                      {solution.comingSoon ? t.solutions.comingSoon : solution.status}
+                  <div className="absolute right-4 top-4">
+                    <span className={cn('rounded-full border px-3 py-1 text-caption font-semibold backdrop-blur-sm',
+                      s.comingSoon ? 'border-white/30 bg-white/15 text-white' : 'border-white/40 bg-white/20 text-white')}>
+                      {s.comingSoon ? t.solutions.comingSoon : s.status}
                     </span>
                   </div>
 
-                  {/* Logo Section - Enhanced */}
-                  <div className="flex items-center justify-center mb-8">
-                    <div className="bg-white/95 backdrop-blur-sm p-6 rounded-3xl shadow-lg group-hover:scale-110 transition-transform duration-300 border border-white/20">
-                      {solution.logo ? (
-                        <img 
-                          src={solution.logo} 
-                          alt={`${solution.title} Logo`}
-                          className="w-20 h-20 object-contain"
-                        />
-                      ) : solution.icon ? (
-                        <solution.icon size={80} className="text-gray-700" />
+                  <div className="mb-8 flex items-center justify-center">
+                    <div className="rounded-2xl border border-white/20 bg-white/95 p-6 shadow-md transition-transform duration-300 group-hover:scale-105">
+                      {s.logo ? (
+                        <img src={s.logo} alt={`${s.title} logo`} loading="lazy" className="h-20 w-20 object-contain" />
+                      ) : s.icon ? (
+                        <s.icon size={80} className="text-neutral-700" />
                       ) : null}
                     </div>
                   </div>
-                  
-                  <div className="text-center mb-6">
-                    <h3 className="text-3xl font-bold mb-2 group-hover:text-orange-200 transition-colors">
-                      {solution.title}
-                    </h3>
-                    
-                    <p className="text-lg font-medium text-white/90 mb-4">
-                      {solution.subtitle}
-                    </p>
-                    
-                    <p className="text-white/80 mb-6 leading-relaxed text-sm">
-                      {solution.description}
-                    </p>
+
+                  <div className="mb-6 text-center">
+                    <h3 className="mb-2 font-display text-h3">{s.title}</h3>
+                    <p className="mb-4 text-body-l font-medium text-white/90">{s.subtitle}</p>
+                    <p className="text-body-s text-white/80">{s.description}</p>
                   </div>
-                  
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
-                    <h4 className="text-lg font-semibold mb-4 text-center">Funcionalidades Principais</h4>
+
+                  <div className="mb-6 rounded-xl bg-white/10 p-6 backdrop-blur-sm">
+                    <h4 className="mb-4 text-center font-display text-h6">{isPt ? 'Funcionalidades Principais' : 'Key Features'}</h4>
                     <ul className="space-y-3">
-                      {solution.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start text-white/90">
-                          <CheckCircle size={16} className="text-orange-300 mr-3 flex-shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
+                      {s.features.map((f, fi) => (
+                        <li key={fi} className="flex items-start gap-3 text-body-s text-white/90">
+                          <CheckCircle size={16} className="mt-0.5 shrink-0 text-accent-300" />
+                          <span>{f}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    {/* Screenshots Button - Only for apps with logos (not custom solutions) */}
-                    {solution.logo && (
-                      <button 
-                        onClick={() => openScreenshotsModal(solution.title)}
-                        className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 group-hover:shadow-lg justify-center"
-                      >
+
+                  <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                    {s.logo && (
+                      <button onClick={() => openScreenshotsModal(s.title)} className="inline-flex items-center justify-center gap-2 rounded-md bg-white/20 px-6 py-3 text-body-s font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
                         <Image size={18} />
-                        {currentLanguage === 'pt' ? 'Ver Screenshots' : 'View Screenshots'}
+                        {isPt ? 'Ver Screenshots' : 'View Screenshots'}
                       </button>
                     )}
-                    
-                    {/* Learn More / Contact Button */}
-                    <button 
-                      onClick={openContactModal}
-                      className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 group-hover:shadow-lg justify-center"
-                    >
-                      {solution.comingSoon ? t.solutions.learnMore : 'Contactar'}
-                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    <button onClick={openContactModal} className="inline-flex items-center justify-center gap-2 rounded-md bg-white/20 px-6 py-3 text-body-s font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+                      {s.comingSoon ? t.solutions.learnMore : isPt ? 'Contactar' : 'Contact us'}
+                      <ArrowRight size={18} />
                     </button>
                   </div>
                 </div>
-                
-                {/* Enhanced Decorative Elements */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl transform translate-x-20 -translate-y-20"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl transform -translate-x-16 translate-y-16"></div>
-                <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-white/5 rounded-full blur-xl transform -translate-x-12 -translate-y-12"></div>
               </div>
             ))}
           </div>
 
-          {/* CTA Section */}
-          <div className="text-center bg-gradient-to-r from-blue-50 to-teal-50 rounded-3xl p-12 animate-fade-in-up">
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">
-              Tem uma Ideia para uma Aplicação?
-            </h3>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Vamos trabalhar juntos para transformar a sua visão numa aplicação que pode impactar positivamente a vida das pessoas.
+          {/* CTA */}
+          <Card padding="lg" className="bg-bg-subtle text-center">
+            <h3 className="mb-4 font-display text-h3 text-primary">{isPt ? 'Tem uma Ideia para uma Aplicação?' : 'Have an Idea for an App?'}</h3>
+            <p className="mx-auto mb-8 max-w-2xl text-body-l text-secondary">
+              {isPt
+                ? 'Vamos trabalhar juntos para transformar a sua visão numa aplicação que pode impactar positivamente a vida das pessoas.'
+                : "Let's work together to turn your vision into an application that can make a real difference in people's lives."}
             </p>
-            <button 
-              onClick={openContactModal}
-              className="bg-gradient-to-r from-blue-700 to-teal-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 mx-auto"
-            >
-              Discutir Projeto
-              <ArrowRight size={20} />
-            </button>
+            <Button size="lg" onClick={openContactModal} rightIcon={<ArrowRight size={20} />} className="mx-auto">
+              {isPt ? 'Discutir Projeto' : 'Discuss a Project'}
+            </Button>
+          </Card>
+        </div>
+      </section>
+
+      {/* ---------- About ---------- */}
+      <section id="about" className="bg-bg-subtle py-20">
+        <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+            <div>
+              <h2 className="mb-6 font-display text-h2 text-primary md:text-display-m">
+                {t.about.title}
+                <span className="block bg-gradient-brand bg-clip-text text-transparent">{t.about.subtitle}</span>
+              </h2>
+              <p className="mb-6 text-body-l text-secondary">{t.about.description1}</p>
+              <p className="mb-8 text-body-l text-secondary">{t.about.description2}</p>
+              <div className="grid grid-cols-2 gap-6">
+                <Card className="text-center">
+                  <div className="font-display text-h2 text-brand">15+</div>
+                  <div className="mt-1 text-body-s text-tertiary">{t.about.stats.projects}</div>
+                </Card>
+                <Card className="text-center">
+                  <div className="font-display text-h2 text-accent">3+</div>
+                  <div className="mt-1 text-body-s text-tertiary">{t.about.stats.experience}</div>
+                </Card>
+              </div>
+            </div>
+            <div className="rounded-2xl bg-gradient-brand-135 p-8 text-white">
+              <h3 className="mb-4 font-display text-h4">{t.about.whyChoose.title}</h3>
+              <ul className="space-y-4">
+                {t.about.whyChoose.reasons.map((reason, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle size={20} className="mt-0.5 shrink-0 text-accent-300" />
+                    <span className="text-body-m text-white/90">{reason}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            <Card padding="lg" className="border-l-4 border-l-primary-500">
+              <h3 className="mb-4 font-display text-h4 text-primary">{t.about.mission.title}</h3>
+              <p className="text-body-m text-secondary">{t.about.mission.description}</p>
+            </Card>
+            <Card padding="lg" className="border-l-4 border-l-accent-500">
+              <h3 className="mb-4 font-display text-h4 text-primary">{t.about.vision.title}</h3>
+              <p className="text-body-m text-secondary">{t.about.vision.description}</p>
+            </Card>
+            <Card padding="lg" className="border-l-4 border-l-success-500">
+              <h3 className="mb-4 font-display text-h4 text-primary">{t.about.values.title}</h3>
+              <div className="space-y-2">
+                {Object.values(t.about.values.items).map((value, i) => (
+                  <p key={i} className="text-body-s text-secondary">{value}</p>
+                ))}
+              </div>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div className="animate-slide-in-left">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                {t.about.title}
-                <span className="block bg-gradient-to-r from-blue-700 to-teal-600 bg-clip-text text-transparent">
-                  {t.about.subtitle}
-                </span>
-              </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                {t.about.description1}
-              </p>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                {t.about.description2}
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center p-4 bg-blue-50 rounded-xl animate-fade-in">
-                  <div className="text-3xl font-bold text-blue-700 mb-2">15+</div>
-                  <div className="text-gray-600 text-sm">{t.about.stats.projects}</div>
-                </div>
-                <div className="text-center p-4 bg-teal-50 rounded-xl animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                  <div className="text-3xl font-bold text-teal-700 mb-2">3+</div>
-                  <div className="text-gray-600 text-sm">{t.about.stats.experience}</div>
-                </div>
-              </div>
-            </div>
-            <div className="relative animate-slide-in-right">
-              <div className="bg-gradient-to-br from-blue-700 to-teal-600 rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">{t.about.whyChoose.title}</h3>
-                <ul className="space-y-4">
-                  {t.about.whyChoose.reasons.map((reason, index) => (
-                    <li key={index} className="flex items-start animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                      <CheckCircle size={20} className="text-orange-300 mr-3 mt-1 flex-shrink-0" />
-                      <span>{reason}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+      {/* ---------- Contact ---------- */}
+      <section id="contact" className="bg-primary-950 py-20">
+        <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 font-display text-h2 text-white md:text-display-m">{t.contact.title}</h2>
+            <p className="mx-auto max-w-3xl text-body-l text-neutral-300">{t.contact.subtitle}</p>
           </div>
 
-          {/* Mission, Vision, Values */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-blue-50 rounded-2xl p-8 animate-slide-in-up">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">{t.about.mission.title}</h3>
-              <p className="text-blue-800 leading-relaxed">{t.about.mission.description}</p>
-            </div>
-            <div className="bg-teal-50 rounded-2xl p-8 animate-slide-in-up" style={{ animationDelay: '0.1s' }}>
-              <h3 className="text-2xl font-bold text-teal-900 mb-4">{t.about.vision.title}</h3>
-              <p className="text-teal-800 leading-relaxed">{t.about.vision.description}</p>
-            </div>
-            <div className="bg-orange-50 rounded-2xl p-8 animate-slide-in-up" style={{ animationDelay: '0.2s' }}>
-              <h3 className="text-2xl font-bold text-orange-900 mb-4">{t.about.values.title}</h3>
-              <div className="space-y-3">
-                {Object.values(t.about.values.items).map((value, index) => (
-                  <p key={index} className="text-orange-800 text-sm leading-relaxed">{value}</p>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+            <div>
+              <h3 className="mb-8 font-display text-h4 text-white">{t.contact.getInTouch}</h3>
+              <div className="space-y-6">
+                {[
+                  { icon: Phone, label: t.contact.phone, value: '+244 923 710 906', tint: 'bg-primary-600' },
+                  { icon: Mail, label: t.contact.email, value: 'info@alio.ao', tint: 'bg-accent-600' },
+                  { icon: MapPin, label: t.contact.location, value: 'Urbanização Nova Vida, Rua 49, Luanda, Angola', tint: 'bg-primary-500' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className={cn('flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-white', item.tint)}>
+                      <item.icon size={22} />
+                    </div>
+                    <div>
+                      <p className="text-body-s text-neutral-400">{item.label}</p>
+                      <p className="font-semibold text-white">{item.value}</p>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
+
+            <Card padding="lg" className="text-center">
+              <h3 className="mb-4 font-display text-h4 text-primary">{isPt ? 'Entre em Contacto' : 'Get in Touch'}</h3>
+              <p className="mb-6 text-body-m text-secondary">
+                {isPt
+                  ? 'Clique no botão abaixo para abrir o nosso formulário de contacto completo.'
+                  : 'Click the button below to open our full contact form.'}
+              </p>
+              <Button size="lg" onClick={openContactModal} leftIcon={<Mail size={20} />} className="mx-auto">
+                {isPt ? 'Abrir Formulário de Contacto' : 'Open Contact Form'}
+              </Button>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in-up">
-              {t.contact.title}
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              {t.contact.subtitle}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="animate-slide-in-left">
-              <h3 className="text-2xl font-bold text-white mb-8">{t.contact.getInTouch}</h3>
-              <div className="space-y-6">
-                <div className="flex items-center animate-fade-in">
-                  <div className="bg-blue-700 p-3 rounded-lg">
-                    <Phone size={24} className="text-white" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-gray-300">{t.contact.phone}</p>
-                    <p className="text-white font-semibold">+244 923 710 906</p>
-                  </div>
-                </div>
-                <div className="flex items-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
-                  <div className="bg-teal-600 p-3 rounded-lg">
-                    <Mail size={24} className="text-white" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-gray-300">{t.contact.email}</p>
-                    <p className="text-white font-semibold">info@alio.ao</p>
-                  </div>
-                </div>
-                <div className="flex items-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                  <div className="bg-orange-500 p-3 rounded-lg">
-                    <MapPin size={24} className="text-white" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-gray-300">{t.contact.location}</p>
-                    <p className="text-white font-semibold">Urbanização Nova Vida, Rua 49<br />Luanda, Angola</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 animate-slide-in-right">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Entre em Contacto</h3>
-                <p className="text-gray-600 mb-6">
-                  Clique no botão abaixo para abrir o nosso formulário de contacto completo
-                </p>
-                <button
-                  onClick={openContactModal}
-                  className="bg-gradient-to-r from-blue-700 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 mx-auto"
-                >
-                  <Mail size={20} />
-                  Abrir Formulário de Contacto
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
       <Footer />
     </div>
   );
