@@ -3,7 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 /** Copy-to-clipboard with a transient "copied" flag (2s). */
 export function useCopy(timeout = 2000) {
   const [copied, setCopied] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const copy = useCallback(
     async (text: string) => {

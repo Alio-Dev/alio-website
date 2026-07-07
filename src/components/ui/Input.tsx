@@ -39,11 +39,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           aria-describedby={describedBy}
           className={cn(
             inputBase,
-            leftIcon && 'pl-10',
-            rightIcon && 'pr-10',
+            Boolean(leftIcon) && 'pl-10',
+            Boolean(rightIcon) && 'pr-10',
             !leftIcon && !rightIcon && 'px-3',
-            leftIcon && !rightIcon && 'pr-3',
-            !leftIcon && rightIcon && 'pl-3',
+            Boolean(leftIcon) && !rightIcon && 'pr-3',
+            !leftIcon && Boolean(rightIcon) && 'pl-3',
             resolvedInvalid && inputInvalid,
             className,
           )}
