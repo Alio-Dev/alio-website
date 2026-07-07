@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, ArrowRight, Code, Database, Smartphone, Globe, Palette, BarChart3, Shield, Server, Cloud, Monitor, Lock, Headphones, TrendingUp, Eye, Brain, Layers, Figma, Brush, MousePointer, Image, Map, Navigation, Satellite, Building, type LucideIcon } from 'lucide-react';
+import { CheckCircle, ArrowRight, Code, Database, Smartphone, Globe, Palette, BarChart3, Shield, Server, Cloud, Monitor, Lock, Headphones, TrendingUp, Eye, Brain, Layers, PenTool, Brush, MousePointer, Image, Map, Navigation, Satellite, Building, type LucideIcon } from 'lucide-react';
 
 interface Feature {
   title: string;
@@ -79,7 +79,7 @@ const getTechnologyIcon = (tech: string, serviceType: string) => {
     // Design Tools
     'adobe creative suite': Palette,
     'adobe creative cloud': Palette,
-    'figma': Figma,
+    'figma': PenTool,
     'sketch': Brush,
     'adobe xd': MousePointer,
     'invision': Eye,

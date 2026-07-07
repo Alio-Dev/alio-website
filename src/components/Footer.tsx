@@ -1,12 +1,17 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Youtube } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { siFacebook, siX, siYoutube } from 'simple-icons';
 import { useLanguage } from '../hooks/useLanguage';
+import { BrandIcon, type SimpleIcon } from './ui/BrandIcon';
 
-const socialLinks = [
-  { icon: Linkedin, href: 'https://www.linkedin.com/company/alioanalytics/' },
-  { icon: Facebook, href: 'https://www.facebook.com/alioanalytics' },
-  { icon: Twitter, href: 'https://twitter.com/alioanalytics' },
-  { icon: Youtube, href: 'https://www.youtube.com/@alioanalytics' },
+// lucide v1 removed brand/social icons; brand glyphs now come from simple-icons.
+// LinkedIn was also removed from simple-icons (trademark) — rendered as an
+// interim mark; drop in an official LinkedIn SVG in the Phase 3 footer rebuild.
+const socialLinks: { label: string; href: string; icon: SimpleIcon | null }[] = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/alioanalytics/', icon: null },
+  { label: 'Facebook', href: 'https://www.facebook.com/alioanalytics', icon: siFacebook },
+  { label: 'X', href: 'https://twitter.com/alioanalytics', icon: siX },
+  { label: 'YouTube', href: 'https://www.youtube.com/@alioanalytics', icon: siYoutube },
 ];
 
 const Footer: React.FC = () => {
@@ -40,16 +45,23 @@ const Footer: React.FC = () => {
               {t.footer.tagline}
             </p>
             <div className="flex space-x-4 mt-4">
-              {socialLinks.map(({ icon: Icon, href }, idx) => (
+              {socialLinks.map(({ icon, href, label }) => (
                 <a
-                  key={idx}
+                  key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-orange-400 transition-colors"
-                  aria-label={Icon.displayName || 'Social'}
+                  aria-label={label}
+                  title={label}
                 >
-                  <Icon size={22} />
+                  {icon ? (
+                    <BrandIcon icon={icon} size={22} />
+                  ) : (
+                    <span className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-sm border border-current text-[11px] font-bold leading-none">
+                      in
+                    </span>
+                  )}
                 </a>
               ))}
             </div>
