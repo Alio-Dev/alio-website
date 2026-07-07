@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle, ArrowRight, Code, Database, Smartphone, Globe, Palette, BarChart3, Shield, Server, Cloud, Monitor, Cpu, HardDrive, Lock, Headphones, PieChart, TrendingUp, Eye, Brain, Layers, Figma, Brush, MousePointer, Image, Map, Navigation, Satellite, TreePine, Building, Leaf } from 'lucide-react';
+import { CheckCircle, ArrowRight, Code, Database, Smartphone, Globe, Palette, BarChart3, Shield, Server, Cloud, Monitor, Lock, Headphones, TrendingUp, Eye, Brain, Layers, Figma, Brush, MousePointer, Image, Map, Navigation, Satellite, Building, type LucideIcon } from 'lucide-react';
 
 interface Feature {
   title: string;
@@ -18,7 +18,7 @@ const getTechnologyIcon = (tech: string, serviceType: string) => {
   const techLower = tech.toLowerCase();
   
   // Common technology icons
-  const iconMap: { [key: string]: any } = {
+  const iconMap: { [key: string]: LucideIcon } = {
     // Programming Languages & Frameworks
     'react': Code,
     'angular': Code,
@@ -128,7 +128,7 @@ const getTechnologyIcon = (tech: string, serviceType: string) => {
   }
   
   // Default icons based on service type
-  const serviceDefaults = {
+  const serviceDefaults: Record<string, LucideIcon> = {
     'digital': Code,
     'web-mobile': Smartphone,
     'it-services': Server,

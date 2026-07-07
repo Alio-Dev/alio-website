@@ -5,7 +5,9 @@ import { Search, CornerDownLeft } from 'lucide-react';
 import { cn } from '../../../lib/cn';
 import { ALL_LINKS, NAV, type NavLink } from '../nav';
 
-export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
+// Mounted only while open (see DesignSystemLayout), so internal state resets
+// naturally on each open — no reset-in-effect needed.
+export function SearchDialog({ onClose }: { onClose: () => void }) {
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,18 +28,13 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
     }).slice(0, 10);
   }, [query, groupOf]);
 
+  // Focus the input on mount (DOM side effect only).
   useEffect(() => {
-    if (open) {
-      setQuery('');
-      setActive(0);
-      requestAnimationFrame(() => inputRef.current?.focus());
-    }
-  }, [open]);
-
-  useEffect(() => setActive(0), [query]);
+    const id = requestAnimationFrame(() => inputRef.current?.focus());
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   useEffect(() => {
-    if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
       if (e.key === 'ArrowDown') {
@@ -56,9 +53,7 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [open, results, active, navigate, onClose]);
-
-  if (!open) return null;
+  }, [results, active, navigate, onClose]);
 
   return createPortal(
     <div className="ds-root fixed inset-0 z-modal flex items-start justify-center p-4 pt-[10vh]">
@@ -73,7 +68,10 @@ export function SearchDialog({ open, onClose }: { open: boolean; onClose: () => 
           <input
             ref={inputRef}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setActive(0);
+            }}
             placeholder="Search components, tokens, guidelines…"
             className="h-12 flex-1 bg-transparent text-body-m text-primary outline-none placeholder:text-tertiary"
           />

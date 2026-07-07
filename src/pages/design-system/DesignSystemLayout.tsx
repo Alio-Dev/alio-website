@@ -63,9 +63,9 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const { pathname } = useLocation();
 
-  // Close mobile nav on route change; scroll to top.
+  // Scroll to top on route change. (The mobile drawer closes itself via each
+  // link's onNavigate, so no setState is needed in this effect.)
   useEffect(() => {
-    setMobileOpen(false);
     window.scrollTo(0, 0);
   }, [pathname]);
 
@@ -153,7 +153,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
         </main>
       </div>
 
-      <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
+      {searchOpen && <SearchDialog onClose={() => setSearchOpen(false)} />}
     </div>
   );
 }

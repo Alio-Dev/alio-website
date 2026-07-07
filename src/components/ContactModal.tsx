@@ -9,7 +9,7 @@ interface ContactModalProps {
 }
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   const [state, handleSubmit] = useForm("xvgrqrve");
 
   if (!isOpen) return null;
@@ -22,10 +22,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             <CheckCircle size={32} className="text-green-600" />
           </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-2">
-            {t.currentLanguage === 'pt' ? 'Mensagem Enviada!' : 'Message Sent!'}
+            {currentLanguage === 'pt' ? 'Mensagem Enviada!' : 'Message Sent!'}
           </h3>
           <p className="text-gray-600 mb-4">
-            {t.currentLanguage === 'pt' 
+            {currentLanguage === 'pt' 
               ? 'Obrigado pelo seu contacto. A sua mensagem foi enviada para a nossa equipa e responderemos em breve!' 
               : 'Thank you for contacting us. Your message has been sent to our team and we will respond shortly!'}
           </p>
@@ -33,7 +33,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             onClick={onClose}
             className="bg-green-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors mt-4"
           >
-            {t.currentLanguage === 'pt' ? 'Fechar' : 'Close'}
+            {currentLanguage === 'pt' ? 'Fechar' : 'Close'}
           </button>
         </div>
       </div>
@@ -218,7 +218,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                   {state.submitting ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      {t.currentLanguage === 'pt' ? 'Enviando...' : 'Sending...'}
+                      {currentLanguage === 'pt' ? 'Enviando...' : 'Sending...'}
                     </>
                   ) : (
                     <>
@@ -230,7 +230,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               </form>
               <div className="mt-6 text-center text-sm text-gray-500">
                 <p>
-                  {t.currentLanguage === 'pt' 
+                  {currentLanguage === 'pt' 
                     ? 'Responderemos em até 24 horas' 
                     : 'We will respond within 24 hours'
                   }

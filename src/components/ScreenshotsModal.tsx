@@ -10,7 +10,7 @@ interface ScreenshotsModalProps {
 }
 
 const ScreenshotsModal: React.FC<ScreenshotsModalProps> = ({ isOpen, onClose, appName, onContactClick }) => {
-  const { t } = useLanguage();
+  const { currentLanguage } = useLanguage();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Define screenshots for each app
@@ -83,10 +83,10 @@ const ScreenshotsModal: React.FC<ScreenshotsModalProps> = ({ isOpen, onClose, ap
             {/* Header */}
             <div className="text-center mb-8">
               <h3 className="text-3xl font-bold text-white mb-3">
-                {t.currentLanguage === 'pt' ? 'Screenshots' : 'Screenshots'} - {appName}
+                {currentLanguage === 'pt' ? 'Screenshots' : 'Screenshots'} - {appName}
               </h3>
               <p className="text-white/80 text-lg">
-                {t.currentLanguage === 'pt' 
+                {currentLanguage === 'pt' 
                   ? `${currentImageIndex + 1} de ${screenshots.length}` 
                   : `${currentImageIndex + 1} of ${screenshots.length}`
                 }
@@ -158,13 +158,13 @@ const ScreenshotsModal: React.FC<ScreenshotsModalProps> = ({ isOpen, onClose, ap
                 onClick={onClose}
                 className="px-8 py-3 bg-white/20 text-white rounded-xl font-medium hover:bg-white/30 transition-all duration-300 backdrop-blur-sm border border-white/20"
               >
-                {t.currentLanguage === 'pt' ? 'Fechar' : 'Close'}
+                {currentLanguage === 'pt' ? 'Fechar' : 'Close'}
               </button>
               <button
                 onClick={handleContactClick}
                 className="px-8 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105"
               >
-                {t.currentLanguage === 'pt' ? 'Contactar para Mais Info' : 'Contact for More Info'}
+                {currentLanguage === 'pt' ? 'Contactar para Mais Info' : 'Contact for More Info'}
               </button>
             </div>
           </div>
@@ -176,19 +176,19 @@ const ScreenshotsModal: React.FC<ScreenshotsModalProps> = ({ isOpen, onClose, ap
             </div>
             
             <h3 className="text-3xl font-bold text-gray-900 mb-6">
-              {t.currentLanguage === 'pt' ? 'Screenshots' : 'Screenshots'} - {appName}
+              {currentLanguage === 'pt' ? 'Screenshots' : 'Screenshots'} - {appName}
             </h3>
             
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-8 mb-8 w-full">
               <Image size={40} className="text-orange-500 mx-auto mb-4" />
               <p className="text-xl text-orange-800 font-medium mb-3">
-                {t.currentLanguage === 'pt' 
+                {currentLanguage === 'pt' 
                   ? 'Screenshots não disponíveis no momento' 
                   : 'Screenshots are not available at the moment'
                 }
               </p>
               <p className="text-orange-700">
-                {t.currentLanguage === 'pt' 
+                {currentLanguage === 'pt' 
                   ? 'Estamos a trabalhar para disponibilizar as imagens da aplicação em breve. Entre em contacto connosco para mais informações sobre o projeto.' 
                   : 'We are working to make the application images available soon. Contact us for more information about the project.'
                 }
@@ -200,13 +200,13 @@ const ScreenshotsModal: React.FC<ScreenshotsModalProps> = ({ isOpen, onClose, ap
                 onClick={onClose}
                 className="px-8 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors"
               >
-                {t.currentLanguage === 'pt' ? 'Fechar' : 'Close'}
+                {currentLanguage === 'pt' ? 'Fechar' : 'Close'}
               </button>
               <button
                 onClick={handleContactClick}
                 className="px-8 py-3 bg-gradient-to-r from-blue-700 to-teal-600 text-white rounded-xl font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105"
               >
-                {t.currentLanguage === 'pt' ? 'Contactar para Mais Info' : 'Contact for More Info'}
+                {currentLanguage === 'pt' ? 'Contactar para Mais Info' : 'Contact for More Info'}
               </button>
             </div>
           </div>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Menu, X, Code, BarChart3, Map, Palette, ArrowRight, Phone, Mail, MapPin, CheckCircle, Database, Smartphone, Shield, Settings, Image } from 'lucide-react';
+import { ChevronDown, Menu, X, Code, BarChart3, Map, Palette, ArrowRight, Phone, Mail, MapPin, CheckCircle, Smartphone, Shield, Settings, Image, type LucideIcon } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 import ContactModal from '../components/ContactModal';
@@ -13,7 +13,7 @@ function HomePage() {
   const [isScreenshotsModalOpen, setIsScreenshotsModalOpen] = useState(false);
   const [selectedApp, setSelectedApp] = useState('');
   const [scrollY, setScrollY] = useState(0);
-  const { t } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -66,7 +66,18 @@ function HomePage() {
     }
   ];
 
-  const solutions = [
+  const solutions: Array<{
+    logo?: string;
+    icon?: LucideIcon;
+    title: string;
+    subtitle: string;
+    description: string;
+    features: string[];
+    status: string;
+    gradient: string;
+    delay: string;
+    comingSoon: boolean;
+  }> = [
     {
       logo: '/kelesa.png',
       title: t.solutions.kelesaKlean.title,
@@ -117,14 +128,6 @@ function HomePage() {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
-
-  const handleContactClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
   };
@@ -376,9 +379,9 @@ function HomePage() {
                           alt={`${solution.title} Logo`}
                           className="w-20 h-20 object-contain"
                         />
-                      ) : (
+                      ) : solution.icon ? (
                         <solution.icon size={80} className="text-gray-700" />
-                      )}
+                      ) : null}
                     </div>
                   </div>
                   
@@ -417,7 +420,7 @@ function HomePage() {
                         className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/30 transition-all duration-300 transform hover:scale-105 flex items-center gap-2 group-hover:shadow-lg justify-center"
                       >
                         <Image size={18} />
-                        {t.currentLanguage === 'pt' ? 'Ver Screenshots' : 'View Screenshots'}
+                        {currentLanguage === 'pt' ? 'Ver Screenshots' : 'View Screenshots'}
                       </button>
                     )}
                     

@@ -117,31 +117,34 @@ export function DonutChart({
   const total = data.reduce((sum, d) => sum + d.value, 0) || 1;
   const radius = (size - thickness) / 2;
   const circ = 2 * Math.PI * radius;
-  let offset = 0;
+
+  // Precompute each segment's dash length and cumulative start offset with a
+  // pure prefix-sum (no mutation inside render — keeps the component pure).
+  const dashes = data.map((d) => (d.value / total) * circ);
+  const segments = data.map((d, i) => ({
+    label: d.label,
+    dash: dashes[i],
+    offset: dashes.slice(0, i).reduce((a, b) => a + b, 0),
+    color: CHART_COLORS[i % CHART_COLORS.length],
+  }));
 
   return (
     <div className={cn('flex items-center gap-6', className)}>
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} role="img" aria-label="Donut chart">
         <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
-          {data.map((d, i) => {
-            const frac = d.value / total;
-            const dash = frac * circ;
-            const seg = (
-              <circle
-                key={d.label}
-                cx={size / 2}
-                cy={size / 2}
-                r={radius}
-                fill="none"
-                stroke={CHART_COLORS[i % CHART_COLORS.length]}
-                strokeWidth={thickness}
-                strokeDasharray={`${dash} ${circ - dash}`}
-                strokeDashoffset={-offset}
-              />
-            );
-            offset += dash;
-            return seg;
-          })}
+          {segments.map((s) => (
+            <circle
+              key={s.label}
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              fill="none"
+              stroke={s.color}
+              strokeWidth={thickness}
+              strokeDasharray={`${s.dash} ${circ - s.dash}`}
+              strokeDashoffset={-s.offset}
+            />
+          ))}
         </g>
       </svg>
       <ul className="flex flex-col gap-1.5 text-body-s">
