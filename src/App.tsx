@@ -7,6 +7,12 @@ import ITServicesPage from './pages/services/ITServicesPage';
 import AnalyticsPage from './pages/services/AnalyticsPage';
 import DesignPage from './pages/services/DesignPage';
 import GISPage from './pages/services/GISPage';
+import AboutPage from './pages/AboutPage';
+import CaseStudiesPage from './pages/CaseStudiesPage';
+import BlogPage from './pages/BlogPage';
+import BlogArticlePage from './pages/BlogArticlePage';
+import CareersPage from './pages/CareersPage';
+import LegalPage from './pages/LegalPage';
 
 // The design system is code-split so it never weighs down the marketing site.
 const DesignSystemApp = lazy(() => import('./pages/design-system/DesignSystemApp'));
@@ -33,6 +39,15 @@ function App() {
       <Route path="/services/analytics" element={<AnalyticsPage />} />
       <Route path="/services/design" element={<DesignPage />} />
       <Route path="/services/gis" element={<GISPage />} />
+
+      {/* Company & content pages */}
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/case-studies" element={<CaseStudiesPage />} />
+      <Route path="/blog" element={<BlogPage />} />
+      <Route path="/blog/:slug" element={<BlogArticlePage />} />
+      <Route path="/careers" element={<CareersPage />} />
+      <Route path="/privacy" element={<LegalPage kind="privacy" />} />
+      <Route path="/terms" element={<LegalPage kind="terms" />} />
 
       {/* Design system — canonical at /design-system, with /docs as an alias */}
       <Route

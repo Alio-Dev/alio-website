@@ -32,11 +32,14 @@ const Footer: React.FC = () => {
     t.services.gis.title,
     t.services.design.title,
   ];
+  const isPt = currentLanguage === 'pt';
   const aboutLinks = [
-    { label: t.nav.about, href: '#' },
-    { label: t.nav.contact, href: '#' },
-    { label: 'Privacy Policy', href: '#' }, // You can add translation keys for these if available
-    { label: 'Terms & Conditions', href: '#' },
+    { label: t.nav.about, href: '/about' },
+    { label: isPt ? 'Casos de Estudo' : 'Case Studies', href: '/case-studies' },
+    { label: 'Blog', href: '/blog' },
+    { label: isPt ? 'Carreiras' : 'Careers', href: '/careers' },
+    { label: isPt ? 'Política de Privacidade' : 'Privacy Policy', href: '/privacy' },
+    { label: isPt ? 'Termos e Condições' : 'Terms & Conditions', href: '/terms' },
   ];
 
   return (
