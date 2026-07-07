@@ -23,6 +23,8 @@ function HomePage() {
   const [scrolled, setScrolled] = useState(false);
   const { t, currentLanguage } = useLanguage();
   const isPt = currentLanguage === 'pt';
+  // Alio Analytics was founded in 2022 — years of experience updates on its own.
+  const yearsExperience = new Date().getFullYear() - 2022;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -300,11 +302,11 @@ function HomePage() {
               <p className="mb-8 text-body-l text-secondary">{t.about.description2}</p>
               <div className="grid grid-cols-2 gap-6">
                 <Card className="text-center">
-                  <div className="font-display text-h2 text-brand">15+</div>
+                  <div className="font-display text-h2 text-brand">20+</div>
                   <div className="mt-1 text-body-s text-tertiary">{t.about.stats.projects}</div>
                 </Card>
                 <Card className="text-center">
-                  <div className="font-display text-h2 text-accent">3+</div>
+                  <div className="font-display text-h2 text-accent">{yearsExperience}+</div>
                   <div className="mt-1 text-body-s text-tertiary">{t.about.stats.experience}</div>
                 </Card>
               </div>
