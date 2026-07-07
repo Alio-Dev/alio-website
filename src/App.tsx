@@ -1,5 +1,6 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useLanguage } from './hooks/useLanguage';
 import HomePage from './pages/HomePage';
 import DigitalSolutionsPage from './pages/services/DigitalSolutionsPage';
 import WebMobilePage from './pages/services/WebMobilePage';
@@ -29,7 +30,16 @@ function DesignSystemFallback() {
   );
 }
 
+/** Keep <html lang> in sync with the active language (WCAG 3.1.1). */
+function useHtmlLang() {
+  const { currentLanguage } = useLanguage();
+  useEffect(() => {
+    document.documentElement.lang = currentLanguage === 'pt' ? 'pt' : 'en';
+  }, [currentLanguage]);
+}
+
 function App() {
+  useHtmlLang();
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
