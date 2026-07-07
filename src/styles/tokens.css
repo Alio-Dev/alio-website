@@ -1,0 +1,160 @@
+/* ============================================================
+   ALIO ANALYTICS — DESIGN TOKENS v1.0
+   CSS Custom Properties · light (:root) + dark (.dark)
+   ============================================================ */
+
+:root {
+  /* ---- Primary (Indigo — logo #2B3990 at 700) ---- */
+  --primary-50:#EEF0FB; --primary-100:#DDE2F7; --primary-200:#BCC5EF;
+  --primary-300:#93A1E3; --primary-400:#6B7CD5; --primary-500:#4C5DC2;
+  --primary-600:#3A49A9; --primary-700:#2B3990; --primary-800:#232E74;
+  --primary-900:#1D265C; --primary-950:#131840;
+
+  /* ---- Accent (Cyan — logo #07B7D1 at 500) ---- */
+  --accent-50:#ECFCFF; --accent-100:#D0F6FC; --accent-200:#A6EDF8;
+  --accent-300:#6EDFF0; --accent-400:#2FCBE2; --accent-500:#07B7D1;
+  --accent-600:#0793AC; --accent-700:#0C7589; --accent-800:#135E6E;
+  --accent-900:#144E5C; --accent-950:#07333E;
+
+  /* ---- Neutral (indigo-cast slate) ---- */
+  --neutral-50:#F7F8FA; --neutral-100:#EEF0F4; --neutral-200:#DDE1E8;
+  --neutral-300:#C4CAD6; --neutral-400:#9AA2B3; --neutral-500:#717A8F;
+  --neutral-600:#565E72; --neutral-700:#444B5C; --neutral-800:#2E3340;
+  --neutral-900:#1F2330; --neutral-950:#12141D;
+
+  /* ---- Semantic scales ---- */
+  --success-50:#EBFAF3; --success-100:#D0F3E2; --success-200:#A3E7C7;
+  --success-300:#6DD4A6; --success-400:#37BC83; --success-500:#16A468;
+  --success-600:#0D8454; --success-700:#0C6A45; --success-800:#0C5439;
+  --success-900:#0B4530; --success-950:#05271B;
+
+  --warning-50:#FEF9EC; --warning-100:#FBEFCB; --warning-200:#F7DE92;
+  --warning-300:#F2C859; --warning-400:#EDB232; --warning-500:#E5971B;
+  --warning-600:#CB7314; --warning-700:#A95214; --warning-800:#8A4017;
+  --warning-900:#723516; --warning-950:#421A08;
+
+  --danger-50:#FDF0F0; --danger-100:#FBDCDD; --danger-200:#F7BFC0;
+  --danger-300:#F09496; --danger-400:#E7666B; --danger-500:#DC3D43;
+  --danger-600:#C42B31; --danger-700:#A42226; --danger-800:#872024;
+  --danger-900:#712124; --danger-950:#3E0D0F;
+
+  --info-50:#EFF6FF; --info-100:#DBEBFE; --info-200:#BFDCFE;
+  --info-300:#93C4FD; --info-400:#60A5FA; --info-500:#3B82F6;
+  --info-600:#2565EB; --info-700:#1D50D8; --info-800:#1E42AF;
+  --info-900:#1E398A; --info-950:#172554;
+
+  /* ---- Chart palette ---- */
+  --chart-1:#2B3990; --chart-2:#07B7D1; --chart-3:#16A468; --chart-4:#E5971B;
+  --chart-5:#7C5CD6; --chart-6:#DC3D43; --chart-7:#D9679E; --chart-8:#5B8DEF;
+
+  /* ---- Semantic aliases (LIGHT) ---- */
+  --bg:#FFFFFF;
+  --bg-subtle:var(--neutral-50);
+  --surface:#FFFFFF;
+  --surface-raised:#FFFFFF;
+  --border:var(--neutral-200);
+  --border-subtle:var(--neutral-100);
+  --text-primary:var(--neutral-950);
+  --text-secondary:var(--neutral-700);
+  --text-tertiary:var(--neutral-500);
+  --text-disabled:var(--neutral-400);
+  --text-inverse:#FFFFFF;
+  --brand:var(--primary-700);
+  --brand-hover:var(--primary-800);
+  --brand-active:var(--primary-900);
+  --brand-subtle:var(--primary-50);
+  --accent:var(--accent-600);
+  --focus-ring:var(--accent-500);
+  --gradient-brand:linear-gradient(90deg,#07B7D1,#2B3990);
+
+  /* ---- Typography ---- */
+  --font-display:'Sora',ui-sans-serif,system-ui,sans-serif;
+  --font-body:'Instrument Sans','Segoe UI',Helvetica,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SF Mono',monospace;
+
+  --text-display-xl:700 72px/76px var(--font-display);
+  --text-display-l:700 60px/64px var(--font-display);
+  --text-display-m:700 48px/54px var(--font-display);
+  --text-h1:700 40px/48px var(--font-display);
+  --text-h2:700 32px/40px var(--font-display);
+  --text-h3:600 26px/34px var(--font-display);
+  --text-h4:600 22px/30px var(--font-display);
+  --text-h5:600 18px/26px var(--font-display);
+  --text-h6:600 16px/24px var(--font-display);
+  --text-body-l:400 18px/28px var(--font-body);
+  --text-body-m:400 16px/24px var(--font-body);
+  --text-body-s:400 14px/20px var(--font-body);
+  --text-caption:400 12px/16px var(--font-body);
+  --text-overline:500 12px/16px var(--font-mono); /* +0.08em, uppercase */
+  --text-code:400 14px/22px var(--font-mono);
+  --tracking-display:-0.03em; --tracking-heading:-0.02em; --tracking-overline:0.08em;
+
+  /* ---- Spacing (8-pt) ---- */
+  --space-0:0; --space-0-5:2px; --space-1:4px; --space-2:8px; --space-3:12px;
+  --space-4:16px; --space-6:24px; --space-8:32px; --space-10:40px; --space-12:48px;
+  --space-16:64px; --space-20:80px; --space-24:96px; --space-32:128px; --space-40:160px;
+
+  /* ---- Radius ---- */
+  --radius-none:0; --radius-sm:6px; --radius-md:8px; --radius-lg:12px;
+  --radius-xl:16px; --radius-2xl:24px; --radius-full:999px;
+
+  /* ---- Shadows (indigo-tinted) ---- */
+  --shadow-xs:0 1px 2px rgba(19,24,64,0.06);
+  --shadow-sm:0 1px 3px rgba(19,24,64,0.08),0 1px 2px rgba(19,24,64,0.04);
+  --shadow-md:0 4px 12px rgba(19,24,64,0.08),0 2px 4px rgba(19,24,64,0.04);
+  --shadow-lg:0 12px 24px rgba(19,24,64,0.10),0 4px 8px rgba(19,24,64,0.05);
+  --shadow-xl:0 24px 48px rgba(19,24,64,0.14),0 8px 16px rgba(19,24,64,0.06);
+  --shadow-float:0 16px 40px rgba(19,24,64,0.16),0 0 0 1px rgba(19,24,64,0.04);
+
+  /* ---- Motion ---- */
+  --duration-75:75ms; --duration-150:150ms; --duration-200:200ms;
+  --duration-300:300ms; --duration-400:400ms; --duration-500:500ms; --duration-700:700ms;
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --ease-enter:cubic-bezier(0,0,0.2,1);
+  --ease-exit:cubic-bezier(0.4,0,1,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+
+  /* ---- Breakpoints (reference) ---- */
+  --bp-sm:640px; --bp-md:768px; --bp-lg:1024px; --bp-xl:1280px; --bp-2xl:1536px;
+  --container-max:1200px;
+
+  /* ---- Z-index ---- */
+  --z-base:0; --z-dropdown:1000; --z-sticky:1100; --z-drawer:1200;
+  --z-modal:1300; --z-popover:1400; --z-toast:1500; --z-tooltip:1600;
+}
+
+.dark {
+  --bg:#0E1017;
+  --bg-subtle:#12141D;
+  --surface:#1F2330;
+  --surface-raised:#2E3340;
+  --border:#2E3340;
+  --border-subtle:#1F2330;
+  --text-primary:#F7F8FA;
+  --text-secondary:#C4CAD6;
+  --text-tertiary:#9AA2B3;
+  --text-disabled:#565E72;
+  --text-inverse:#12141D;
+  --brand:var(--primary-400);
+  --brand-hover:var(--primary-300);
+  --brand-active:var(--primary-500);
+  --brand-subtle:rgba(107,124,213,0.16);
+  --accent:var(--accent-400);
+  --focus-ring:var(--accent-400);
+
+  /* Dark mode: borders replace shadows; glow for featured elements */
+  --shadow-xs:none; --shadow-sm:none;
+  --shadow-md:0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg:0 12px 32px rgba(0,0,0,0.5);
+  --shadow-xl:0 24px 56px rgba(0,0,0,0.6);
+  --shadow-float:0 16px 40px rgba(0,0,0,0.5);
+  --glow-accent:0 0 0 1px rgba(47,203,226,0.25),0 8px 32px rgba(7,183,209,0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

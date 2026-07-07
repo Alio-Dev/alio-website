@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="./handoff/tokens.css" data-resource-id="tokensCss" />
+<meta name="ext-resource-dependency" content="./handoff/tailwind.config.js" data-resource-id="tailwindCfg" />
+<meta name="ext-resource-dependency" content="./handoff/tokens.json" data-resource-id="tokensJson" />
+<meta name="ext-resource-dependency" content="./handoff/tokens.ts" data-resource-id="tokensTs" />
+<meta name="ext-resource-dependency" content="./handoff/BRAND.md" data-resource-id="brandMd" />
+<template id="__bundler_thumbnail" data-bg-color="#131840">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#131840"/>
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#07B7D1"/><stop offset="1" stop-color="#6B7CD5"/></linearGradient></defs>
+    <path d="M 360 520 Q 420 320 480 320 Q 540 320 600 480 Q 640 580 700 580 Q 760 580 840 360" fill="none" stroke="url(#g)" stroke-width="36" stroke-linecap="round"/>
+    <circle cx="360" cy="520" r="22" fill="#07B7D1"/>
+    <circle cx="840" cy="360" r="22" fill="#6B7CD5"/>
+  </svg>
+</template>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>Alio Analytics — Developer Handoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+</style>
+</helmet>
+
+<div style="font-family: 'Instrument Sans', sans-serif; color: #12141D; background: #FFFFFF;">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 48px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/alio-icon.svg" alt="Alio" style="height: 26px; width: auto;">
+        <span style="font-family: Sora, sans-serif; font-size: 17px; letter-spacing: -0.02em;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #717A8F; border: 1px solid #DDE1E8; border-radius: 999px; padding: 2px 8px; margin-left: 6px;">design system v1.0</span>
+      </div>
+      <nav style="display: flex; gap: 4px; font-size: 13px; font-weight: 500;">
+        <a href="01 Foundations.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">01 Foundations</a>
+        <a href="02 Components.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">02 Components</a>
+        <a href="03 Data Motion Imagery.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">03 Data &amp; Motion</a>
+        <a href="04 Patterns.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">04 Patterns</a>
+        <a href="05 Brand Kit.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">05 Brand Kit</a>
+        <a href="#s24" style="color: #12141D; text-decoration: none; padding: 6px 10px; border-radius: 6px; background: #EEF0F4;">06 Handoff</a>
+      </nav>
+    </div>
+  </header>
+
+  <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px 72px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #0793AC; margin-bottom: 24px;">Part V — Handoff · Sections 24–27</div>
+    <h1 style="font-family: Sora, sans-serif; font-size: 56px; line-height: 1.07; letter-spacing: -0.03em; font-weight: 700; margin: 0 0 24px;">Developer Handoff</h1>
+    <p style="font-size: 18px; line-height: 1.6; color: #444B5C; max-width: 660px; margin: 0 0 32px;">Copy-paste-ready tokens in four formats, the React architecture, API specs for the 15 core components, and the final verification checklist. Everything below exists as real files in <code style="font-family: 'JetBrains Mono', monospace; font-size: 15px; background: #F7F8FA; padding: 2px 8px; border-radius: 6px;">handoff/</code>.</p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <sc-for list="{{ files }}" as="f" hint-placeholder-count="5">
+        <a href="{{ f.href }}" download="{{ f.name }}" style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: #2B3990; text-decoration: none; font-weight: 500;" style-hover="border-color: #07B7D1; background: #ECFCFF;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 0v6h6"></path></svg>{{ f.name }}
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- 24 + 25: tokens -->
+  <section id="s24" data-screen-label="24-25 Tokens and Tailwind" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">24 · 25</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Design Tokens &amp; Tailwind Theme</h2>
+      <p style="font-size: 15px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 32px;">Four synchronized formats — CSS custom properties (light + dark), Tailwind config, W3C JSON, and TypeScript constants. Excerpts below; the linked files are the source of truth.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px;">
+        <div style="background: #12141D; border-radius: 14px; overflow: hidden;">
+          <div style="display: flex; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #1F2330;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #717A8F;">handoff/tokens.css — excerpt</span><a href="{{ hrefTokensCss }}" download="tokens.css" style="font-size: 11.5px; font-weight: 600; color: #6EDFF0; text-decoration: none;">Open full file →</a></div>
+          <pre style="margin: 0; padding: 18px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.75; color: #C4CAD6; overflow-x: auto;"><span style="color: #6B7CD5;">:root</span> {
+  <span style="color: #2FCBE2;">--primary-700</span>: #2B3990;  <span style="color: #565E72;">/* logo indigo */</span>
+  <span style="color: #2FCBE2;">--accent-500</span>: #07B7D1;   <span style="color: #565E72;">/* logo cyan */</span>
+  <span style="color: #2FCBE2;">--bg</span>: #FFFFFF;
+  <span style="color: #2FCBE2;">--text-primary</span>: var(--neutral-950);
+  <span style="color: #2FCBE2;">--brand</span>: var(--primary-700);
+  <span style="color: #2FCBE2;">--focus-ring</span>: var(--accent-500);
+  <span style="color: #2FCBE2;">--radius-md</span>: 8px;
+  <span style="color: #2FCBE2;">--shadow-md</span>: 0 4px 12px rgba(19,24,64,.08)…;
+  <span style="color: #2FCBE2;">--duration-150</span>: 150ms;
+}
+<span style="color: #6B7CD5;">.dark</span> {
+  <span style="color: #2FCBE2;">--bg</span>: #0E1017;
+  <span style="color: #2FCBE2;">--brand</span>: var(--primary-400);
+  <span style="color: #2FCBE2;">--shadow-sm</span>: none; <span style="color: #565E72;">/* borders instead */</span>
+}</pre>
+        </div>
+        <div style="background: #12141D; border-radius: 14px; overflow: hidden;">
+          <div style="display: flex; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid #1F2330;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #717A8F;">handoff/tailwind.config.js — excerpt</span><a href="{{ hrefTailwind }}" download="tailwind.config.js" style="font-size: 11.5px; font-weight: 600; color: #6EDFF0; text-decoration: none;">Open full file →</a></div>
+          <pre style="margin: 0; padding: 18px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.75; color: #C4CAD6; overflow-x: auto;">module.exports = {
+  <span style="color: #2FCBE2;">darkMode</span>: <span style="color: #F2C859;">'class'</span>,
+  theme: { extend: {
+    colors: {
+      primary: { <span style="color: #F2C859;">700: '#2B3990'</span>, … },
+      accent:  { <span style="color: #F2C859;">500: '#07B7D1'</span>, … },
+      chart:   { 1: '#2B3990', … 8 },
+    },
+    fontFamily: {
+      display: [<span style="color: #F2C859;">'Sora'</span>, …],
+      sans: [<span style="color: #F2C859;">'"Instrument Sans"'</span>, …],
+      mono: [<span style="color: #F2C859;">'"JetBrains Mono"'</span>, …],
+    },
+    fontSize: { <span style="color: #F2C859;">'display-xl'</span>: ['72px', …], h1…, overline },
+    boxShadow / keyframes / animation / zIndex…
+  }}}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 26: package -->
+  <section id="s26" data-screen-label="26 Developer Handoff Package" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">26</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 32px;">Developer Handoff Package</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 32px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Folder structure — Atomic Design</div>
+          <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.85; color: #444B5C; background: #F7F8FA; border-radius: 10px; padding: 16px; overflow-x: auto;">src/
+├─ styles/
+│  ├─ tokens.css        ← from handoff/
+│  └─ globals.css
+├─ lib/
+│  ├─ tokens.ts         ← from handoff/
+│  ├─ cn.ts             (clsx + tailwind-merge)
+│  └─ format.ts         (Kz, dates pt-AO)
+├─ components/
+│  ├─ ui/               (atoms: Button, Input,
+│  │                     Badge, Avatar, Spinner…)
+│  ├─ composed/         (molecules: Field, Card,
+│  │                     Alert, Tabs, Pagination…)
+│  ├─ blocks/           (organisms: DataTable,
+│  │                     Sidebar, KpiCard, Chart…)
+│  └─ layouts/          (AppShell, MarketingPage)
+└─ app/                 (routes)</pre>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Variant system — CVA pattern</div>
+          <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.8; color: #444B5C; background: #F7F8FA; border-radius: 10px; padding: 16px; overflow-x: auto;">const button = cva(
+  'inline-flex items-center gap-2 font-sans
+   font-semibold rounded-md transition
+   duration-150 ease-standard
+   focus-visible:ring-2
+   focus-visible:ring-accent-500
+   focus-visible:ring-offset-2
+   disabled:opacity-45',
+  { variants: {
+      variant: {
+        primary: 'bg-primary-700 text-white
+                  hover:bg-primary-800
+                  dark:bg-primary-400
+                  dark:text-neutral-950',
+        secondary: 'bg-primary-50
+                  text-primary-700',
+        outline: 'border border-neutral-200',
+        ghost: '', danger: 'bg-danger-600…',
+      },
+      size: { sm:'h-8 px-3 text-[12.5px]',
+              md:'h-10 px-4 text-sm',
+              lg:'h-12 px-6 text-[15px]' },
+    },
+    defaultVariants: { variant:'primary',
+                       size:'md' } });</pre>
+          <div style="font-size: 12.5px; color: #717A8F; margin-top: 12px;">Naming: PascalCase components, camelCase props, kebab-case files. One component per file; variants via CVA, never boolean soup.</div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Implementation priority</div>
+          <div style="display: flex; flex-direction: column; gap: 7px;">
+            <sc-for list="{{ priority }}" as="p" hint-placeholder-count="8">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #fff; background: {{ p.bg }}; border-radius: 6px; width: 24px; height: 20px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">{{ p.n }}</span>
+                <span style="font-size: 13px; color: #12141D; font-weight: 500;">{{ p.name }}</span>
+                <span style="font-size: 11.5px; color: #9AA2B3; margin-left: auto;">{{ p.why }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top: 18px; padding: 14px 16px; background: #ECFCFF; border-radius: 10px; font-size: 12.5px; line-height: 1.6; color: #0C7589;"><strong>BRAND.md</strong> in handoff/ summarizes the entire brand for AI sessions — load it first in any Claude Code conversation.</div>
+        </div>
+      </div>
+
+      <!-- API specs -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 20px;">Component API specs — 15 core components</h3>
+      <div style="border: 1px solid #EEF0F4; border-radius: 14px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 150px 1.6fr 2fr; background: #F7F8FA; border-bottom: 1px solid #EEF0F4; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #717A8F;">
+          <div style="padding: 12px 20px;">Component</div><div style="padding: 12px 16px;">Props</div><div style="padding: 12px 16px;">Notes</div>
+        </div>
+        <sc-for list="{{ apis }}" as="a" hint-placeholder-count="15">
+          <div style="display: grid; grid-template-columns: 150px 1.6fr 2fr; border-bottom: 1px solid #F7F8FA; font-size: 13px; align-items: start;">
+            <div style="padding: 13px 20px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: #2B3990; font-weight: 500;">{{ a.name }}</div>
+            <div style="padding: 13px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.7; color: #565E72;">{{ a.props }}</div>
+            <div style="padding: 13px 16px; line-height: 1.55; color: #444B5C;">{{ a.notes }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- 27: checklist -->
+  <section id="s27" data-screen-label="27 Final Verification Checklist" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px 128px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">27</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Final Verification Checklist</h2>
+      <p style="font-size: 15px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 32px;">Every section of the brief, verified. Click any row's link to jump to the delivered work.</p>
+      <div style="border: 1px solid #EEF0F4; border-radius: 14px; overflow: hidden; margin-bottom: 32px;">
+        <div style="display: grid; grid-template-columns: 56px 1.4fr 2fr 110px; background: #F7F8FA; border-bottom: 1px solid #EEF0F4; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #717A8F;">
+          <div style="padding: 12px 0 12px 20px;">§</div><div style="padding: 12px 16px;">Deliverable</div><div style="padding: 12px 16px;">Includes</div><div style="padding: 12px 16px;">Status</div>
+        </div>
+        <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="27">
+          <div style="display: grid; grid-template-columns: 56px 1.4fr 2fr 110px; border-bottom: 1px solid #F7F8FA; font-size: 13px; align-items: center;">
+            <div style="padding: 11px 0 11px 20px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #9AA2B3;">{{ c.n }}</div>
+            <div style="padding: 11px 16px;"><a href="{{ c.href }}" style="color: #12141D; font-weight: 600; text-decoration: none;" style-hover="color: #2B3990;">{{ c.name }}</a></div>
+            <div style="padding: 11px 16px; color: #717A8F; font-size: 12.5px; line-height: 1.5;">{{ c.inc }}</div>
+            <div style="padding: 11px 16px;"><span style="font-size: 11.5px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #EBFAF3; color: #0C6A45;">✅ Delivered</span></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: #131840; border-radius: 16px; padding: 40px 48px; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap;">
+        <div>
+          <div style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px;">27 / 27 sections delivered.</div>
+          <div style="font-size: 14px; color: #93A1E3; max-width: 520px; line-height: 1.6;">The handoff package (tokens.css · tailwind.config.js · tokens.json · tokens.ts · BRAND.md) is copy-paste ready for Claude Code. Start any implementation session by loading BRAND.md.</div>
+        </div>
+        <a href="{{ hrefBrand }}" download="BRAND.md" style="height: 48px; padding: 0 24px; border-radius: 10px; background: #fff; color: #131840; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14.5px; text-decoration: none; display: inline-flex; align-items: center; flex-shrink: 0;">Open BRAND.md</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 40px 48px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="assets/alio-icon.svg" alt="" style="height: 18px;">
+        <span style="font-size: 13px; color: #717A8F;">Alio Analytics — Design System · Part V</span>
+      </div>
+      <a href="01 Foundations.dc.html" style="font-size: 14px; font-weight: 600; color: #2B3990; text-decoration: none;">↺ Back to Foundations</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    const R = window.__resources || {};
+    const files = [
+      { name: 'tokens.css', href: R.tokensCss || 'handoff/tokens.css' },
+      { name: 'tailwind.config.js', href: R.tailwindCfg || 'handoff/tailwind.config.js' },
+      { name: 'tokens.json', href: R.tokensJson || 'handoff/tokens.json' },
+      { name: 'tokens.ts', href: R.tokensTs || 'handoff/tokens.ts' },
+      { name: 'BRAND.md', href: R.brandMd || 'handoff/BRAND.md' },
+    ];
+    const priority = [
+      { n: '1', name: 'Button + focus ring', why: 'everything depends on it', bg: '#2B3990' },
+      { n: '2', name: 'Input / Field / Select', why: 'forms everywhere', bg: '#2B3990' },
+      { n: '3', name: 'Card + Badge', why: 'core surfaces', bg: '#2B3990' },
+      { n: '4', name: 'Alert + Toast', why: 'feedback layer', bg: '#3A49A9' },
+      { n: '5', name: 'Tabs + Pagination', why: 'navigation basics', bg: '#3A49A9' },
+      { n: '6', name: 'Modal + Drawer', why: 'overlay system', bg: '#3A49A9' },
+      { n: '7', name: 'DataTable', why: 'BI core', bg: '#0793AC' },
+      { n: '8', name: 'AppShell (Sidebar+Topbar)', why: 'dashboard frame', bg: '#0793AC' },
+      { n: '9', name: 'KpiCard + Chart wrapper', why: 'analytics pages', bg: '#0793AC' },
+      { n: '10', name: 'EmptyState + Skeleton', why: 'loading polish', bg: '#07B7D1' },
+    ];
+    const apis = [
+      { name: 'Button', props: "variant: primary|secondary|outline|ghost|danger|success|link · size: sm|md|lg · loading?: bool · leftIcon/rightIcon?: ReactNode · asChild?: bool", notes: 'Loading swaps left icon for spinner and sets aria-busy. Icon-only requires aria-label. Min touch 44px via padding.' },
+      { name: 'IconButton', props: 'icon: ReactNode · label: string (required) · variant · size', notes: 'label feeds aria-label + tooltip. 40px visual, 44px hit area.' },
+      { name: 'Input', props: 'size: sm|md · invalid?: bool · prefix/suffix?: ReactNode · leftIcon?: ReactNode', notes: 'Always wrapped by Field. Focus: cyan border + 3px soft ring.' },
+      { name: 'Field', props: 'label: string · required?: bool · help?: string · error?: string · children', notes: 'Wires htmlFor/id, aria-describedby, aria-invalid. Error replaces help, icon + danger-600 text.' },
+      { name: 'Select / Combobox', props: 'options: {value,label,icon?}[] · value · onChange · searchable?: bool · placeholder', notes: 'Combobox highlights matched substring in bold. Menu = radius-lg, shadow-lg, max-h 320px.' },
+      { name: 'Checkbox / Radio / Switch', props: 'checked · onChange · label?: string · disabled?: bool', notes: '18px box/circle; switch 40×23. Brand-700 when on (dark: brand-400). Label click toggles.' },
+      { name: 'Badge', props: 'tone: default|brand|accent|success|warning|danger · variant: soft|solid|outline', notes: 'Soft = 50-bg + 700-text. 12px/600, radius-full, 3px 10px padding.' },
+      { name: 'Avatar', props: 'name: string · src?: string · size: 24|32|40|48 · status?: online|away', notes: 'Initials fallback on brand gradient. AvatarGroup: max?: number, −9px overlap, +N overflow chip.' },
+      { name: 'Card', props: 'padding: compact|default|feature · interactive?: bool · as?: element', notes: 'interactive adds hover lift (200ms) + cursor. Border neutral-100; dark: surface + border.' },
+      { name: 'Alert', props: 'tone: info|success|warning|danger · title · children · onDismiss?', notes: 'Icon per tone (never color alone). role=status; danger uses role=alert.' },
+      { name: 'Toast (useToast)', props: "toast({ title, description?, tone?, action? }) · duration=5000", notes: 'Dark panel both modes. Bottom-right, stacks max 3, pauses on hover. aria-live=polite.' },
+      { name: 'Modal', props: 'open · onClose · size: sm|md|lg|full · title · footer?: ReactNode', notes: 'Focus trap; Esc + scrim close; returns focus to trigger. Panel scale .97→1, 250ms.' },
+      { name: 'Tabs', props: 'variant: line|pill|enclosed · value · onChange · items: {value,label,icon?}[]', notes: 'Arrow-key navigation, roving tabindex. Line variant is default.' },
+      { name: 'DataTable', props: 'columns: ColumnDef[] · data · sortable? · selectable? · density: comfortable|dense · pagination?', notes: 'Sorted column header in brand-700 with ▲▼. Selected rows tint #F7FBFF. Sticky header ≥ 20 rows.' },
+      { name: 'KpiCard', props: 'label · value · delta?: {value, direction} · spark?: number[] · icon?', notes: 'Delta pill: success/danger soft badge. Sparkline 32px, chart-1/2 colors, no axes.' },
+    ];
+    const P = '01 Foundations.dc.html', C = '02 Components.dc.html', D = '03 Data Motion Imagery.dc.html', T = '04 Patterns.dc.html', B = '05 Brand Kit.dc.html';
+    const checklist = [
+      { n: '1', name: 'Brand Strategy', inc: 'Positioning, value prop, stories, mission/vision, 5 pillars, tone of voice ×6 EN/PT, messaging ×3 audiences, pitches 10/30/60s, 3 bilingual taglines', href: P + '#s1' },
+      { n: '2', name: 'Logo System', inc: 'Primary/vertical/symbol, mono ×2, reversed, gradient, favicon+app icon, min sizes, clear space, 8 don\u2019ts, format matrix', href: P + '#s2' },
+      { n: '3', name: 'Color System', inc: '7 full 50–950 scales, HEX/RGB/HSL/Tailwind/WCAG per core color, light+dark palettes, chart palette + sequential + diverging', href: P + '#s3' },
+      { n: '4', name: 'Typography', inc: 'Sora + Instrument Sans + JetBrains Mono, 16-style scale with live specimens, responsive table 1440/768/375', href: P + '#s4' },
+      { n: '5', name: 'Iconography', inc: 'Lucide, 1.75px stroke, 24px grid, sizing 16–48, color rules, 20 icons rendered', href: P + '#s5' },
+      { n: '6', name: 'Spacing System', inc: '8-pt scale 0–160 with tokens, margins, containers, breakpoints sm–2xl', href: P + '#s6' },
+      { n: '7', name: 'Grid System', inc: '12/8/4 columns rendered with gutters + margins, usage rules', href: P + '#s7' },
+      { n: '8', name: 'Border Radius', inc: 'none→full scale with component mapping', href: P + '#s8' },
+      { n: '9', name: 'Elevation & Shadows', inc: '6 light shadows + dark-mode border/glow strategy, rendered', href: P + '#s9' },
+      { n: '10', name: 'Buttons', inc: '7 variants × 6 states, light + dark matrices, sizes, icons, icon-only, groups', href: C + '#s10' },
+      { n: '11', name: 'Forms', inc: 'All input types, validation ×4, choices, switch, slider, date/time, upload, combobox, dark mode, full form layout', href: C + '#s11' },
+      { n: '12', name: 'Cards', inc: 'KPI ×3, service, case study, team, pricing ×2, testimonial, hover states', href: C + '#s12' },
+      { n: '13', name: 'Navigation', inc: 'Navbar, mega menu, sidebar ×2, mobile drawer + bottom nav, breadcrumbs, tabs ×3 (live), dropdown, pagination (live), stepper, footers ×2', href: C + '#s13' },
+      { n: '14', name: 'Feedback & Overlays', inc: 'Alerts ×4, banner, toasts, tooltip, popover, progress, spinners, skeleton, empty state, modal, drawer, 404/500', href: C + '#s14' },
+      { n: '15', name: 'Display Components', inc: 'Badges/tags/chips, avatars + groups, accordion (live), dividers, timeline, stats, lists, code block, full table, kanban, calendar', href: C + '#s15' },
+      { n: '16', name: 'Data Visualization', inc: 'Line/bar/donut/area/scatter in brand palette, GIS: base map, choropleth, markers, legend, heatmap, diverging', href: D + '#s16' },
+      { n: '17', name: 'Motion Design', inc: 'Duration scale 75–700, 4 easing curves, live hover specimens, micro-interaction spec, loading, reduced motion', href: D + '#s17' },
+      { n: '18', name: 'Illustrations & Imagery', inc: 'Illustration/photo/3D direction, AI prompt template + negative prompt, 6 do/don\u2019ts', href: D + '#s18' },
+      { n: '19', name: 'Accessibility', inc: 'Contrast pairs table, keyboard map, focus spec (live), touch targets, form a11y', href: D + '#s19' },
+      { n: '20', name: 'Website Style Guide', inc: 'Full homepage mock (hero, logo cloud, services, case, CTA), service, contact, careers, blog templates', href: T + '#s20' },
+      { n: '21', name: 'Dashboard Design Language', inc: 'Full analytics overview mock (shell, KPIs, charts, table), GIS dashboard, settings page', href: T + '#s21' },
+      { n: '22', name: 'Marketing & Corporate Assets', inc: 'Business card, letterhead, e-mail signature, 8 slide layouts, LinkedIn banner+profile, IG post/carousel/story, FB/LI post, highlights, WhatsApp, roll-up, booth, company profile, proposal, invoice (NIF/IVA 14%/IBAN AO/Kz), receipt, contract cover', href: B + '#s22' },
+      { n: '23', name: 'Figma Organization', inc: 'File structure, variables + light/dark modes, naming, Auto Layout, publishing workflow', href: B + '#s23' },
+      { n: '24', name: 'Design Tokens', inc: 'tokens.css (:root + .dark), tokens.json (W3C), tokens.ts — colors, type, spacing, radius, shadows, motion, breakpoints, z-index', href: '#s24' },
+      { n: '25', name: 'Tailwind Theme', inc: 'Full config: class dark mode, fonts, full scales, shadows, animations', href: '#s24' },
+      { n: '26', name: 'Developer Handoff Package', inc: 'Atomic architecture, folder structure, CVA variants, 15 component API specs, priority order, BRAND.md for AI tools', href: '#s26' },
+    ];
+    return { files, priority, apis, checklist,
+      hrefTokensCss: R.tokensCss || 'handoff/tokens.css',
+      hrefTailwind: R.tailwindCfg || 'handoff/tailwind.config.js',
+      hrefBrand: R.brandMd || 'handoff/BRAND.md' };
+  }
+}
+</script>
+</body>
+</html>

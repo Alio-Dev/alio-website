@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>Alio Analytics — Foundations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+</style>
+</helmet>
+
+<div style="font-family: 'Instrument Sans', sans-serif; color: #12141D; background: #FFFFFF;">
+
+  <!-- ============ STICKY NAV ============ -->
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 48px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/alio-icon.svg" alt="Alio" style="height: 26px; width: auto;">
+        <span style="font-family: Sora, sans-serif; font-size: 17px; letter-spacing: -0.02em;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #717A8F; border: 1px solid #DDE1E8; border-radius: 999px; padding: 2px 8px; margin-left: 6px;">design system v1.0</span>
+      </div>
+      <nav style="display: flex; gap: 4px; font-size: 13px; font-weight: 500;">
+        <a href="#s1" style="color: #12141D; text-decoration: none; padding: 6px 10px; border-radius: 6px; background: #EEF0F4;">01 Foundations</a>
+        <a href="02 Components.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">02 Components</a>
+        <a href="03 Data Motion Imagery.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">03 Data &amp; Motion</a>
+        <a href="04 Patterns.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">04 Patterns</a>
+        <a href="05 Brand Kit.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">05 Brand Kit</a>
+        <a href="06 Handoff.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">06 Handoff</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <div style="max-width: 1240px; margin: 0 auto; padding: 112px 48px 96px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #0793AC; margin-bottom: 24px;">Part I — Brand Foundations</div>
+    <h1 style="font-family: Sora, sans-serif; font-size: 64px; line-height: 1.05; letter-spacing: -0.03em; font-weight: 700; margin: 0 0 28px; max-width: 800px;">Clarity from complexity.</h1>
+    <p style="font-size: 19px; line-height: 1.6; color: #444B5C; max-width: 620px; margin: 0;">The Alio Analytics identity system — strategy, logo, color, typography, and the structural foundations every product and communication is built on. English-first, bilingual EN/PT.</p>
+    <div style="display: flex; gap: 32px; margin-top: 48px; font-size: 13px; color: #717A8F;">
+      <div><span style="color: #12141D; font-weight: 600;">Luanda, Angola</span> · Information Technology</div>
+      <div>alio.ao</div>
+      <div>Published at ocanda.ao/design-system</div>
+    </div>
+  </div>
+
+  <!-- ============ 1. BRAND STRATEGY ============ -->
+  <section id="s1" data-screen-label="1 Brand Strategy" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">01</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Brand Strategy</h2>
+      <p style="font-size: 16px; line-height: 1.65; color: #565E72; max-width: 640px; margin: 0 0 56px;">Who Alio is, what it stands for, and how it speaks — the strategic layer every visual decision answers to.</p>
+
+      <!-- Positioning + value prop -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <div style="background: #12141D; color: #FFFFFF; border-radius: 16px; padding: 40px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #2FCBE2; text-transform: uppercase; margin-bottom: 16px;">Positioning statement</div>
+          <p style="font-family: Sora, sans-serif; font-size: 22px; line-height: 1.45; font-weight: 400; margin: 0;">For organisations in Angola and across Africa that run on critical data, <strong style="font-weight: 700;">Alio Analytics</strong> is the technology partner that turns complex systems into clear, reliable software — with world-class engineering and design, delivered from Luanda.</p>
+        </div>
+        <div style="background: #F7F8FA; border: 1px solid #EEF0F4; border-radius: 16px; padding: 40px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #0793AC; text-transform: uppercase; margin-bottom: 16px;">Value proposition</div>
+          <p style="font-family: Sora, sans-serif; font-size: 22px; line-height: 1.45; margin: 0 0 20px;">World-class software, built where the problem lives.</p>
+          <p style="font-size: 15px; line-height: 1.65; color: #565E72; margin: 0;">Alio combines deep local context — government, oil &amp; gas, banking, logistics — with international engineering standards. Clients get software that works in their reality: their data, their regulations, their infrastructure.</p>
+        </div>
+      </div>
+
+      <!-- Mission / Vision / Story -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 64px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #0793AC; text-transform: uppercase; margin-bottom: 12px;">Mission</div>
+          <p style="font-size: 15px; line-height: 1.65; color: #2E3340; margin: 0;">To build innovative technology solutions that solve real problems across Angola and Africa — with world-class quality and exceptional user experience.</p>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #0793AC; text-transform: uppercase; margin-bottom: 12px;">Vision</div>
+          <p style="font-size: 15px; line-height: 1.65; color: #2E3340; margin: 0;">To become one of Africa's leading technology companies — recognised for innovation, quality, and impactful digital solutions.</p>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #0793AC; text-transform: uppercase; margin-bottom: 12px;">Brand story — short</div>
+          <p style="font-size: 15px; line-height: 1.65; color: #2E3340; margin: 0;">Alio was founded on a simple observation: Africa's hardest problems don't need imported software — they need software built by people who understand them. From Luanda, Alio builds the systems that run governments, banks, and industries.</p>
+        </div>
+      </div>
+
+      <!-- Long story -->
+      <div style="max-width: 760px; margin-bottom: 72px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: #0793AC; text-transform: uppercase; margin-bottom: 12px;">Brand story — long</div>
+        <p style="font-size: 16px; line-height: 1.75; color: #444B5C; margin: 0 0 16px;">Every day, decisions worth millions are made across Angola on top of spreadsheets, paper trails, and systems designed for somewhere else. Alio Analytics exists to close that gap. We are engineers, designers, and analysts from Luanda who hold ourselves to one standard: the software we ship must stand next to the best in the world — and work in the realities of ours.</p>
+        <p style="font-size: 16px; line-height: 1.75; color: #444B5C; margin: 0;">From GIS platforms that map national infrastructure to business-intelligence tools that give ministries and banks a live view of their operations, we build technology that turns complexity into clarity. Not for the demo. For the decade. <em style="color: #717A8F;">(PT: Construímos tecnologia que transforma complexidade em clareza. Não para a demonstração — para a década.)</em></p>
+      </div>
+
+      <!-- Pillars -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 24px;">Brand pillars</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; margin-bottom: 72px;">
+        <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="5">
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 24px 20px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9AA2B3; margin-bottom: 12px;">{{ p.num }}</div>
+            <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 8px;">{{ p.name }}</div>
+            <div style="font-size: 13px; line-height: 1.55; color: #717A8F;">{{ p.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- Tone of voice -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 24px; font-weight: 600; margin: 0 0 8px;">Tone of voice</h3>
+      <p style="font-size: 15px; line-height: 1.6; color: #565E72; max-width: 640px; margin: 0 0 28px;">Confident, not boastful. Precise, not cold. Plain language over jargon; short sentences; verbs over nouns. We explain — we never talk down. In Portuguese, we use "você"-neutral professional register.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-bottom: 72px;">
+        <sc-for list="{{ voiceExamples }}" as="v" hint-placeholder-count="6">
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #0793AC;">{{ v.context }}</div>
+            <div style="font-size: 16px; line-height: 1.55; color: #12141D; font-weight: 500;">{{ v.en }}</div>
+            <div style="font-size: 14px; line-height: 1.55; color: #717A8F; font-style: italic;">{{ v.pt }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- Messaging framework -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 24px; font-weight: 600; margin: 0 0 24px;">Messaging framework — by audience</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 72px;">
+        <sc-for list="{{ audiences }}" as="a" hint-placeholder-count="3">
+          <div style="background: #F7F8FA; border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+            <div style="font-family: Sora, sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 4px;">{{ a.name }}</div>
+            <div style="font-size: 13px; color: #717A8F; margin-bottom: 20px;">{{ a.sub }}</div>
+            <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #9AA2B3; margin-bottom: 6px;">They care about</div>
+            <div style="font-size: 14px; line-height: 1.6; color: #444B5C; margin-bottom: 16px;">{{ a.cares }}</div>
+            <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #9AA2B3; margin-bottom: 6px;">Lead message</div>
+            <div style="font-size: 14px; line-height: 1.6; color: #12141D; font-weight: 500; margin-bottom: 16px;">{{ a.message }}</div>
+            <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #9AA2B3; margin-bottom: 6px;">Proof points</div>
+            <div style="font-size: 14px; line-height: 1.6; color: #444B5C;">{{ a.proof }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- Elevator pitches + taglines -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <h3 style="font-family: Sora, sans-serif; font-size: 20px; font-weight: 600; margin: 0 0 20px;">Elevator pitch</h3>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #0793AC; margin-bottom: 6px;">10 SECONDS</div>
+              <p style="font-size: 15px; line-height: 1.6; color: #2E3340; margin: 0;">"Alio Analytics builds custom software, data platforms, and GIS solutions for organisations across Angola — with world-class engineering, from Luanda."</p>
+            </div>
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #0793AC; margin-bottom: 6px;">30 SECONDS</div>
+              <p style="font-size: 15px; line-height: 1.6; color: #2E3340; margin: 0;">"We're a Luanda-based technology company that builds the systems critical organisations run on — government, banking, oil &amp; gas, logistics. Custom software, mobile apps, GIS, data analytics, and AI. What makes us different is the combination: international engineering standards with deep local context. We build software that works in Angola's reality, not just in a demo."</p>
+            </div>
+            <div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #0793AC; margin-bottom: 6px;">60 SECONDS</div>
+              <p style="font-size: 15px; line-height: 1.6; color: #2E3340; margin: 0;">"Most critical organisations in Angola still run on spreadsheets, paper, or imported systems designed for other markets. Alio Analytics closes that gap. We design and build custom software, mobile apps, GIS platforms, and business-intelligence tools — end to end, from discovery and UX design to cloud deployment and integration with existing systems. Our clients include government institutions, banks, and industrial operators who need software they can trust for a decade, not a demo. We hold ourselves to one standard: everything we ship must stand next to the best in the world — and work in the realities of ours. That's why our vision is to become one of Africa's leading technology companies, built from Luanda."</p>
+            </div>
+          </div>
+        </div>
+        <div style="background: #131840; border-radius: 16px; padding: 32px; color: #FFFFFF;">
+          <h3 style="font-family: Sora, sans-serif; font-size: 20px; font-weight: 600; margin: 0 0 20px;">Taglines <span style="font-weight: 400; color: #93A1E3; font-size: 14px;">EN / PT</span></h3>
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div>
+              <div style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">Clarity from complexity.</div>
+              <div style="font-size: 15px; color: #93A1E3; margin-top: 4px;">Clareza na complexidade.</div>
+              <div style="font-size: 12px; color: #6B7CD5; margin-top: 8px;">Primary — product &amp; website</div>
+            </div>
+            <div>
+              <div style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">Built in Angola. Engineered for the world.</div>
+              <div style="font-size: 15px; color: #93A1E3; margin-top: 4px;">Feito em Angola. Ao nível do mundo.</div>
+              <div style="font-size: 12px; color: #6B7CD5; margin-top: 8px;">Corporate — proposals, About, recruiting</div>
+            </div>
+            <div>
+              <div style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;">Data into decisions.</div>
+              <div style="font-size: 15px; color: #93A1E3; margin-top: 4px;">Dados que decidem.</div>
+              <div style="font-size: 12px; color: #6B7CD5; margin-top: 8px;">Analytics &amp; BI campaigns</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. LOGO SYSTEM ============ -->
+  <section id="s2" data-screen-label="2 Logo System" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">02</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Logo System</h2>
+      <p style="font-size: 16px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 56px;">The Alio mark: two interlocking peaks — an ascending "A" motif drawn as a continuous circuit path, with node points marking where data begins and ends. The cyan→indigo gradient reads left to right: raw signal → structured insight.</p>
+
+      <!-- Primary lockup -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 2fr)); gap: 24px; margin-bottom: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 72px 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;">
+          <div style="display: flex; align-items: center; gap: 18px;">
+            <img src="assets/alio-icon.svg" alt="" style="height: 56px; width: auto;">
+            <span style="font-family: Sora, sans-serif; font-size: 42px; letter-spacing: -0.02em; color: #12141D;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+          </div>
+          <div style="font-size: 12px; color: #9AA2B3;">Primary logo — horizontal lockup</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <div style="flex: 1; border: 1px solid #EEF0F4; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+              <img src="assets/alio-icon.svg" alt="" style="height: 44px; width: auto;">
+              <span style="font-family: Sora, sans-serif; font-size: 22px; letter-spacing: -0.02em; color: #12141D;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+            </div>
+            <div style="font-size: 12px; color: #9AA2B3;">Vertical (secondary)</div>
+          </div>
+          <div style="flex: 1; border: 1px solid #EEF0F4; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;">
+            <img src="assets/alio-icon.svg" alt="" style="height: 48px; width: auto;">
+            <div style="font-size: 12px; color: #9AA2B3;">Symbol only</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mono + reversed -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 56px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 10px; height: 48px;">
+            <img src="assets/alio-icon-black.svg" alt="" style="height: 30px;">
+            <span style="font-family: Sora, sans-serif; font-size: 21px; letter-spacing: -0.02em; color: #12141D;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+          </div>
+          <div style="font-size: 12px; color: #9AA2B3;">Monochrome black</div>
+        </div>
+        <div style="background: #12141D; border-radius: 16px; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 10px; height: 48px;">
+            <img src="assets/alio-icon-white.svg" alt="" style="height: 30px;">
+            <span style="font-family: Sora, sans-serif; font-size: 21px; letter-spacing: -0.02em; color: #FFFFFF;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+          </div>
+          <div style="font-size: 12px; color: #717A8F;">Monochrome white</div>
+        </div>
+        <div style="background: #131840; border-radius: 16px; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 10px; height: 48px;">
+            <img src="assets/alio-icon.svg" alt="" style="height: 30px; filter: saturate(1.15) brightness(1.35);">
+            <span style="font-family: Sora, sans-serif; font-size: 21px; letter-spacing: -0.02em; color: #FFFFFF;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+          </div>
+          <div style="font-size: 12px; color: #6B7CD5;">Reversed — dark backgrounds</div>
+        </div>
+        <div style="background: linear-gradient(135deg, #07B7D1, #2B3990); border-radius: 16px; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 10px; height: 48px;">
+            <img src="assets/alio-icon-white.svg" alt="" style="height: 30px;">
+            <span style="font-family: Sora, sans-serif; font-size: 21px; letter-spacing: -0.02em; color: #FFFFFF;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+          </div>
+          <div style="font-size: 12px; color: rgba(255,255,255,0.75);">White on brand gradient</div>
+        </div>
+      </div>
+
+      <!-- Clear space + min size + favicon -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 56px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <h4 style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin: 0 0 20px;">Clear space</h4>
+          <div style="display: flex; justify-content: center; padding: 8px 0 20px;">
+            <div style="position: relative; padding: 28px; border: 1.5px dashed #93A1E3; border-radius: 4px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="assets/alio-icon.svg" alt="" style="height: 34px;">
+                <span style="font-family: Sora, sans-serif; font-size: 22px; letter-spacing: -0.02em;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+              </div>
+              <div style="position: absolute; top: 2px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4C5DC2;">x</div>
+              <div style="position: absolute; left: 6px; top: 50%; transform: translateY(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4C5DC2;">x</div>
+              <div style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4C5DC2;">x</div>
+              <div style="position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4C5DC2;">x</div>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.6; color: #565E72; margin: 0;"><strong>x = height of one peak's apex curve</strong> (½ the symbol height). Keep at least x of clear space on all sides. Nothing enters this zone — no text, rules, or other marks.</p>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <h4 style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin: 0 0 20px;">Minimum sizes</h4>
+          <div style="display: flex; flex-direction: column; gap: 18px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="display: flex; align-items: center; gap: 5px; width: 150px;">
+                <img src="assets/alio-icon.svg" alt="" style="height: 14px;">
+                <span style="font-family: Sora, sans-serif; font-size: 11px;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+              </div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #717A8F;">lockup ≥ 96px / 24mm wide</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 150px;"><img src="assets/alio-icon.svg" alt="" style="height: 16px;"></div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #717A8F;">symbol ≥ 16px / 5mm tall</div>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.6; color: #565E72; margin: 0;">Below these sizes the counter-dots fill in. Use the symbol alone under 96px; never render the full lockup smaller than the minimum.</p>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <h4 style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin: 0 0 20px;">Favicon &amp; app icon</h4>
+          <div style="display: flex; align-items: flex-end; gap: 20px; margin-bottom: 20px;">
+            <div style="text-align: center;"><div style="width: 48px; height: 48px; border-radius: 11px; background: #131840; display: flex; align-items: center; justify-content: center;"><img src="assets/alio-icon-white.svg" alt="" style="width: 32px;"></div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9AA2B3; margin-top: 6px;">48</div></div>
+            <div style="text-align: center;"><div style="width: 32px; height: 32px; border-radius: 7px; background: #131840; display: flex; align-items: center; justify-content: center;"><img src="assets/alio-icon-white.svg" alt="" style="width: 22px;"></div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9AA2B3; margin-top: 6px;">32</div></div>
+            <div style="text-align: center;"><div style="width: 16px; height: 16px; border-radius: 4px; background: #131840; display: flex; align-items: center; justify-content: center;"><img src="assets/alio-icon-white.svg" alt="" style="width: 12px;"></div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9AA2B3; margin-top: 6px;">16</div></div>
+            <div style="text-align: center;"><div style="width: 48px; height: 48px; border-radius: 11px; background: linear-gradient(135deg, #07B7D1, #2B3990); display: flex; align-items: center; justify-content: center;"><img src="assets/alio-icon-white.svg" alt="" style="width: 32px;"></div><div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9AA2B3; margin-top: 6px;">app icon</div></div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.6; color: #565E72; margin: 0;"><strong>Refinement:</strong> at 16px, use the white symbol on navy #131840 — the gradient mark loses definition. App icon: white symbol on brand gradient, 22% corner radius.</p>
+        </div>
+      </div>
+
+      <!-- Don'ts -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 24px; font-weight: 600; margin: 0 0 24px;">Incorrect usage</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 56px;">
+        <sc-for list="{{ donts }}" as="d" hint-placeholder-count="8">
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; overflow: hidden;">
+            <div style="position: relative; height: 110px; display: flex; align-items: center; justify-content: center; background: {{ d.bg }};">
+              <div style="transform: {{ d.transform }}; filter: {{ d.filter }}; opacity: {{ d.opacity }}; display: flex; align-items: center; gap: 6px;">
+                <img src="{{ d.icon }}" alt="" style="height: 28px;">
+                <sc-if value="{{ d.showText }}" hint-placeholder-val="{{ true }}"><span style="font-family: {{ d.font }}; font-size: 17px; letter-spacing: -0.02em; color: {{ d.textColor }};"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span></sc-if>
+              </div>
+              <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%;"><line x1="0" y1="100" x2="100" y2="0" stroke="#DC3D43" stroke-width="1.5" vector-effect="non-scaling-stroke"></line></svg>
+              <div style="position: absolute; top: 8px; left: 8px; width: 18px; height: 18px; border-radius: 50%; background: #DC3D43; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600;">✕</div>
+            </div>
+            <div style="padding: 12px 14px; font-size: 12.5px; line-height: 1.5; color: #565E72;">{{ d.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- File format matrix -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 24px; font-weight: 600; margin: 0 0 24px;">File format matrix</h3>
+      <div style="border: 1px solid #EEF0F4; border-radius: 12px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 100px 1fr 1fr 1fr; background: #F7F8FA; border-bottom: 1px solid #EEF0F4; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #717A8F;">
+          <div style="padding: 12px 20px;">Format</div><div style="padding: 12px 20px;">Use for</div><div style="padding: 12px 20px;">Variants needed</div><div style="padding: 12px 20px;">Never for</div>
+        </div>
+        <sc-for list="{{ formats }}" as="f" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: 100px 1fr 1fr 1fr; border-bottom: 1px solid #F7F8FA; font-size: 14px; color: #444B5C;">
+            <div style="padding: 14px 20px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #2B3990; font-weight: 500;">{{ f.fmt }}</div>
+            <div style="padding: 14px 20px; line-height: 1.5;">{{ f.use }}</div>
+            <div style="padding: 14px 20px; line-height: 1.5;">{{ f.variants }}</div>
+            <div style="padding: 14px 20px; line-height: 1.5; color: #9AA2B3;">{{ f.never }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. COLOR SYSTEM ============ -->
+  <section id="s3" data-screen-label="3 Color System" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">03</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Color System</h2>
+      <p style="font-size: 16px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 20px;">Derived directly from the logo gradient: <strong>Indigo #2B3990</strong> (primary) and <strong>Cyan #07B7D1</strong> (accent). Neutrals carry a subtle indigo cast so greys never feel detached from the brand. Contrast ratios below are computed live against white (light mode) — WCAG 2.1.</p>
+      <div style="display: flex; gap: 12px; margin-bottom: 56px;">
+        <div style="height: 64px; flex: 1; border-radius: 12px; background: linear-gradient(90deg, #07B7D1, #2B3990); display: flex; align-items: center; padding: 0 24px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px;">brand gradient — #07B7D1 → #2B3990 · 90° in UI, 135° on surfaces</div>
+      </div>
+
+      <sc-for list="{{ scaleGroups }}" as="grp" hint-placeholder-count="2">
+        <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 40px 0 20px;">{{ grp.title }}</h3>
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <sc-for list="{{ grp.scales }}" as="sc">
+            <div>
+              <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px;">
+                <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600;">{{ sc.name }}</div>
+                <div style="font-size: 12.5px; color: #717A8F;">{{ sc.usage }}</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9AA2B3; margin-left: auto;">tailwind ≈ {{ sc.tw }}</div>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(11, 1fr); border-radius: 10px; overflow: hidden; border: 1px solid #EEF0F4;">
+                <sc-for list="{{ sc.steps }}" as="st" hint-placeholder-count="11">
+                  <div style="background: {{ st.hex }}; padding: 14px 8px 10px; display: flex; flex-direction: column; gap: 2px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 500; color: {{ st.ink }};">{{ st.step }}</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: {{ st.inkSoft }};">{{ st.hexShort }}</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: {{ st.inkSoft }};">{{ st.crLabel }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+
+      <!-- Key color detail cards -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 56px 0 20px;">Core brand colors — full specification</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 56px;">
+        <sc-for list="{{ coreColors }}" as="c" hint-placeholder-count="4">
+          <div style="border: 1px solid #EEF0F4; border-radius: 14px; overflow: hidden;">
+            <div style="height: 88px; background: {{ c.hex }};"></div>
+            <div style="padding: 18px 20px;">
+              <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 2px;">{{ c.name }}</div>
+              <div style="font-size: 12px; color: #717A8F; margin-bottom: 12px;">{{ c.role }}</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.9; color: #444B5C;">
+                <div>HEX  {{ c.hex }}</div>
+                <div>RGB  {{ c.rgb }}</div>
+                <div>HSL  {{ c.hsl }}</div>
+                <div>TW   {{ c.tw }}</div>
+                <div>on white {{ c.crWhite }} · on dark {{ c.crDark }}</div>
+              </div>
+              <div style="margin-top: 10px; display: flex; gap: 6px;">
+                <span style="font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: {{ c.badgeBg }}; color: {{ c.badgeInk }};">{{ c.badge }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- Light / dark semantic palettes -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 20px;">Semantic tokens — light &amp; dark mode</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 24px; margin-bottom: 56px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; overflow: hidden;">
+          <div style="padding: 16px 24px; border-bottom: 1px solid #EEF0F4; font-family: Sora, sans-serif; font-weight: 600; font-size: 14px;">☀ Light mode</div>
+          <div style="padding: 12px 0; background: #FFFFFF;">
+            <sc-for list="{{ lightTokens }}" as="t" hint-placeholder-count="12">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 7px 24px;">
+                <div style="width: 26px; height: 26px; border-radius: 7px; background: {{ t.hex }}; border: 1px solid #DDE1E8; flex-shrink: 0;"></div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #2B3990; width: 190px;">{{ t.token }}</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #717A8F; width: 80px;">{{ t.hex }}</div>
+                <div style="font-size: 12px; color: #9AA2B3;">{{ t.use }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="border: 1px solid #2E3340; border-radius: 16px; overflow: hidden; background: #12141D;">
+          <div style="padding: 16px 24px; border-bottom: 1px solid #2E3340; font-family: Sora, sans-serif; font-weight: 600; font-size: 14px; color: #F7F8FA;">☾ Dark mode</div>
+          <div style="padding: 12px 0;">
+            <sc-for list="{{ darkTokens }}" as="t" hint-placeholder-count="12">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 7px 24px;">
+                <div style="width: 26px; height: 26px; border-radius: 7px; background: {{ t.hex }}; border: 1px solid #2E3340; flex-shrink: 0;"></div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6EDFF0; width: 190px;">{{ t.token }}</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #9AA2B3; width: 80px;">{{ t.hex }}</div>
+                <div style="font-size: 12px; color: #717A8F;">{{ t.use }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart palette -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 8px;">Data-visualisation palette</h3>
+      <p style="font-size: 14px; line-height: 1.6; color: #565E72; max-width: 640px; margin: 0 0 24px;">Eight categorical colors (brand-anchored, perceptually spaced), plus sequential and diverging scales for GIS choropleths and heatmaps. Full usage rules in <a href="03 Data Motion Imagery.dc.html" style="color: #0793AC;">Section 16</a>.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin-bottom: 20px;">
+        <sc-for list="{{ chartCat }}" as="cc" hint-placeholder-count="8">
+          <div>
+            <div style="height: 56px; border-radius: 10px; background: {{ cc.hex }};"></div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #717A8F; margin-top: 6px;">{{ cc.n }} {{ cc.hex }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div>
+          <div style="font-size: 12.5px; font-weight: 600; color: #565E72; margin-bottom: 8px;">Sequential — cyan → indigo (choropleth, density)</div>
+          <div style="display: flex; border-radius: 8px; overflow: hidden; height: 40px;">
+            <sc-for list="{{ seqScale }}" as="s" hint-placeholder-count="7"><div style="flex: 1; background: {{ s }};"></div></sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 12.5px; font-weight: 600; color: #565E72; margin-bottom: 8px;">Diverging — red ↔ neutral ↔ indigo (variance, ±)</div>
+          <div style="display: flex; border-radius: 8px; overflow: hidden; height: 40px;">
+            <sc-for list="{{ divScale }}" as="s" hint-placeholder-count="7"><div style="flex: 1; background: {{ s }};"></div></sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. TYPOGRAPHY ============ -->
+  <section id="s4" data-screen-label="4 Typography" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">04</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Typography</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 40px 0 56px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 52px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 16px;">Sora</div>
+          <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #0793AC; margin-bottom: 10px;">Display &amp; headings</div>
+          <p style="font-size: 14px; line-height: 1.6; color: #565E72; margin: 0 0 12px;">Geometric, slightly technical, with the same rounded-terminal DNA as the logo mark. Weights: 300 (wordmark), 600, 700, 800.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9AA2B3;">Fallback: ui-sans-serif, system-ui</div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: 'Instrument Sans', sans-serif; font-size: 52px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; margin-bottom: 16px;">Instrument Sans</div>
+          <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #0793AC; margin-bottom: 10px;">Body &amp; UI</div>
+          <p style="font-size: 14px; line-height: 1.6; color: #565E72; margin: 0 0 12px;">Neutral, highly legible at small sizes, excellent Portuguese diacritics. Weights: 400, 500, 600.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9AA2B3;">Fallback: 'Segoe UI', Helvetica, sans-serif</div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 16px;">JetBrains Mono</div>
+          <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #0793AC; margin-bottom: 10px;">Code, data &amp; labels</div>
+          <p style="font-size: 14px; line-height: 1.6; color: #565E72; margin: 0 0 12px;">Code blocks, tabular numbers in dashboards, overline labels, token names. Weights: 400, 500.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9AA2B3;">Fallback: ui-monospace, 'SF Mono', monospace</div>
+        </div>
+      </div>
+
+      <!-- Type scale specimens -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 24px;">Type scale — live specimens</h3>
+      <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 8px 0; margin-bottom: 40px;">
+        <sc-for list="{{ typeScale }}" as="ts" hint-placeholder-count="16">
+          <div style="display: flex; align-items: baseline; gap: 32px; padding: 18px 32px; border-bottom: 1px solid #F7F8FA;">
+            <div style="width: 210px; flex-shrink: 0;">
+              <div style="font-size: 13px; font-weight: 600; color: #12141D;">{{ ts.name }}</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #9AA2B3; margin-top: 3px;">{{ ts.spec }}</div>
+            </div>
+            <div style="font-family: {{ ts.family }}; font-size: {{ ts.px }}; line-height: {{ ts.lh }}; font-weight: {{ ts.weight }}; letter-spacing: {{ ts.tracking }}; text-transform: {{ ts.transform }}; color: #12141D; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{ ts.sample }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- Responsive table -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 20px;">Responsive scale</h3>
+      <div style="border: 1px solid #EEF0F4; border-radius: 12px; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; background: #F7F8FA; border-bottom: 1px solid #EEF0F4; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #717A8F;">
+          <div style="padding: 12px 24px;">Style</div><div style="padding: 12px 24px;">Desktop 1440</div><div style="padding: 12px 24px;">Tablet 768</div><div style="padding: 12px 24px;">Mobile 375</div>
+        </div>
+        <sc-for list="{{ responsive }}" as="r" hint-placeholder-count="9">
+          <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; border-bottom: 1px solid #F7F8FA; font-size: 13.5px; color: #444B5C;">
+            <div style="padding: 12px 24px; font-weight: 600; color: #12141D;">{{ r.name }}</div>
+            <div style="padding: 12px 24px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">{{ r.d }}</div>
+            <div style="padding: 12px 24px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">{{ r.t }}</div>
+            <div style="padding: 12px 24px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">{{ r.m }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. ICONOGRAPHY ============ -->
+  <section id="s5" data-screen-label="5 Iconography" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">05</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Iconography</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 2fr)); gap: 24px; margin-top: 40px;">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="border: 1px solid #EEF0F4; border-radius: 14px; padding: 24px;">
+            <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 14px;">Library: Lucide</div>
+            <div style="font-size: 13.5px; line-height: 1.9; color: #444B5C;">
+              Stroke width <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">1.75px</strong> at 24px grid<br>
+              Corner radius <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">2px</strong> (round joins/caps)<br>
+              Grid <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">24×24</strong>, 2px padding<br>
+              Style <strong>outline only</strong> — filled variants reserved for active nav states<br>
+              Color: inherit text color; never the brand gradient
+            </div>
+          </div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 14px; padding: 24px;">
+            <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 14px;">Sizing scale</div>
+            <div style="display: flex; align-items: flex-end; gap: 18px;">
+              <sc-for list="{{ iconSizes }}" as="sz" hint-placeholder-count="5">
+                <div style="text-align: center;">
+                  <svg width="{{ sz.px }}" height="{{ sz.px }}" viewBox="0 0 24 24" fill="none" stroke="#2B3990" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+                  <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9AA2B3; margin-top: 6px;">{{ sz.px }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 14px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 20px;">20 core icons — brand style</div>
+          <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+            <sc-for list="{{ icons }}" as="ic" hint-placeholder-count="20">
+              <div style="border: 1px solid #F7F8FA; border-radius: 10px; padding: 16px 8px; display: flex; flex-direction: column; align-items: center; gap: 10px;" style-hover="border-color: #A6EDF8; background: #ECFCFF;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2E3340" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ ic.d }}"></path></svg>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #9AA2B3;">{{ ic.name }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. SPACING ============ -->
+  <section id="s6" data-screen-label="6 Spacing" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">06</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Spacing System</h2>
+      <p style="font-size: 16px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 48px;">An 8-point scale with 2/4px micro-steps. Components use ≤24px; layout gaps use 32–64px; section rhythm uses 80–160px. When in doubt, go bigger — whitespace is a brand asset.</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 14px; padding: 28px 32px;">
+          <sc-for list="{{ spacing }}" as="sp" hint-placeholder-count="14">
+            <div style="display: flex; align-items: center; gap: 16px; padding: 5px 0;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #2B3990; width: 110px;">{{ sp.token }}</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #9AA2B3; width: 48px;">{{ sp.px }}</div>
+              <div style="height: 14px; border-radius: 3px; background: linear-gradient(90deg, #07B7D1, #2B3990); width: {{ sp.w }};"></div>
+              <div style="font-size: 12px; color: #9AA2B3;">{{ sp.use }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="border: 1px solid #EEF0F4; border-radius: 14px; padding: 24px 28px;">
+            <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 14px;">Breakpoints</div>
+            <sc-for list="{{ breakpoints }}" as="bp" hint-placeholder-count="5">
+              <div style="display: flex; gap: 16px; padding: 4px 0; font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">
+                <span style="color: #2B3990; width: 42px;">{{ bp.name }}</span><span style="color: #444B5C; width: 74px;">{{ bp.px }}</span><span style="color: #9AA2B3; font-family: 'Instrument Sans', sans-serif; font-size: 12.5px;">{{ bp.note }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 14px; padding: 24px 28px;">
+            <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 14px;">Containers &amp; margins</div>
+            <div style="font-size: 13.5px; line-height: 2; color: #444B5C;">
+              Content max-width <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">1200px</strong> (marketing), <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">100%−sidebar</strong> (app)<br>
+              Page margins: <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">48px</strong> desktop · <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">32px</strong> tablet · <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">20px</strong> mobile<br>
+              Prose max-width <strong style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px;">680px</strong> (~72ch)<br>
+              Card padding: 24px (compact) / 32px (default) / 40px (feature)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. GRID ============ -->
+  <section id="s7" data-screen-label="7 Grid" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">07</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Grid System</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 3fr)); gap: 24px; align-items: start;">
+        <div>
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Desktop — 12 columns · 24px gutter · 48px margin</div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 16px 24px; height: 180px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px;">
+            <sc-for list="{{ col12 }}" as="c" hint-placeholder-count="12"><div style="background: rgba(7,183,209,0.14); border: 1px dashed #6EDFF0; border-radius: 4px;"></div></sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Tablet — 8 col · 20px · 32px</div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 16px; height: 180px; display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px;">
+            <sc-for list="{{ col8 }}" as="c" hint-placeholder-count="8"><div style="background: rgba(7,183,209,0.14); border: 1px dashed #6EDFF0; border-radius: 4px;"></div></sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px;">Mobile — 4 col · 16px · 20px</div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 16px 12px; height: 180px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+            <sc-for list="{{ col4 }}" as="c" hint-placeholder-count="4"><div style="background: rgba(7,183,209,0.14); border: 1px dashed #6EDFF0; border-radius: 4px;"></div></sc-for>
+          </div>
+        </div>
+      </div>
+      <p style="font-size: 14px; line-height: 1.6; color: #565E72; max-width: 720px; margin: 24px 0 0;">Marketing pages: content spans 10 of 12 columns max; heroes span 8. Dashboards: sidebar occupies a fixed 264px rail outside the grid; content uses a fluid 12-column grid with 24px gutters. Cards snap to 3/4/6/12-column widths.</p>
+    </div>
+  </section>
+
+  <!-- ============ 8. RADIUS ============ -->
+  <section id="s8" data-screen-label="8 Border Radius" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">08</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Border Radius</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 16px;">
+        <sc-for list="{{ radii }}" as="r" hint-placeholder-count="7">
+          <div style="text-align: center;">
+            <div style="height: 88px; border: 1.5px solid #4C5DC2; background: #EEF0FB; border-radius: {{ r.css }}; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #2B3990;">{{ r.px }}</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2B3990; margin-top: 10px;">{{ r.token }}</div>
+            <div style="font-size: 11.5px; color: #9AA2B3; margin-top: 4px; line-height: 1.45;">{{ r.use }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. ELEVATION ============ -->
+  <section id="s9" data-screen-label="9 Elevation" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px 128px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">09</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Elevation &amp; Shadows</h2>
+      <p style="font-size: 16px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 48px;">Shadows are indigo-tinted (never pure black) and used sparingly — most separation comes from borders. Dark mode replaces shadows with borders and, for floating layers, a faint cyan glow.</p>
+      <div style="background: #F7F8FA; border-radius: 16px; padding: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <sc-for list="{{ shadows }}" as="sh" hint-placeholder-count="6">
+          <div>
+            <div style="height: 96px; background: #FFFFFF; border-radius: 12px; box-shadow: {{ sh.css }};"></div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #2B3990; margin-top: 14px;">{{ sh.token }}</div>
+            <div style="font-size: 11.5px; color: #717A8F; margin-top: 4px; line-height: 1.5;">{{ sh.use }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: #12141D; border-radius: 16px; padding: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px;">
+        <sc-for list="{{ darkShadows }}" as="sh" hint-placeholder-count="6">
+          <div>
+            <div style="height: 96px; background: #1F2330; border-radius: 12px; border: 1px solid {{ sh.border }}; box-shadow: {{ sh.css }};"></div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6EDFF0; margin-top: 14px;">{{ sh.token }}</div>
+            <div style="font-size: 11.5px; color: #717A8F; margin-top: 4px; line-height: 1.5;">{{ sh.use }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 40px 48px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="assets/alio-icon.svg" alt="" style="height: 18px;">
+        <span style="font-size: 13px; color: #717A8F;">Alio Analytics — Design System · Part I</span>
+      </div>
+      <a href="02 Components.dc.html" style="font-size: 14px; font-weight: 600; color: #2B3990; text-decoration: none;">Next: Component Library →</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  // ---- WCAG helpers ----
+  hexToRgb(hex) {
+    const h = hex.replace('#', '');
+    return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+  }
+  lum(hex) {
+    const [r, g, b] = this.hexToRgb(hex).map(v => {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+  contrast(a, b) {
+    const l1 = this.lum(a), l2 = this.lum(b);
+    const hi = Math.max(l1, l2), lo = Math.min(l1, l2);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+  fmtCr(r) { return r.toFixed(r >= 10 ? 0 : 1) + ':1'; }
+  hexToHsl(hex) {
+    let [r, g, b] = this.hexToRgb(hex).map(v => v / 255);
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0, l = (max + min) / 2;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = ((g - b) / d + (g < b ? 6 : 0));
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h *= 60;
+    }
+    return `${Math.round(h)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+  }
+
+  buildScale(name, usage, tw, steps) {
+    const keys = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+    return {
+      name, usage, tw,
+      steps: steps.map((hex, i) => {
+        const crW = this.contrast(hex, '#FFFFFF');
+        const dark = this.lum(hex) < 0.35;
+        return {
+          step: keys[i], hex,
+          hexShort: hex.replace('#', ''),
+          ink: dark ? 'rgba(255,255,255,0.95)' : 'rgba(18,20,29,0.85)',
+          inkSoft: dark ? 'rgba(255,255,255,0.65)' : 'rgba(18,20,29,0.55)',
+          crLabel: this.fmtCr(crW) + (crW >= 7 ? ' AAA' : crW >= 4.5 ? ' AA' : crW >= 3 ? ' AA-L' : ''),
+        };
+      })
+    };
+  }
+
+  renderVals() {
+    const P = ['#EEF0FB','#DDE2F7','#BCC5EF','#93A1E3','#6B7CD5','#4C5DC2','#3A49A9','#2B3990','#232E74','#1D265C','#131840'];
+    const A = ['#ECFCFF','#D0F6FC','#A6EDF8','#6EDFF0','#2FCBE2','#07B7D1','#0793AC','#0C7589','#135E6E','#144E5C','#07333E'];
+    const N = ['#F7F8FA','#EEF0F4','#DDE1E8','#C4CAD6','#9AA2B3','#717A8F','#565E72','#444B5C','#2E3340','#1F2330','#12141D'];
+    const SU = ['#EBFAF3','#D0F3E2','#A3E7C7','#6DD4A6','#37BC83','#16A468','#0D8454','#0C6A45','#0C5439','#0B4530','#05271B'];
+    const W = ['#FEF9EC','#FBEFCB','#F7DE92','#F2C859','#EDB232','#E5971B','#CB7314','#A95214','#8A4017','#723516','#421A08'];
+    const D = ['#FDF0F0','#FBDCDD','#F7BFC0','#F09496','#E7666B','#DC3D43','#C42B31','#A42226','#872024','#712124','#3E0D0F'];
+    const I = ['#EFF6FF','#DBEBFE','#BFDCFE','#93C4FD','#60A5FA','#3B82F6','#2565EB','#1D50D8','#1E42AF','#1E398A','#172554'];
+
+    const scaleGroups = [
+      { title: 'Brand & neutral scales', scales: [
+        this.buildScale('Primary — Indigo', 'Brand anchor. 700 is the logo indigo. Buttons, links, focus, nav.', 'indigo (custom)', P),
+        this.buildScale('Accent — Cyan', 'The logo cyan at 500. Highlights, data, active states. Text: use 600+.', 'cyan', A),
+        this.buildScale('Neutral — Slate', 'Indigo-cast greys. Text, borders, surfaces.', 'slate (custom)', N),
+      ]},
+      { title: 'Semantic scales', scales: [
+        this.buildScale('Success', 'Confirmations, positive deltas, valid states.', 'emerald', SU),
+        this.buildScale('Warning', 'Caution, pending states, degraded service.', 'amber', W),
+        this.buildScale('Danger', 'Errors, destructive actions, negative deltas.', 'red (custom)', D),
+        this.buildScale('Info', 'Neutral notices. Distinct from Primary by hue (blue vs indigo).', 'blue', I),
+      ]},
+    ];
+
+    const core = [
+      { name: 'Alio Indigo', hex: '#2B3990', role: 'Primary · primary-700', tw: 'indigo-800' },
+      { name: 'Alio Cyan', hex: '#07B7D1', role: 'Accent · accent-500', tw: 'cyan-500' },
+      { name: 'Ink', hex: '#12141D', role: 'Text primary · neutral-950', tw: 'slate-950' },
+      { name: 'Deep Navy', hex: '#131840', role: 'Dark surfaces · primary-950', tw: 'indigo-950' },
+    ];
+    const coreColors = core.map(c => {
+      const crW = this.contrast(c.hex, '#FFFFFF');
+      const crD = this.contrast(c.hex, '#12141D');
+      const [r, g, b] = this.hexToRgb(c.hex);
+      const pass = crW >= 7 ? 'AAA on white' : crW >= 4.5 ? 'AA on white' : crW >= 3 ? 'AA large only' : 'Decorative on white';
+      return { ...c, rgb: `${r} ${g} ${b}`, hsl: this.hexToHsl(c.hex),
+        crWhite: this.fmtCr(crW), crDark: this.fmtCr(crD), badge: pass,
+        badgeBg: crW >= 4.5 ? '#EBFAF3' : '#FEF9EC', badgeInk: crW >= 4.5 ? '#0C6A45' : '#A95214' };
+    });
+
+    const lightTokens = [
+      { token: '--bg', hex: '#FFFFFF', use: 'Page background' },
+      { token: '--bg-subtle', hex: '#F7F8FA', use: 'Alt sections, wells' },
+      { token: '--surface', hex: '#FFFFFF', use: 'Cards, panels' },
+      { token: '--surface-raised', hex: '#FFFFFF', use: 'Popovers + shadow-md' },
+      { token: '--border', hex: '#DDE1E8', use: 'Default borders' },
+      { token: '--border-subtle', hex: '#EEF0F4', use: 'Dividers, hairlines' },
+      { token: '--text-primary', hex: '#12141D', use: 'Headings, body · 17.8:1' },
+      { token: '--text-secondary', hex: '#444B5C', use: 'Supporting text · 8.6:1' },
+      { token: '--text-tertiary', hex: '#717A8F', use: 'Captions, meta · 4.6:1' },
+      { token: '--text-disabled', hex: '#9AA2B3', use: 'Disabled labels' },
+      { token: '--text-inverse', hex: '#FFFFFF', use: 'On dark/brand fills' },
+      { token: '--brand', hex: '#2B3990', use: 'Primary actions · 10.6:1' },
+      { token: '--brand-hover', hex: '#232E74', use: 'Hover state' },
+      { token: '--accent', hex: '#0793AC', use: 'Accent text/icons · 4.5:1' },
+      { token: '--focus-ring', hex: '#07B7D1', use: '2px ring, 2px offset' },
+    ];
+    const darkTokens = [
+      { token: '--bg', hex: '#0E1017', use: 'Page background' },
+      { token: '--bg-subtle', hex: '#12141D', use: 'Alt sections, wells' },
+      { token: '--surface', hex: '#1F2330', use: 'Cards, panels' },
+      { token: '--surface-raised', hex: '#2E3340', use: 'Popovers, menus' },
+      { token: '--border', hex: '#2E3340', use: 'Default borders' },
+      { token: '--border-subtle', hex: '#1F2330', use: 'Dividers' },
+      { token: '--text-primary', hex: '#F7F8FA', use: 'Headings, body · 16.9:1' },
+      { token: '--text-secondary', hex: '#C4CAD6', use: 'Supporting · 10.7:1' },
+      { token: '--text-tertiary', hex: '#9AA2B3', use: 'Captions · 6.4:1' },
+      { token: '--text-disabled', hex: '#565E72', use: 'Disabled labels' },
+      { token: '--text-inverse', hex: '#12141D', use: 'On light fills' },
+      { token: '--brand', hex: '#6B7CD5', use: 'Primary actions · 5.4:1' },
+      { token: '--brand-hover', hex: '#93A1E3', use: 'Hover state' },
+      { token: '--accent', hex: '#2FCBE2', use: 'Accent text/icons · 9.5:1' },
+      { token: '--focus-ring', hex: '#2FCBE2', use: '2px ring, 2px offset' },
+    ];
+
+    const chartCat = ['#2B3990','#07B7D1','#16A468','#E5971B','#7C5CD6','#DC3D43','#D9679E','#5B8DEF']
+      .map((hex, i) => ({ n: 'c' + (i + 1), hex }));
+
+    const donts = [
+      { label: "Don't stretch or squash the mark", bg: '#FFFFFF', transform: 'scaleX(1.55)', filter: 'none', opacity: 1, icon: 'assets/alio-icon.svg', showText: false, font: '', textColor: '' },
+      { label: "Don't rotate the logo", bg: '#FFFFFF', transform: 'rotate(-18deg)', filter: 'none', opacity: 1, icon: 'assets/alio-icon.svg', showText: true, font: "Sora, sans-serif", textColor: '#12141D' },
+      { label: "Don't recolor outside the approved palette", bg: '#FFFFFF', transform: 'none', filter: 'hue-rotate(120deg) saturate(1.4)', opacity: 1, icon: 'assets/alio-icon.svg', showText: false, font: '', textColor: '' },
+      { label: "Don't add drop shadows or effects", bg: '#FFFFFF', transform: 'none', filter: 'drop-shadow(3px 5px 4px rgba(0,0,0,0.45))', opacity: 1, icon: 'assets/alio-icon.svg', showText: false, font: '', textColor: '' },
+      { label: "Don't place the gradient mark on low-contrast color fields", bg: '#4C5DC2', transform: 'none', filter: 'none', opacity: 1, icon: 'assets/alio-icon.svg', showText: false, font: '', textColor: '' },
+      { label: "Don't set the wordmark in another typeface", bg: '#FFFFFF', transform: 'none', filter: 'none', opacity: 1, icon: 'assets/alio-icon.svg', showText: true, font: "Georgia, serif", textColor: '#12141D' },
+      { label: "Don't place on busy imagery without a scrim", bg: 'repeating-linear-gradient(45deg, #93A1E3 0 8px, #F2C859 8px 16px, #37BC83 16px 24px)', transform: 'none', filter: 'none', opacity: 1, icon: 'assets/alio-icon-white.svg', showText: false, font: '', textColor: '' },
+      { label: "Don't reduce opacity or use as watermark", bg: '#FFFFFF', transform: 'none', filter: 'none', opacity: 0.28, icon: 'assets/alio-icon.svg', showText: true, font: "Sora, sans-serif", textColor: '#12141D' },
+    ];
+
+    const formats = [
+      { fmt: 'SVG', use: 'Web, app UI, email headers — anything on a screen', variants: 'gradient, mono black, mono white, navy', never: 'Microsoft Office documents' },
+      { fmt: 'PNG', use: 'Office docs, social profiles, partners without SVG support', variants: '@1x/@2x/@3x on transparent, 512–2048px', never: 'Print production' },
+      { fmt: 'PDF', use: 'Print: stationery, signage, press — vector CMYK', variants: 'CMYK gradient + mono K100', never: 'Web embedding' },
+      { fmt: 'ICO', use: 'Favicon bundle (16/32/48) for legacy browsers', variants: 'white symbol on navy tile', never: 'Anything except favicons' },
+    ];
+
+    const typeScale = [
+      { name: 'Display XL', spec: 'Sora 700 · 72/76 · -3%', family: 'Sora, sans-serif', px: '72px', lh: '1.06', weight: 700, tracking: '-0.03em', transform: 'none', sample: 'Clarity from complexity' },
+      { name: 'Display L', spec: 'Sora 700 · 60/64 · -3%', family: 'Sora, sans-serif', px: '60px', lh: '1.07', weight: 700, tracking: '-0.03em', transform: 'none', sample: 'Data into decisions' },
+      { name: 'Display M', spec: 'Sora 700 · 48/54 · -2%', family: 'Sora, sans-serif', px: '48px', lh: '1.12', weight: 700, tracking: '-0.02em', transform: 'none', sample: 'Built in Angola' },
+      { name: 'Heading 1', spec: 'Sora 700 · 40/48 · -2%', family: 'Sora, sans-serif', px: '40px', lh: '1.2', weight: 700, tracking: '-0.02em', transform: 'none', sample: 'Analytics for every decision' },
+      { name: 'Heading 2', spec: 'Sora 700 · 32/40 · -2%', family: 'Sora, sans-serif', px: '32px', lh: '1.25', weight: 700, tracking: '-0.02em', transform: 'none', sample: 'GIS solutions at national scale' },
+      { name: 'Heading 3', spec: 'Sora 600 · 26/34 · -1%', family: 'Sora, sans-serif', px: '26px', lh: '1.3', weight: 600, tracking: '-0.01em', transform: 'none', sample: 'Business intelligence, live' },
+      { name: 'Heading 4', spec: 'Sora 600 · 22/30 · -1%', family: 'Sora, sans-serif', px: '22px', lh: '1.36', weight: 600, tracking: '-0.01em', transform: 'none', sample: 'Cloud infrastructure that scales' },
+      { name: 'Heading 5', spec: 'Sora 600 · 18/26 · 0', family: 'Sora, sans-serif', px: '18px', lh: '1.44', weight: 600, tracking: '0', transform: 'none', sample: 'Systems integration without friction' },
+      { name: 'Heading 6', spec: 'Sora 600 · 16/24 · 0', family: 'Sora, sans-serif', px: '16px', lh: '1.5', weight: 600, tracking: '0', transform: 'none', sample: 'Digital transformation, measured' },
+      { name: 'Body L', spec: 'Instrument Sans 400 · 18/28', family: "'Instrument Sans', sans-serif", px: '18px', lh: '1.56', weight: 400, tracking: '0', transform: 'none', sample: 'We build software that works in Angola\u2019s reality — não para a demonstração, para a década.' },
+      { name: 'Body M', spec: 'Instrument Sans 400 · 16/24', family: "'Instrument Sans', sans-serif", px: '16px', lh: '1.5', weight: 400, tracking: '0', transform: 'none', sample: 'From GIS platforms to business intelligence, we turn complexity into clarity.' },
+      { name: 'Body S', spec: 'Instrument Sans 400 · 14/20', family: "'Instrument Sans', sans-serif", px: '14px', lh: '1.43', weight: 400, tracking: '0', transform: 'none', sample: 'Supporting copy, table cells, form help text, and dense UI surfaces.' },
+      { name: 'Caption', spec: 'Instrument Sans 400 · 12/16 · +1%', family: "'Instrument Sans', sans-serif", px: '12px', lh: '1.34', weight: 400, tracking: '0.01em', transform: 'none', sample: 'Timestamps, chart axis labels, photo credits, legal footnotes.' },
+      { name: 'Overline', spec: 'JetBrains Mono 500 · 12/16 · +8% · caps', family: "'JetBrains Mono', monospace", px: '12px', lh: '1.34', weight: 500, tracking: '0.08em', transform: 'uppercase', sample: 'Section kicker · Data label' },
+      { name: 'Code', spec: 'JetBrains Mono 400 · 14/22', family: "'JetBrains Mono', monospace", px: '14px', lh: '1.57', weight: 400, tracking: '0', transform: 'none', sample: 'const insight = await alio.analyze(data);' },
+    ];
+
+    const responsive = [
+      { name: 'Display XL', d: '72 / 76', t: '56 / 60', m: '40 / 46' },
+      { name: 'Display L', d: '60 / 64', t: '48 / 54', m: '36 / 42' },
+      { name: 'Display M', d: '48 / 54', t: '40 / 46', m: '32 / 38' },
+      { name: 'H1', d: '40 / 48', t: '34 / 42', m: '28 / 36' },
+      { name: 'H2', d: '32 / 40', t: '28 / 36', m: '24 / 32' },
+      { name: 'H3', d: '26 / 34', t: '24 / 32', m: '22 / 30' },
+      { name: 'H4–H6', d: '22 / 18 / 16', t: 'same', m: 'same' },
+      { name: 'Body L', d: '18 / 28', t: '17 / 26', m: '16 / 25' },
+      { name: 'Body M / S / Caption', d: '16 / 14 / 12', t: 'same', m: 'same' },
+    ];
+
+    const icons = [
+      { name: 'search', d: 'M21 21l-4.34-4.34M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z' },
+      { name: 'settings', d: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.4-3a7.4 7.4 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-2-1.2L14.5 3h-5L9 5.6a7.4 7.4 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7.5 7.5 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 2 1.2L9.5 21h5l.4-2.6a7.4 7.4 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.07-.4.1-.8.1-1.2z' },
+      { name: 'chart-bar', d: 'M3 3v18h18M8 17v-6m5 6V7m5 10v-4' },
+      { name: 'map-pin', d: 'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0zm-5 0a3 3 0 1 1-6 0 3 3 0 0 1 6 0z' },
+      { name: 'database', d: 'M12 8c4.97 0 9-1.34 9-3s-4.03-3-9-3-9 1.34-9 3 4.03 3 9 3zm9-3v14c0 1.66-4.03 3-9 3s-9-1.34-9-3V5m18 7c0 1.66-4.03 3-9 3s-9-1.34-9-3' },
+      { name: 'cloud', d: 'M17.5 19a4.5 4.5 0 0 0 .42-8.98 7 7 0 0 0-13.6 1.9A4 4 0 0 0 6 19h11.5z' },
+      { name: 'cpu', d: 'M9 9h6v6H9zM5 5h14v14H5zM9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3' },
+      { name: 'layers', d: 'M12 2 2 7.5l10 5.5 10-5.5L12 2zM2 12.5 12 18l10-5.5M2 17.5 12 23l10-5.5' },
+      { name: 'users', d: 'M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m20 0v-2a4 4 0 0 0-3-3.87M15 3.13a4 4 0 0 1 0 7.75M12.5 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z' },
+      { name: 'calendar', d: 'M8 2v4m8-4v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z' },
+      { name: 'bell', d: 'M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9m-4.7 13a2 2 0 0 1-3.4 0' },
+      { name: 'mail', d: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 3-10 6L2 7' },
+      { name: 'file-text', d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 0v6h6M9 13h6m-6 4h6' },
+      { name: 'globe', d: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zm-9-9h18M12 3a13.7 13.7 0 0 1 3.5 9 13.7 13.7 0 0 1-3.5 9 13.7 13.7 0 0 1-3.5-9A13.7 13.7 0 0 1 12 3z' },
+      { name: 'shield', d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
+      { name: 'zap', d: 'M13 2 3 14h8l-1 8 11-12h-8l0-8z' },
+      { name: 'trending-up', d: 'M22 7 13.5 15.5l-4-4L2 19m20-12h-6m6 0v6' },
+      { name: 'filter', d: 'M22 3H2l8 9.5V19l4 2v-8.5L22 3z' },
+      { name: 'download', d: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5 5 5 5-5m-5 5V3' },
+      { name: 'check-circle', d: 'M22 11.1V12a10 10 0 1 1-5.93-9.14M22 4 12 14l-3-3' },
+    ];
+
+    const spacing = [
+      { token: '--space-0', px: '0', w: '0px', use: 'flush' },
+      { token: '--space-0.5', px: '2', w: '2px', use: 'hairline gaps' },
+      { token: '--space-1', px: '4', w: '4px', use: 'icon↔label' },
+      { token: '--space-2', px: '8', w: '8px', use: 'chip padding, tight stacks' },
+      { token: '--space-3', px: '12', w: '12px', use: 'inside compact components' },
+      { token: '--space-4', px: '16', w: '16px', use: 'default component padding' },
+      { token: '--space-6', px: '24', w: '24px', use: 'card padding, grid gutter' },
+      { token: '--space-8', px: '32', w: '32px', use: 'card gaps, form sections' },
+      { token: '--space-10', px: '40', w: '40px', use: 'feature card padding' },
+      { token: '--space-12', px: '48', w: '48px', use: 'page margins desktop' },
+      { token: '--space-16', px: '64', w: '64px', use: 'sub-section rhythm' },
+      { token: '--space-20', px: '80', w: '80px', use: 'section spacing (min)' },
+      { token: '--space-24', px: '96', w: '96px', use: 'marketing sections' },
+      { token: '--space-32', px: '128', w: '128px', use: 'hero breathing room' },
+      { token: '--space-40', px: '160', w: '160px', use: 'maximum rhythm' },
+    ];
+
+    const breakpoints = [
+      { name: 'sm', px: '640px', note: 'large phones' },
+      { name: 'md', px: '768px', note: 'tablets' },
+      { name: 'lg', px: '1024px', note: 'small laptops' },
+      { name: 'xl', px: '1280px', note: 'desktop' },
+      { name: '2xl', px: '1536px', note: 'wide desktop' },
+    ];
+
+    const radii = [
+      { token: '--radius-none', px: '0', css: '0', use: 'tables, full-bleed' },
+      { token: '--radius-sm', px: '6', css: '6px', use: 'badges, chips, inline tags' },
+      { token: '--radius-md', px: '8', css: '8px', use: 'buttons, inputs, selects' },
+      { token: '--radius-lg', px: '12', css: '12px', use: 'cards, popovers, menus' },
+      { token: '--radius-xl', px: '16', css: '16px', use: 'modals, feature cards' },
+      { token: '--radius-2xl', px: '24', css: '24px', use: 'hero panels, imagery' },
+      { token: '--radius-full', px: '∞', css: '999px', use: 'pills, avatars, dots' },
+    ];
+
+    const shadows = [
+      { token: '--shadow-xs', css: '0 1px 2px rgba(19,24,64,0.06)', use: 'Buttons, inputs' },
+      { token: '--shadow-sm', css: '0 1px 3px rgba(19,24,64,0.08), 0 1px 2px rgba(19,24,64,0.04)', use: 'Cards (resting)' },
+      { token: '--shadow-md', css: '0 4px 12px rgba(19,24,64,0.08), 0 2px 4px rgba(19,24,64,0.04)', use: 'Card hover, dropdowns' },
+      { token: '--shadow-lg', css: '0 12px 24px rgba(19,24,64,0.10), 0 4px 8px rgba(19,24,64,0.05)', use: 'Popovers, drawers' },
+      { token: '--shadow-xl', css: '0 24px 48px rgba(19,24,64,0.14), 0 8px 16px rgba(19,24,64,0.06)', use: 'Modals' },
+      { token: '--shadow-float', css: '0 16px 40px rgba(19,24,64,0.16), 0 0 0 1px rgba(19,24,64,0.04)', use: 'Floating toolbars, FABs' },
+    ];
+    const darkShadows = [
+      { token: 'border only', css: 'none', border: '#2E3340', use: 'Cards — no shadow in dark' },
+      { token: '+ raised border', css: 'none', border: '#444B5C', use: 'Hover: lighten border' },
+      { token: '--shadow-md·dark', css: '0 4px 16px rgba(0,0,0,0.4)', border: '#2E3340', use: 'Dropdowns, menus' },
+      { token: '--shadow-lg·dark', css: '0 12px 32px rgba(0,0,0,0.5)', border: '#2E3340', use: 'Popovers, drawers' },
+      { token: '--shadow-xl·dark', css: '0 24px 56px rgba(0,0,0,0.6)', border: '#444B5C', use: 'Modals' },
+      { token: '--glow-accent', css: '0 0 0 1px rgba(47,203,226,0.25), 0 8px 32px rgba(7,183,209,0.12)', border: '#2E3340', use: 'Featured / active elements' },
+    ];
+
+    return {
+      pillars: [
+        { num: '01', name: 'Engineered precision', desc: 'Every detail measured. Code, copy, and pixels held to the same standard.' },
+        { num: '02', name: 'Human clarity', desc: 'Complexity is our input, never our output. Plain language, legible interfaces.' },
+        { num: '03', name: 'African ambition', desc: 'Built in Luanda to a world standard — without clichés, without apology.' },
+        { num: '04', name: 'Quiet confidence', desc: 'We show, not shout. Restraint in design; evidence in claims.' },
+        { num: '05', name: 'Long-term trust', desc: 'Software for the decade, not the demo. Partners, not vendors.' },
+      ],
+      voiceExamples: [
+        { context: 'Website hero', en: 'Software that turns Angola\u2019s hardest problems into working systems.', pt: 'Software que transforma os problemas mais difíceis de Angola em sistemas que funcionam.' },
+        { context: 'Error message', en: 'We couldn\u2019t save your changes. Your work is safe — check your connection and try again.', pt: 'Não foi possível guardar as alterações. O seu trabalho está seguro — verifique a ligação e tente novamente.' },
+        { context: 'Proposal opening', en: 'You asked for a system your teams will actually use. This proposal shows how we\u2019ll build it — and how we\u2019ll prove it works.', pt: 'Pediu um sistema que as suas equipas vão realmente usar. Esta proposta mostra como o vamos construir.' },
+        { context: 'Social post', en: 'National-scale GIS, live in 14 weeks. Here\u2019s what we learned mapping 2,300 km of infrastructure. ↓', pt: 'GIS à escala nacional, em produção em 14 semanas. Eis o que aprendemos.' },
+        { context: 'Email', en: 'Hi Teresa — the dashboard is live. Three things to look at first: usage, exceptions, and the new export. Details below.', pt: 'Olá Teresa — o dashboard está no ar. Três coisas a ver primeiro: utilização, exceções e a nova exportação.' },
+        { context: 'Dashboard empty state', en: 'No data yet. Connect a source and your first insights appear here within minutes.', pt: 'Ainda sem dados. Ligue uma fonte e os primeiros insights aparecem aqui em minutos.' },
+      ],
+      audiences: [
+        { name: 'Government', sub: 'Ministries · agencies · municipal', cares: 'Sovereignty, compliance, citizen impact, dependable local support.', message: 'Critical national systems, built and supported in Angola — to international standards.', proof: 'Local team & data residency options · GIS at national scale · long-term support contracts.' },
+        { name: 'Enterprise', sub: 'Oil & gas · banking · telecom · mining', cares: 'Reliability, security, integration with legacy systems, measurable ROI.', message: 'We integrate with what you have and modernise what you need — without stopping the business.', proof: 'Systems-integration practice · BI with auditable data lineage · security-first engineering.' },
+        { name: 'Startups & SMEs', sub: 'Founders · growing businesses', cares: 'Speed, cost clarity, a partner who can design and build.', message: 'A senior product team on demand — design, build, and launch in weeks.', proof: 'Fixed-scope sprints · UI/UX in-house · cloud-native from day one.' },
+      ],
+      donts, formats, scaleGroups, coreColors, lightTokens, darkTokens, chartCat,
+      seqScale: ['#D0F6FC','#8FE3F1','#4FC7E0','#17A9CB','#1C7FB0','#245B9E','#2B3990'],
+      divScale: ['#C42B31','#E7666B','#F0BFC1','#EEF0F4','#93A1E3','#4C5DC2','#2B3990'],
+      typeScale, responsive, icons,
+      iconSizes: [{ px: 16 }, { px: 20 }, { px: 24 }, { px: 32 }, { px: 48 }],
+      spacing, breakpoints, radii, shadows, darkShadows,
+      col12: Array(12).fill(0), col8: Array(8).fill(0), col4: Array(4).fill(0),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>Alio Analytics — Data, Motion, Imagery, Accessibility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  @keyframes alio-spin { to { transform: rotate(360deg); } }
+  @keyframes alio-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.6); opacity: 0; } }
+  @keyframes alio-hoverfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+</style>
+</helmet>
+
+<div style="font-family: 'Instrument Sans', sans-serif; color: #12141D; background: #FFFFFF;">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 48px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/alio-icon.svg" alt="Alio" style="height: 26px; width: auto;">
+        <span style="font-family: Sora, sans-serif; font-size: 17px; letter-spacing: -0.02em;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #717A8F; border: 1px solid #DDE1E8; border-radius: 999px; padding: 2px 8px; margin-left: 6px;">design system v1.0</span>
+      </div>
+      <nav style="display: flex; gap: 4px; font-size: 13px; font-weight: 500;">
+        <a href="01 Foundations.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">01 Foundations</a>
+        <a href="02 Components.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">02 Components</a>
+        <a href="#s16" style="color: #12141D; text-decoration: none; padding: 6px 10px; border-radius: 6px; background: #EEF0F4;">03 Data &amp; Motion</a>
+        <a href="04 Patterns.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">04 Patterns</a>
+        <a href="05 Brand Kit.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">05 Brand Kit</a>
+        <a href="06 Handoff.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">06 Handoff</a>
+      </nav>
+    </div>
+  </header>
+
+  <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px 72px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #0793AC; margin-bottom: 24px;">Part II — Sections 16–19</div>
+    <h1 style="font-family: Sora, sans-serif; font-size: 56px; line-height: 1.07; letter-spacing: -0.03em; font-weight: 700; margin: 0 0 24px;">Data, Motion &amp; Imagery</h1>
+    <p style="font-size: 18px; line-height: 1.6; color: #444B5C; max-width: 640px; margin: 0;">How Alio visualises data and maps, how the interface moves, how imagery is art-directed — and the accessibility contract underneath it all.</p>
+  </div>
+
+  <!-- ============ 16. DATA VIZ ============ -->
+  <section id="s16" data-screen-label="16 Data Visualization" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">16</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Data Visualization</h2>
+      <p style="font-size: 15px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 40px;">Rules: category 1 is always Alio Indigo; category 2 always Cyan. Never more than 8 series — aggregate the rest into "Other" (neutral-400). Gridlines are neutral-100; axis labels are Caption in neutral-500. No 3D, no chart junk.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <!-- Line chart -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Line — pipeline volume</div>
+          <div style="font-size: 12px; color: #9AA2B3; margin-bottom: 18px;">Monthly, TB processed</div>
+          <svg viewBox="0 0 340 170" style="width: 100%;">
+            <g stroke="#EEF0F4" stroke-width="1"><line x1="36" y1="20" x2="330" y2="20"></line><line x1="36" y1="60" x2="330" y2="60"></line><line x1="36" y1="100" x2="330" y2="100"></line><line x1="36" y1="140" x2="330" y2="140"></line></g>
+            <g font-family="JetBrains Mono" font-size="9" fill="#9AA2B3"><text x="8" y="23">6.0</text><text x="8" y="63">4.0</text><text x="8" y="103">2.0</text><text x="14" y="143">0</text><text x="36" y="160">Jan</text><text x="105" y="160">Mar</text><text x="175" y="160">May</text><text x="245" y="160">Jul</text><text x="305" y="160">Sep</text></g>
+            <path d="M36 118 L73 108 L110 112 L147 92 L184 96 L221 72 L258 78 L295 52 L330 40" fill="none" stroke="#2B3990" stroke-width="2.5" stroke-linecap="round"></path>
+            <path d="M36 130 L73 126 L110 118 L147 122 L184 108 L221 112 L258 98 L295 92 L330 80" fill="none" stroke="#07B7D1" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0"></path>
+            <circle cx="330" cy="40" r="4" fill="#2B3990"></circle><circle cx="330" cy="80" r="4" fill="#07B7D1"></circle>
+          </svg>
+          <div style="display: flex; gap: 18px; font-size: 12px; color: #565E72; margin-top: 10px;">
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 3px; border-radius: 2px; background: #2B3990;"></span>Production</span>
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 3px; border-radius: 2px; background: #07B7D1;"></span>Staging</span>
+          </div>
+        </div>
+        <!-- Bar chart -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Bar — projects by sector</div>
+          <div style="font-size: 12px; color: #9AA2B3; margin-bottom: 18px;">Active engagements</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 90px; font-size: 12.5px; color: #565E72; text-align: right; flex-shrink: 0;">{{ b.label }}</div>
+                <div style="flex: 1; height: 22px; background: #F7F8FA; border-radius: 6px; overflow: hidden;"><div style="width: {{ b.w }}; height: 100%; border-radius: 6px; background: {{ b.color }};"></div></div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #12141D; width: 22px;">{{ b.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <!-- Donut + area -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Donut — revenue mix</div>
+          <div style="font-size: 12px; color: #9AA2B3; margin-bottom: 12px;">FY 2026, by service line</div>
+          <div style="display: flex; align-items: center; gap: 24px;">
+            <svg viewBox="0 0 120 120" style="width: 128px; flex-shrink: 0;">
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#EEF0F4" stroke-width="10"></circle>
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#2B3990" stroke-width="16" stroke-dasharray="115.6 173.4" stroke-dashoffset="0" transform="rotate(-90 60 60)" stroke-linecap="butt"></circle>
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#07B7D1" stroke-width="16" stroke-dasharray="72.3 216.7" stroke-dashoffset="-115.6" transform="rotate(-90 60 60)"></circle>
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#16A468" stroke-width="16" stroke-dasharray="46.2 242.8" stroke-dashoffset="-187.9" transform="rotate(-90 60 60)"></circle>
+              <circle cx="60" cy="60" r="46" fill="none" stroke="#C4CAD6" stroke-width="16" stroke-dasharray="54.9 234.1" stroke-dashoffset="-234.1" transform="rotate(-90 60 60)"></circle>
+              <text x="60" y="57" text-anchor="middle" font-family="Sora" font-size="17" font-weight="700" fill="#12141D">Kz</text>
+              <text x="60" y="73" text-anchor="middle" font-family="Sora" font-size="12" font-weight="600" fill="#717A8F">412M</text>
+            </svg>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; color: #444B5C;">
+              <span style="display: flex; align-items: center; gap: 7px;"><span style="width: 9px; height: 9px; border-radius: 3px; background: #2B3990;"></span>Custom software · 40%</span>
+              <span style="display: flex; align-items: center; gap: 7px;"><span style="width: 9px; height: 9px; border-radius: 3px; background: #07B7D1;"></span>Data &amp; BI · 25%</span>
+              <span style="display: flex; align-items: center; gap: 7px;"><span style="width: 9px; height: 9px; border-radius: 3px; background: #16A468;"></span>GIS · 16%</span>
+              <span style="display: flex; align-items: center; gap: 7px;"><span style="width: 9px; height: 9px; border-radius: 3px; background: #C4CAD6;"></span>Other · 19%</span>
+            </div>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin: 22px 0 10px;">Area — cumulative</div>
+          <svg viewBox="0 0 340 90" style="width: 100%;">
+            <defs><linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07B7D1" stop-opacity="0.28"></stop><stop offset="1" stop-color="#07B7D1" stop-opacity="0.02"></stop></linearGradient></defs>
+            <path d="M0 78 L48 70 L96 72 L144 56 L192 48 L240 34 L288 26 L340 12 L340 90 L0 90 Z" fill="url(#areaFill)"></path>
+            <path d="M0 78 L48 70 L96 72 L144 56 L192 48 L240 34 L288 26 L340 12" fill="none" stroke="#0793AC" stroke-width="2.5" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <!-- Scatter -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Scatter — cost vs. delivery time</div>
+          <div style="font-size: 12px; color: #9AA2B3; margin-bottom: 18px;">Each point = one project</div>
+          <svg viewBox="0 0 340 180" style="width: 100%;">
+            <g stroke="#EEF0F4" stroke-width="1"><line x1="36" y1="20" x2="330" y2="20"></line><line x1="36" y1="65" x2="330" y2="65"></line><line x1="36" y1="110" x2="330" y2="110"></line><line x1="36" y1="155" x2="330" y2="155"></line><line x1="36" y1="20" x2="36" y2="155"></line></g>
+            <sc-for list="{{ scatter }}" as="pt" hint-placeholder-count="14">
+              <circle cx="{{ pt.x }}" cy="{{ pt.y }}" r="{{ pt.r }}" fill="{{ pt.c }}" opacity="0.85"></circle>
+            </sc-for>
+            <g font-family="JetBrains Mono" font-size="9" fill="#9AA2B3"><text x="36" y="172">4 wk</text><text x="160" y="172">12 wk</text><text x="295" y="172">24 wk</text><text x="4" y="24">120M</text><text x="10" y="158">10M</text></g>
+          </svg>
+          <div style="display: flex; gap: 18px; font-size: 12px; color: #565E72; margin-top: 10px;">
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #2B3990;"></span>Government</span>
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #07B7D1;"></span>Enterprise</span>
+            <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #16A468;"></span>SME</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIS -->
+      <h3 style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 600; margin: 40px 0 20px;">Map &amp; GIS visualisation</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; overflow: hidden;">
+          <div style="padding: 18px 24px 0;">
+            <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Choropleth — schematic</div>
+            <div style="font-size: 12px; color: #9AA2B3; margin-bottom: 14px;">Base map: desaturated light grey (#F4F5F7 land, #E2ECF2 water), no labels beyond admin names.</div>
+          </div>
+          <div style="position: relative; background: #E2ECF2; padding: 20px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;">
+            <sc-for list="{{ choro }}" as="c" hint-placeholder-count="24">
+              <div style="height: 42px; border-radius: 7px; background: {{ c }}; border: 1px solid rgba(255,255,255,0.6);"></div>
+            </sc-for>
+            <!-- marker pin -->
+            <div style="position: absolute; top: 38px; left: 42%;">
+              <div style="position: relative; width: 30px; height: 30px;">
+                <span style="position: absolute; inset: 0; border-radius: 50%; background: rgba(7,183,209,0.35); animation: alio-pulse 1.8s ease-out infinite;"></span>
+                <span style="position: absolute; inset: 5px; border-radius: 50%; background: #2B3990; border: 2.5px solid #fff; box-shadow: 0 2px 8px rgba(19,24,64,0.35);"></span>
+              </div>
+            </div>
+            <!-- legend -->
+            <div style="position: absolute; bottom: 14px; right: 14px; background: rgba(255,255,255,0.94); border-radius: 10px; padding: 10px 14px; box-shadow: 0 4px 12px rgba(19,24,64,0.12);">
+              <div style="font-size: 10.5px; font-weight: 600; color: #444B5C; margin-bottom: 6px;">Density / km²</div>
+              <div style="display: flex; height: 8px; border-radius: 4px; overflow: hidden; width: 120px;">
+                <sc-for list="{{ seqScale }}" as="s" hint-placeholder-count="7"><div style="flex: 1; background: {{ s }};"></div></sc-for>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: #9AA2B3; margin-top: 3px;"><span>0</span><span>500+</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 24px 28px;">
+            <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Marker &amp; layer rules</div>
+            <div style="display: flex; gap: 24px; align-items: center; margin-bottom: 14px; flex-wrap: wrap;">
+              <div style="text-align: center;"><span style="display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #2B3990; border: 2.5px solid #fff; box-shadow: 0 1px 4px rgba(19,24,64,0.3);"></span><div style="font-size: 10.5px; color: #9AA2B3; margin-top: 4px;">point</div></div>
+              <div style="text-align: center;"><span style="display: inline-flex; min-width: 26px; height: 26px; border-radius: 50%; background: #07B7D1; color: #fff; font-size: 11px; font-weight: 700; align-items: center; justify-content: center; border: 2.5px solid #fff; box-shadow: 0 1px 4px rgba(19,24,64,0.3);">12</span><div style="font-size: 10.5px; color: #9AA2B3; margin-top: 4px;">cluster</div></div>
+              <div style="text-align: center;"><span style="display: inline-block; width: 26px; height: 15px; border-radius: 4px; background: rgba(22,164,104,0.25); border: 2px solid #16A468;"></span><div style="font-size: 10.5px; color: #9AA2B3; margin-top: 4px;">zone</div></div>
+              <div style="text-align: center;"><span style="display: inline-block; width: 30px; height: 4px; border-radius: 2px; background: #E5971B;"></span><div style="font-size: 10.5px; color: #9AA2B3; margin-top: 4px;">route</div></div>
+            </div>
+            <div style="font-size: 13px; line-height: 1.7; color: #565E72;">Selected features get a 2px cyan halo. Max 5 visible thematic layers; layer legend always visible bottom-right. Semantic colors (success/warning/danger) mark status, never quantity.</div>
+          </div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 24px 28px;">
+            <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Heatmap &amp; diverging</div>
+            <div style="font-size: 12px; color: #717A8F; margin-bottom: 6px;">Heatmap — navy → cyan → white (intensity)</div>
+            <div style="height: 22px; border-radius: 7px; background: linear-gradient(90deg, #131840, #2B3990, #0793AC, #07B7D1, #6EDFF0, #ECFCFF); margin-bottom: 16px;"></div>
+            <div style="font-size: 12px; color: #717A8F; margin-bottom: 6px;">Diverging — deficit ↔ surplus</div>
+            <div style="display: flex; height: 22px; border-radius: 7px; overflow: hidden;">
+              <sc-for list="{{ divScale }}" as="s" hint-placeholder-count="7"><div style="flex: 1; background: {{ s }};"></div></sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 17. MOTION ============ -->
+  <section id="s17" data-screen-label="17 Motion Design" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">17</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Motion Design</h2>
+      <p style="font-size: 15px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 40px;">Motion is functional, brief, and physical. Elements fade+slide 8px; nothing bounces except deliberate success moments. If a user notices the animation itself, it's too long.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 18px;">Duration scale</div>
+          <sc-for list="{{ durations }}" as="d" hint-placeholder-count="7">
+            <div style="display: flex; align-items: center; gap: 14px; padding: 5px 0;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #2B3990; width: 110px;">{{ d.token }}</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #9AA2B3; width: 52px;">{{ d.ms }}</div>
+              <div style="font-size: 12.5px; color: #565E72;">{{ d.use }}</div>
+            </div>
+          </sc-for>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin: 22px 0 14px;">Easing curves</div>
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+            <sc-for list="{{ easings }}" as="e" hint-placeholder-count="4">
+              <div style="text-align: center;">
+                <svg viewBox="0 0 60 60" style="width: 100%; max-width: 64px; border: 1px solid #EEF0F4; border-radius: 8px; background: #FBFCFD;">
+                  <path d="{{ e.path }}" fill="none" stroke="#2B3990" stroke-width="2"></path>
+                </svg>
+                <div style="font-size: 11px; font-weight: 600; color: #12141D; margin-top: 5px;">{{ e.name }}</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 8.2px; color: #9AA2B3;">{{ e.bez }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 18px;">Live specimens — hover them</div>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <button style="height: 42px; border-radius: 9px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer; transition: background 0.15s cubic-bezier(0.4,0,0.2,1), transform 0.15s cubic-bezier(0.4,0,0.2,1);" style-hover="background: #232E74; transform: translateY(-1px);" style-active="transform: translateY(0) scale(0.99);">Button — 150ms color + lift</button>
+            <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 18px; cursor: pointer; transition: box-shadow 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s;" style-hover="box-shadow: 0 12px 24px rgba(19,24,64,0.10); transform: translateY(-3px); border-color: #A6EDF8;">
+              <div style="font-size: 13.5px; font-weight: 600;">Card — 200ms lift + shadow</div>
+              <div style="font-size: 12.5px; color: #717A8F;">translateY(−3px), shadow-sm → shadow-md</div>
+            </div>
+            <a href="#s17" style="font-size: 14px; font-weight: 600; color: #2B3990; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; width: fit-content;" style-hover="gap: 10px;">Link arrow — gap eases 150ms <span style="transition: all 0.15s;">→</span></a>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin: 24px 0 12px;">Micro-interactions spec</div>
+          <div style="font-size: 13px; line-height: 1.8; color: #565E72;">
+            <strong>Page enter:</strong> content fades in + rises 8px, 300ms enter-ease, stagger 40ms/child (max 5).<br>
+            <strong>Modal:</strong> scrim fades 200ms; panel scales 0.97→1 + fade, 250ms.<br>
+            <strong>Toast:</strong> slides from bottom-right 16px, 250ms; auto-dismiss 5s.<br>
+            <strong>Accordion:</strong> height auto-animates 250ms; chevron rotates 200ms.<br>
+            <strong>Success:</strong> checkmark draws in 400ms spring — the one playful moment.
+          </div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 18px;">Loading — brand moment</div>
+          <div style="display: flex; align-items: center; justify-content: center; padding: 22px 0 26px;">
+            <div style="animation: alio-hoverfloat 2.2s ease-in-out infinite;"><img src="assets/alio-icon.svg" alt="" style="height: 44px;"></div>
+          </div>
+          <div style="font-size: 13px; line-height: 1.7; color: #565E72; margin-bottom: 22px;">Full-page loads: the mark floats gently (2.2s loop) above a "Preparing your workspace…" caption. Inline loads use spinners only.</div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 12px;">Reduced motion</div>
+          <div style="background: #F7F8FA; border-radius: 10px; padding: 14px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.8; color: #444B5C;">@media (prefers-reduced-motion:<br>&nbsp;&nbsp;reduce) {<br>&nbsp;&nbsp;transition-duration: 0.01ms;<br>&nbsp;&nbsp;animation: none;<br>}</div>
+          <div style="font-size: 13px; line-height: 1.7; color: #565E72; margin-top: 12px;">All movement collapses to instant opacity changes. Progress indicators keep animating (they convey state), but pulses, floats, and parallax stop.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 18. IMAGERY ============ -->
+  <section id="s18" data-screen-label="18 Illustrations and Imagery" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">18</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Illustrations &amp; Imagery</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 12px;">Illustration style</div>
+          <div style="height: 120px; border-radius: 12px; background: #131840; display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 16px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; border: 2.5px solid #2FCBE2;"></div>
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #07B7D1, #2B3990);"></div>
+            <div style="width: 0; height: 0; border-left: 22px solid transparent; border-right: 22px solid transparent; border-bottom: 38px solid #6B7CD5;"></div>
+            <div style="width: 40px; height: 3px; border-radius: 2px; background: #2FCBE2; transform: rotate(-45deg);"></div>
+          </div>
+          <div style="font-size: 13.5px; line-height: 1.7; color: #565E72;">Geometric and diagrammatic — flat shapes, 2–2.5px line work, node dots echoing the logo. Palette limited to brand colors + one neutral. No mascots, no isometric people, no gradients beyond the brand pair. Illustrations explain (flows, systems, networks); they never decorate.</div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 12px;">Photography</div>
+          <div style="height: 120px; border-radius: 12px; border: 1.5px dashed #C4CAD6; background: #F7F8FA; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; margin-bottom: 16px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9AA2B3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 15-4-4-8 8"></path></svg>
+            <span style="font-size: 12px; color: #9AA2B3;">Client photo library — placeholder</span>
+          </div>
+          <div style="font-size: 13.5px; line-height: 1.7; color: #565E72;">Real Angolan professionals at work — natural light, honest environments (offices, field sites, server rooms in Luanda), candid over posed. Cool, slightly desaturated grade that lets brand cyan pop in UI overlays. <strong>Never:</strong> stock handshakes, blue-tinted circuit boards, generic skylines, staged diversity shots.</div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 12px;">3D style</div>
+          <div style="height: 120px; border-radius: 12px; background: linear-gradient(160deg, #EEF0FB, #ECFCFF); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #07B7D1, #2B3990); border-radius: 14px; transform: rotate(12deg) skewY(-6deg); box-shadow: 14px 18px 32px rgba(43,57,144,0.25);"></div>
+          </div>
+          <div style="font-size: 13.5px; line-height: 1.7; color: #565E72;">Used sparingly (hero moments only): soft-studio renders of abstract brand geometry — rounded glass/matte forms in indigo-cyan, single light source, generous negative space. Never literal objects (no 3D laptops, robots, or globes).</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px;">
+        <div style="background: #12141D; border-radius: 16px; padding: 32px; color: #fff;">
+          <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 6px;">AI image generation — prompt template</div>
+          <div style="font-size: 13px; color: #9AA2B3; margin-bottom: 18px;">Reusable base prompt; swap the [subject].</div>
+          <div style="background: #1F2330; border-radius: 12px; padding: 18px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8; color: #C4CAD6;">"[subject] in a modern Luanda office / field site, photographed on 35mm, natural window light, cool slightly desaturated color grade, deep indigo and teal accents, generous negative space, candid documentary style, no text, no logos — in the style of premium tech brand photography"</div>
+          <div style="font-size: 12.5px; line-height: 1.7; color: #9AA2B3; margin-top: 14px;"><strong style="color: #C4CAD6;">Negative prompt:</strong> stock photo look, handshake, circuit board overlay, blue glow, hologram, exaggerated smiles, clipart, 3D globe.</div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 18px;">Do / Don't</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <sc-for list="{{ imgRules }}" as="r" hint-placeholder-count="6">
+              <div style="display: flex; gap: 9px; align-items: flex-start; padding: 12px 14px; border-radius: 10px; background: {{ r.bg }};">
+                <span style="font-size: 12px; font-weight: 700; color: {{ r.ink }}; flex-shrink: 0;">{{ r.mark }}</span>
+                <span style="font-size: 12.5px; line-height: 1.5; color: #444B5C;">{{ r.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 19. ACCESSIBILITY ============ -->
+  <section id="s19" data-screen-label="19 Accessibility" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px 128px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">19</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px;">Accessibility</h2>
+      <p style="font-size: 15px; line-height: 1.65; color: #565E72; max-width: 680px; margin: 0 0 40px;">WCAG 2.1 AA is the floor, not the goal. Government work often demands more — design to AAA for body text wherever possible.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Contrast — token pairs</div>
+          <sc-for list="{{ contrastPairs }}" as="cp" hint-placeholder-count="7">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 6px 0;">
+              <div style="width: 120px; height: 30px; border-radius: 7px; background: {{ cp.bg }}; color: {{ cp.fg }}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; border: 1px solid #EEF0F4; flex-shrink: 0;">Aa</div>
+              <div style="flex: 1; font-size: 12px; color: #565E72;">{{ cp.pair }}</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #12141D;">{{ cp.ratio }}</div>
+              <span style="font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: {{ cp.badgeBg }}; color: {{ cp.badgeInk }};">{{ cp.badge }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Keyboard navigation map</div>
+          <div style="display: flex; flex-direction: column; gap: 9px; font-size: 13px; color: #444B5C; margin-bottom: 24px;">
+            <div style="display: flex; gap: 10px;"><kbd style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #F7F8FA; border: 1px solid #DDE1E8; border-bottom-width: 2px; border-radius: 6px; padding: 2px 8px; min-width: 74px; text-align: center;">Tab</kbd>Move through interactive elements, DOM order</div>
+            <div style="display: flex; gap: 10px;"><kbd style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #F7F8FA; border: 1px solid #DDE1E8; border-bottom-width: 2px; border-radius: 6px; padding: 2px 8px; min-width: 74px; text-align: center;">Enter / ␣</kbd>Activate buttons; ␣ toggles checkboxes</div>
+            <div style="display: flex; gap: 10px;"><kbd style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #F7F8FA; border: 1px solid #DDE1E8; border-bottom-width: 2px; border-radius: 6px; padding: 2px 8px; min-width: 74px; text-align: center;">↑↓←→</kbd>Within menus, tabs, radio groups, tables</div>
+            <div style="display: flex; gap: 10px;"><kbd style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #F7F8FA; border: 1px solid #DDE1E8; border-bottom-width: 2px; border-radius: 6px; padding: 2px 8px; min-width: 74px; text-align: center;">Esc</kbd>Close modal / drawer / menu; focus returns to trigger</div>
+            <div style="display: flex; gap: 10px;"><kbd style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #F7F8FA; border: 1px solid #DDE1E8; border-bottom-width: 2px; border-radius: 6px; padding: 2px 8px; min-width: 74px; text-align: center;">Skip link</kbd>"Skip to content" is the first tab stop on every page</div>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Focus indicator — try Tab here</div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button style="height: 38px; padding: 0 16px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer; outline: none;" style-focus="box-shadow: 0 0 0 2px #fff, 0 0 0 4px #07B7D1;">Primary</button>
+            <button style="height: 38px; padding: 0 16px; border-radius: 8px; background: #fff; color: #12141D; border: 1px solid #DDE1E8; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer; outline: none;" style-focus="box-shadow: 0 0 0 2px #fff, 0 0 0 4px #07B7D1;">Outline</button>
+            <input placeholder="Input" style="height: 38px; padding: 0 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 13.5px; outline: none; width: 110px;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.22);">
+          </div>
+          <div style="font-size: 12.5px; color: #717A8F; margin-top: 12px;">Spec: 2px cyan ring + 2px offset (white gap) on all interactive elements. Never <code style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px;">outline: none</code> without a replacement.</div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Touch targets</div>
+          <div style="display: flex; align-items: flex-end; gap: 18px; margin-bottom: 14px;">
+            <div style="text-align: center;"><div style="width: 44px; height: 44px; border: 1.5px dashed #16A468; border-radius: 10px; display: flex; align-items: center; justify-content: center;"><span style="width: 24px; height: 24px; border-radius: 6px; background: #EBFAF3; display: inline-flex; align-items: center; justify-content: center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0D8454" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></div><div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: #0D8454; margin-top: 5px;">44px min</div></div>
+            <div style="text-align: center;"><div style="width: 28px; height: 28px; border: 1.5px dashed #DC3D43; border-radius: 8px;"></div><div style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: #C42B31; margin-top: 5px;">28px ✕</div></div>
+          </div>
+          <div style="font-size: 13px; line-height: 1.7; color: #565E72; margin-bottom: 22px;">44×44px minimum on touch; 8px minimum between adjacent targets. Icon buttons get invisible padding to reach 44px even when drawn at 36px.</div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Form accessibility</div>
+          <div style="font-size: 13px; line-height: 1.85; color: #565E72;">
+            Every input has a visible <code style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: #F7F8FA; padding: 1px 5px; border-radius: 4px;">&lt;label for&gt;</code> — placeholders never replace labels.<br>
+            Required fields: asterisk + <code style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: #F7F8FA; padding: 1px 5px; border-radius: 4px;">aria-required</code>.<br>
+            Errors: <code style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: #F7F8FA; padding: 1px 5px; border-radius: 4px;">aria-describedby</code> + <code style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: #F7F8FA; padding: 1px 5px; border-radius: 4px;">aria-invalid</code>, announced via live region — never color alone (icon + text always).<br>
+            Groups use <code style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: #F7F8FA; padding: 1px 5px; border-radius: 4px;">fieldset/legend</code>; errors move focus to the first invalid field on submit.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 40px 48px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="assets/alio-icon.svg" alt="" style="height: 18px;">
+        <span style="font-size: 13px; color: #717A8F;">Alio Analytics — Design System · Sections 16–19</span>
+      </div>
+      <a href="04 Patterns.dc.html" style="font-size: 14px; font-weight: 600; color: #2B3990; text-decoration: none;">Next: Patterns &amp; Pages →</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    const bars = [
+      { label: 'Government', v: 14, w: '100%', color: '#2B3990' },
+      { label: 'Oil & Gas', v: 9, w: '64%', color: '#07B7D1' },
+      { label: 'Banking', v: 7, w: '50%', color: '#16A468' },
+      { label: 'Logistics', v: 5, w: '36%', color: '#E5971B' },
+      { label: 'NGOs', v: 3, w: '21%', color: '#C4CAD6' },
+    ];
+    const scatterPts = [
+      [60, 130, '#16A468', 4], [82, 118, '#16A468', 4], [98, 138, '#16A468', 4],
+      [120, 100, '#07B7D1', 5], [148, 92, '#07B7D1', 5], [170, 108, '#07B7D1', 5], [188, 76, '#07B7D1', 5],
+      [205, 62, '#2B3990', 6], [232, 50, '#2B3990', 6], [255, 68, '#2B3990', 6], [280, 38, '#2B3990', 6], [305, 30, '#2B3990', 6],
+      [140, 60, '#2B3990', 6], [250, 100, '#07B7D1', 5],
+    ];
+    const seq = ['#D0F6FC','#8FE3F1','#4FC7E0','#17A9CB','#1C7FB0','#245B9E','#2B3990'];
+    const choroIdx = [1,2,1,0,2,3, 2,3,4,2,1,4, 3,5,6,4,3,2, 1,2,4,3,1,0];
+    return {
+      bars,
+      scatter: scatterPts.map(p => ({ x: p[0], y: p[1], c: p[2], r: p[3] })),
+      seqScale: seq,
+      divScale: ['#C42B31','#E7666B','#F0BFC1','#EEF0F4','#93A1E3','#4C5DC2','#2B3990'],
+      choro: choroIdx.map(i => seq[i]),
+      durations: [
+        { token: '--duration-75', ms: '75ms', use: 'color/opacity flips, active press' },
+        { token: '--duration-150', ms: '150ms', use: 'hover states — buttons, links, rows' },
+        { token: '--duration-200', ms: '200ms', use: 'card lifts, chevrons, small reveals' },
+        { token: '--duration-300', ms: '300ms', use: 'page-enter, accordions, tab panels' },
+        { token: '--duration-400', ms: '400ms', use: 'drawers, success checkmark draw' },
+        { token: '--duration-500', ms: '500ms', use: 'complex chart transitions' },
+        { token: '--duration-700', ms: '700ms', use: 'hero entrances only — never in-app' },
+      ],
+      easings: [
+        { name: 'Standard', bez: '.4,0,.2,1', path: 'M8 52 C 30 52, 20 8, 52 8' },
+        { name: 'Enter', bez: '0,0,.2,1', path: 'M8 52 C 8 52, 20 8, 52 8' },
+        { name: 'Exit', bez: '.4,0,1,1', path: 'M8 52 C 30 52, 52 30, 52 8' },
+        { name: 'Spring', bez: '.34,1.56,.64,1', path: 'M8 52 C 24 52, 28 0, 40 4 C 46 6, 46 8, 52 8' },
+      ],
+      imgRules: [
+        { mark: '✓', bg: '#EBFAF3', ink: '#0D8454', text: 'Candid work moments, natural light, real environments' },
+        { mark: '✕', bg: '#FDF0F0', ink: '#C42B31', text: 'Stock handshakes, forced smiles, "diverse team pointing at screen"' },
+        { mark: '✓', bg: '#EBFAF3', ink: '#0D8454', text: 'Angolan cities and field sites, shown with dignity and specificity' },
+        { mark: '✕', bg: '#FDF0F0', ink: '#C42B31', text: 'Safari/acacia-tree clichés, poverty framing, generic "Africa rising" tropes' },
+        { mark: '✓', bg: '#EBFAF3', ink: '#0D8454', text: 'UI screenshots on real devices, subtle brand-tinted shadows' },
+        { mark: '✕', bg: '#FDF0F0', ink: '#C42B31', text: 'Circuit-board overlays, binary rain, glowing blue holograms' },
+      ],
+      contrastPairs: [
+        { bg: '#FFFFFF', fg: '#12141D', pair: 'text-primary / bg', ratio: '17.8:1', badge: 'AAA', badgeBg: '#EBFAF3', badgeInk: '#0C6A45' },
+        { bg: '#FFFFFF', fg: '#444B5C', pair: 'text-secondary / bg', ratio: '8.6:1', badge: 'AAA', badgeBg: '#EBFAF3', badgeInk: '#0C6A45' },
+        { bg: '#FFFFFF', fg: '#717A8F', pair: 'text-tertiary / bg', ratio: '4.6:1', badge: 'AA', badgeBg: '#EBFAF3', badgeInk: '#0C6A45' },
+        { bg: '#2B3990', fg: '#FFFFFF', pair: 'white / brand', ratio: '10.6:1', badge: 'AAA', badgeBg: '#EBFAF3', badgeInk: '#0C6A45' },
+        { bg: '#FFFFFF', fg: '#0793AC', pair: 'accent-600 / bg', ratio: '4.5:1', badge: 'AA', badgeBg: '#EBFAF3', badgeInk: '#0C6A45' },
+        { bg: '#FFFFFF', fg: '#07B7D1', pair: 'accent-500 / bg — decorative only', ratio: '2.4:1', badge: 'FAIL', badgeBg: '#FDF0F0', badgeInk: '#A42226' },
+        { bg: '#0E1017', fg: '#F7F8FA', pair: 'dark: text-primary / bg', ratio: '16.9:1', badge: 'AAA', badgeBg: '#EBFAF3', badgeInk: '#0C6A45' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

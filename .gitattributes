@@ -1,0 +1,13 @@
+# Normalize line endings — commit LF, check out native.
+* text=auto eol=lf
+
+# Explicit binary types (never touch EOL / never diff as text)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.zip binary

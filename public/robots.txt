@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alio.ao/sitemap.xml 

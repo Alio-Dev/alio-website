@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<title>Alio Analytics — Components</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  @keyframes alio-spin { to { transform: rotate(360deg); } }
+  @keyframes alio-shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+  @keyframes alio-indet { 0% { left: -35%; } 100% { left: 100%; } }
+</style>
+</helmet>
+
+<div style="font-family: 'Instrument Sans', sans-serif; color: #12141D; background: #FFFFFF;">
+
+  <!-- STICKY NAV -->
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 0 48px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/alio-icon.svg" alt="Alio" style="height: 26px; width: auto;">
+        <span style="font-family: Sora, sans-serif; font-size: 17px; letter-spacing: -0.02em;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #717A8F; border: 1px solid #DDE1E8; border-radius: 999px; padding: 2px 8px; margin-left: 6px;">design system v1.0</span>
+      </div>
+      <nav style="display: flex; gap: 4px; font-size: 13px; font-weight: 500;">
+        <a href="01 Foundations.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">01 Foundations</a>
+        <a href="#s10" style="color: #12141D; text-decoration: none; padding: 6px 10px; border-radius: 6px; background: #EEF0F4;">02 Components</a>
+        <a href="03 Data Motion Imagery.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">03 Data &amp; Motion</a>
+        <a href="04 Patterns.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">04 Patterns</a>
+        <a href="05 Brand Kit.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">05 Brand Kit</a>
+        <a href="06 Handoff.dc.html" style="color: #565E72; text-decoration: none; padding: 6px 10px; border-radius: 6px;" style-hover="background: #F7F8FA;">06 Handoff</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div style="max-width: 1240px; margin: 0 auto; padding: 96px 48px 72px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #0793AC; margin-bottom: 24px;">Part II — Component Library</div>
+    <h1 style="font-family: Sora, sans-serif; font-size: 56px; line-height: 1.07; letter-spacing: -0.03em; font-weight: 700; margin: 0 0 24px; max-width: 800px;">Components</h1>
+    <p style="font-size: 18px; line-height: 1.6; color: #444B5C; max-width: 640px; margin: 0;">Every interface element, every state, in light and dark mode. Hover the interactive specimens — tabs, switches, accordions, and pagination are live.</p>
+  </div>
+
+  <!-- ============ 10. BUTTONS ============ -->
+  <section id="s10" data-screen-label="10 Buttons" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">10</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Buttons</h2>
+
+      <sc-for list="{{ buttonPanels }}" as="panel" hint-placeholder-count="2">
+        <div style="border-radius: 16px; border: 1px solid {{ panel.borderCol }}; background: {{ panel.bg }}; padding: 36px 40px; margin-bottom: 24px; overflow-x: auto;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; color: {{ panel.title }}; margin-bottom: 24px;">{{ panel.label }}</div>
+          <div style="display: grid; grid-template-columns: 110px repeat(6, 1fr); gap: 12px 16px; align-items: center; min-width: 860px;">
+            <div></div>
+            <sc-for list="{{ panel.stateHeads }}" as="h"><div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: {{ panel.muted }};">{{ h }}</div></sc-for>
+            <sc-for list="{{ panel.variants }}" as="v">
+              <div style="font-size: 13px; font-weight: 600; color: {{ panel.title }};">{{ v.name }}</div>
+              <sc-for list="{{ v.states }}" as="s" hint-placeholder-count="6">
+                <div>
+                  <button style="height: 36px; padding: 0 14px; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; display: inline-flex; align-items: center; gap: 7px; cursor: pointer; white-space: nowrap; background: {{ s.bg }}; color: {{ s.color }}; border: {{ s.border }}; box-shadow: {{ s.shadow }}; opacity: {{ s.opacity }}; text-decoration: {{ s.deco }};">
+                    <sc-if value="{{ s.spinner }}" hint-placeholder-val="{{ false }}"><span style="width: 13px; height: 13px; border: 2px solid {{ s.spinTrack }}; border-top-color: {{ s.color }}; border-radius: 50%; display: inline-block; animation: alio-spin 0.7s linear infinite;"></span></sc-if>
+                    {{ s.label }}
+                  </button>
+                </div>
+              </sc-for>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+
+      <!-- Sizes, icons, groups -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 20px;">Sizes</div>
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <button style="height: 32px; padding: 0 12px; border-radius: 7px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 12.5px; cursor: pointer;">Small · 32</button>
+            <button style="height: 40px; padding: 0 16px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer;">Medium · 40</button>
+            <button style="height: 48px; padding: 0 22px; border-radius: 10px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 15px; cursor: pointer;">Large · 48</button>
+          </div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 20px;">With icons &amp; icon-only</div>
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <button style="height: 40px; padding: 0 16px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5 5 5 5-5m-5 5V3"></path></svg>Download report</button>
+            <button style="height: 40px; padding: 0 16px; border-radius: 8px; background: #fff; color: #12141D; border: 1px solid #DDE1E8; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">Next step<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></button>
+            <button aria-label="Settings" style="width: 40px; height: 40px; border-radius: 8px; background: #fff; color: #444B5C; border: 1px solid #DDE1E8; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v4m0 14v4M4.2 4.2l2.8 2.8m9.9 9.9 2.9 2.9M1 12h4m14 0h4M4.2 19.8 7 17m9.9-9.9 2.9-2.9"></path></svg></button>
+            <button aria-label="Add" style="width: 40px; height: 40px; border-radius: 999px; background: linear-gradient(135deg, #07B7D1, #2B3990); color: #fff; border: none; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></button>
+          </div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 20px;">Button group</div>
+          <div style="display: inline-flex; border: 1px solid #DDE1E8; border-radius: 8px; overflow: hidden;">
+            <button style="height: 38px; padding: 0 16px; background: #EEF0FB; color: #2B3990; border: none; border-right: 1px solid #DDE1E8; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer;">Day</button>
+            <button style="height: 38px; padding: 0 16px; background: #fff; color: #565E72; border: none; border-right: 1px solid #DDE1E8; font-family: 'Instrument Sans', sans-serif; font-weight: 500; font-size: 13.5px; cursor: pointer;" style-hover="background: #F7F8FA;">Week</button>
+            <button style="height: 38px; padding: 0 16px; background: #fff; color: #565E72; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 500; font-size: 13.5px; cursor: pointer;" style-hover="background: #F7F8FA;">Month</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11. FORMS ============ -->
+  <section id="s11" data-screen-label="11 Forms" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">11</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Forms</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <!-- Text inputs -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 22px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Text inputs</div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Label <span style="color: #DC3D43;">*</span></label>
+            <input placeholder="Default input" style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; color: #12141D; background: #fff; outline: none;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);">
+            <div style="font-size: 12px; color: #717A8F; margin-top: 5px;">Helper text lives here.</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Filled variant</label>
+            <input placeholder="Filled input" style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid transparent; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: #F7F8FA; outline: none;" style-focus="background: #fff; border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);">
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">With icon</label>
+            <div style="position: relative;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA2B3" stroke-width="1.75" stroke-linecap="round" style="position: absolute; left: 12px; top: 12px;"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M21 21l-4.34-4.34"></path></svg>
+              <input placeholder="Search projects…" style="width: 100%; height: 40px; padding: 0 12px 0 36px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: #fff; outline: none;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);">
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Prefix / suffix</label>
+            <div style="display: flex; align-items: stretch; border: 1px solid #DDE1E8; border-radius: 8px; overflow: hidden;">
+              <span style="display: flex; align-items: center; padding: 0 12px; background: #F7F8FA; border-right: 1px solid #DDE1E8; font-size: 13.5px; color: #717A8F;">Kz</span>
+              <input placeholder="1.000.000,00" style="flex: 1; height: 38px; padding: 0 12px; border: none; font-family: 'JetBrains Mono', monospace; font-size: 13.5px; outline: none; min-width: 0;">
+              <span style="display: flex; align-items: center; padding: 0 12px; background: #F7F8FA; border-left: 1px solid #DDE1E8; font-size: 13.5px; color: #717A8F;">AOA</span>
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Textarea</label>
+            <textarea placeholder="Describe the project scope…" style="width: 100%; min-height: 88px; padding: 10px 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; resize: vertical; outline: none;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);"></textarea>
+          </div>
+        </div>
+
+        <!-- Validation + selects -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 22px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Validation states</div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Error</label>
+            <input value="not-an-email" style="width: 100%; height: 40px; padding: 0 12px; border: 1.5px solid #DC3D43; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: #FDF0F0; outline: none;">
+            <div style="display: flex; align-items: center; gap: 5px; font-size: 12.5px; color: #C42B31; margin-top: 5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4m0 4h.01"></path></svg>Enter a valid e-mail address.</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Success</label>
+            <input value="teresa@alio.ao" style="width: 100%; height: 40px; padding: 0 12px; border: 1.5px solid #16A468; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; outline: none;">
+            <div style="display: flex; align-items: center; gap: 5px; font-size: 12.5px; color: #0D8454; margin-top: 5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Looks good.</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Warning</label>
+            <input value="+244 9xx xxx xxx" style="width: 100%; height: 40px; padding: 0 12px; border: 1.5px solid #E5971B; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; outline: none;">
+            <div style="display: flex; align-items: center; gap: 5px; font-size: 12.5px; color: #A95214; margin-top: 5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4m0 4h.01"></path></svg>Number format not verified.</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Disabled</label>
+            <input value="Read-only value" disabled style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #EEF0F4; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: #F7F8FA; color: #9AA2B3;">
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-top: 4px;">Select &amp; combobox</div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Select</label>
+            <select style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: #fff; color: #12141D; outline: none;">
+              <option>GIS Solutions</option><option>Data Analytics</option><option>Business Intelligence</option><option>Cloud Solutions</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Combobox — open state</label>
+            <div style="position: relative;">
+              <input value="ana" style="width: 100%; height: 40px; padding: 0 12px; border: 1.5px solid #07B7D1; border-radius: 8px 8px 0 0; font-family: 'Instrument Sans', sans-serif; font-size: 14px; outline: none; box-shadow: 0 0 0 3px rgba(7,183,209,0.14);">
+              <div style="border: 1px solid #DDE1E8; border-top: none; border-radius: 0 0 10px 10px; background: #fff; box-shadow: 0 12px 24px rgba(19,24,64,0.10); overflow: hidden;">
+                <div style="padding: 9px 12px; font-size: 13.5px; background: #EEF0FB; color: #2B3990; font-weight: 500;"><strong>Ana</strong>lytics dashboard</div>
+                <div style="padding: 9px 12px; font-size: 13.5px; color: #444B5C;" style-hover="background: #F7F8FA;"><strong>Ana</strong> Ferreira — Data team</div>
+                <div style="padding: 9px 12px; font-size: 13.5px; color: #444B5C;" style-hover="background: #F7F8FA;">Lu<strong>ana</strong> district — GIS layer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Choices + misc -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 22px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Checkboxes, radios, switches</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ checkboxes }}" as="cb" hint-placeholder-count="3">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: {{ cb.labelColor }};" onClick="{{ cb.toggle }}">
+                <span style="width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid {{ cb.border }}; background: {{ cb.bg }}; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <sc-if value="{{ cb.on }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                </span>{{ cb.label }}
+              </label>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <sc-for list="{{ radios }}" as="rd" hint-placeholder-count="3">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; color: #2E3340;" onClick="{{ rd.pick }}">
+                <span style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid {{ rd.border }}; background: #fff; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <sc-if value="{{ rd.on }}" hint-placeholder-val="{{ false }}"><span style="width: 9px; height: 9px; border-radius: 50%; background: #2B3990;"></span></sc-if>
+                </span>{{ rd.label }}
+              </label>
+            </sc-for>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div onClick="{{ toggleSwitch }}" style="width: 40px; height: 23px; border-radius: 999px; background: {{ switchBg }}; padding: 2.5px; cursor: pointer; transition: background 0.18s;">
+              <div style="width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(19,24,64,0.25); transform: {{ switchKnob }}; transition: transform 0.18s;"></div>
+            </div>
+            <span style="font-size: 14px; color: #2E3340;">E-mail notifications — <span style="font-weight: 600;">{{ switchLabel }}</span> (click me)</span>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-top: 4px;">Slider — live</div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #717A8F; margin-bottom: 6px;"><span>Data refresh interval</span><span style="font-family: 'JetBrains Mono', monospace; color: #2B3990;">{{ sliderVal }} min</span></div>
+            <input type="range" min="5" max="120" value="{{ sliderVal }}" onInput="{{ onSlider }}" style="width: 100%; accent-color: #2B3990;">
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-top: 4px;">Date &amp; time</div>
+          <div style="display: flex; gap: 10px;">
+            <input type="date" value="2026-07-06" style="flex: 1; height: 40px; padding: 0 10px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 13.5px; color: #12141D; outline: none; min-width: 0;">
+            <input type="time" value="09:30" style="width: 110px; height: 40px; padding: 0 10px; border: 1px solid #DDE1E8; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 13.5px; color: #12141D; outline: none;">
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-top: 4px;">File upload</div>
+          <div style="border: 1.5px dashed #C4CAD6; border-radius: 12px; padding: 26px 20px; text-align: center; cursor: pointer;" style-hover="border-color: #07B7D1; background: #ECFCFF;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#717A8F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m14-7-5-5-5 5m5-5v12"></path></svg>
+            <div style="font-size: 13.5px; color: #2E3340;"><span style="color: #2B3990; font-weight: 600;">Click to upload</span> or drag &amp; drop</div>
+            <div style="font-size: 12px; color: #9AA2B3; margin-top: 3px;">SHP, GeoJSON, CSV, XLSX — up to 50 MB</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark mode form + complete example -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px;">
+        <div style="background: #12141D; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 20px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; color: #F7F8FA;">Dark mode</div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #C4CAD6; margin-bottom: 6px;">Project name <span style="color: #E7666B;">*</span></label>
+            <input placeholder="e.g. Cadastre Portal" style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #2E3340; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: #1F2330; color: #F7F8FA; outline: none;" style-focus="border-color: #2FCBE2; box-shadow: 0 0 0 3px rgba(47,203,226,0.16);">
+            <div style="font-size: 12px; color: #717A8F; margin-top: 5px;">Visible to your whole workspace.</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #C4CAD6; margin-bottom: 6px;">Error state</label>
+            <input value="duplicate-name" style="width: 100%; height: 40px; padding: 0 12px; border: 1.5px solid #E7666B; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: rgba(220,61,67,0.08); color: #F7F8FA; outline: none;">
+            <div style="font-size: 12.5px; color: #F09496; margin-top: 5px;">A project with this name already exists.</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #C4CAD6; margin-bottom: 6px;">Sector</label>
+            <select style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #2E3340; border-radius: 8px; font-family: 'Instrument Sans', sans-serif; font-size: 14px; background: #1F2330; color: #F7F8FA; outline: none;"><option>Government</option><option>Banking</option><option>Oil &amp; Gas</option></select>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 23px; border-radius: 999px; background: #2FCBE2; padding: 2.5px;"><div style="width: 18px; height: 18px; border-radius: 50%; background: #12141D; transform: translateX(17px);"></div></div>
+            <span style="font-size: 14px; color: #C4CAD6;">Enable weekly digest</span>
+          </div>
+        </div>
+
+        <!-- Complete form layout -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 40px; grid-column: span 2; min-width: 0;">
+          <div style="font-family: Sora, sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 6px;">Request a proposal</div>
+          <div style="font-size: 14px; color: #717A8F; margin-bottom: 28px;">Complete form layout — 2-column grid, 24px gaps, single primary action.</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px;">
+            <div><label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Full name <span style="color: #DC3D43;">*</span></label><input placeholder="Teresa dos Santos" style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-size: 14px; font-family: 'Instrument Sans', sans-serif; outline: none;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);"></div>
+            <div><label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Work e-mail <span style="color: #DC3D43;">*</span></label><input placeholder="name@company.ao" style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-size: 14px; font-family: 'Instrument Sans', sans-serif; outline: none;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);"></div>
+            <div><label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Organisation</label><input placeholder="Ministry / company" style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-size: 14px; font-family: 'Instrument Sans', sans-serif; outline: none;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);"></div>
+            <div><label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Service</label><select style="width: 100%; height: 40px; padding: 0 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-size: 14px; font-family: 'Instrument Sans', sans-serif; background: #fff; outline: none;"><option>Custom software</option><option>GIS solutions</option><option>Data analytics &amp; BI</option><option>Mobile app</option></select></div>
+            <div style="grid-column: span 2;"><label style="display: block; font-size: 13px; font-weight: 600; color: #2E3340; margin-bottom: 6px;">Project summary</label><textarea placeholder="What are you trying to solve?" style="width: 100%; min-height: 96px; padding: 10px 12px; border: 1px solid #DDE1E8; border-radius: 8px; font-size: 14px; font-family: 'Instrument Sans', sans-serif; resize: vertical; outline: none;" style-focus="border-color: #07B7D1; box-shadow: 0 0 0 3px rgba(7,183,209,0.18);"></textarea></div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 24px; gap: 16px; flex-wrap: wrap;">
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; color: #565E72; cursor: pointer;"><span style="width: 17px; height: 17px; border-radius: 5px; border: 1.5px solid #C4CAD6; flex-shrink: 0;"></span>I agree to be contacted about this request.</label>
+            <div style="display: flex; gap: 12px;">
+              <button style="height: 42px; padding: 0 18px; border-radius: 8px; background: #fff; color: #444B5C; border: 1px solid #DDE1E8; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer;" style-hover="background: #F7F8FA;">Cancel</button>
+              <button style="height: 42px; padding: 0 22px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer;" style-hover="background: #232E74;">Send request</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 12. CARDS ============ -->
+  <section id="s12" data-screen-label="12 Cards" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">12</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Cards</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <!-- KPI cards -->
+        <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="3">
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 24px; background: #fff; transition: box-shadow 0.18s, transform 0.18s; cursor: default;" style-hover="box-shadow: 0 4px 12px rgba(19,24,64,0.08); transform: translateY(-2px);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <span style="font-size: 13px; font-weight: 500; color: #717A8F;">{{ k.label }}</span>
+              <span style="font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: {{ k.deltaBg }}; color: {{ k.deltaInk }};">{{ k.delta }}</span>
+            </div>
+            <div style="font-family: Sora, sans-serif; font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px;">{{ k.value }}</div>
+            <div style="font-size: 12.5px; color: #9AA2B3;">{{ k.sub }}</div>
+            <svg viewBox="0 0 120 32" style="width: 100%; height: 32px; margin-top: 14px;" preserveAspectRatio="none"><path d="{{ k.spark }}" fill="none" stroke="{{ k.sparkColor }}" stroke-width="2" stroke-linecap="round"></path></svg>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <!-- Service card -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px; transition: all 0.18s;" style-hover="border-color: #A6EDF8; box-shadow: 0 12px 24px rgba(19,24,64,0.08);">
+          <div style="width: 44px; height: 44px; border-radius: 11px; background: #EEF0FB; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#2B3990" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 8px;">GIS Solutions</div>
+          <p style="font-size: 14px; line-height: 1.6; color: #565E72; margin: 0 0 18px;">National-scale mapping, cadastre systems, and spatial analytics for infrastructure and land management.</p>
+          <a href="#s12" style="font-size: 14px; font-weight: 600; color: #2B3990; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">Explore service <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg></a>
+        </div>
+        <!-- Project / case study -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; overflow: hidden; transition: all 0.18s;" style-hover="box-shadow: 0 12px 24px rgba(19,24,64,0.10); transform: translateY(-2px);">
+          <div style="height: 130px; background: linear-gradient(135deg, #131840, #2B3990 60%, #07B7D1 130%); display: flex; align-items: flex-end; padding: 16px;">
+            <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.25); padding: 3px 10px; border-radius: 999px;">Case study · Government</span>
+          </div>
+          <div style="padding: 24px 28px 28px;">
+            <div style="font-family: Sora, sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 8px;">National road-network GIS platform</div>
+            <p style="font-size: 13.5px; line-height: 1.6; color: #565E72; margin: 0 0 16px;">2,300 km of infrastructure mapped and monitored in real time across 6 provinces.</p>
+            <div style="display: flex; gap: 20px; font-size: 12.5px; color: #717A8F;">
+              <span><strong style="color: #12141D; font-family: 'JetBrains Mono', monospace;">14 wk</strong> delivery</span>
+              <span><strong style="color: #12141D; font-family: 'JetBrains Mono', monospace;">−38%</strong> survey cost</span>
+            </div>
+          </div>
+        </div>
+        <!-- Team card -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 32px; text-align: center;">
+          <div style="width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #07B7D1, #2B3990); color: #fff; font-family: Sora, sans-serif; font-weight: 600; font-size: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">TS</div>
+          <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600;">Teresa dos Santos</div>
+          <div style="font-size: 13px; color: #0793AC; font-weight: 500; margin: 3px 0 10px;">Head of Data Engineering</div>
+          <p style="font-size: 13px; line-height: 1.55; color: #717A8F; margin: 0 0 16px;">Builds the pipelines behind Alio's BI platforms. Previously led data at a pan-African bank.</p>
+          <div style="display: flex; justify-content: center; gap: 8px;">
+            <span style="width: 32px; height: 32px; border-radius: 8px; border: 1px solid #DDE1E8; display: inline-flex; align-items: center; justify-content: center; color: #565E72; cursor: pointer;" style-hover="border-color: #07B7D1; color: #0793AC;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.75-2.2 4 0 4.75 2.6 4.75 6V24h-4v-8.5c0-2-.04-4.65-2.85-4.65-2.85 0-3.3 2.2-3.3 4.5V24H8V8z"></path></svg></span>
+            <span style="width: 32px; height: 32px; border-radius: 8px; border: 1px solid #DDE1E8; display: inline-flex; align-items: center; justify-content: center; color: #565E72; cursor: pointer;" style-hover="border-color: #07B7D1; color: #0793AC;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+        <!-- Pricing -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 36px 32px; display: flex; flex-direction: column;">
+          <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; color: #565E72;">Discovery Sprint</div>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin: 14px 0 4px;"><span style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em;">Kz 4,9M</span><span style="font-size: 13px; color: #9AA2B3;">/ 2 weeks</span></div>
+          <div style="font-size: 13px; color: #717A8F; margin-bottom: 22px;">Fixed scope. Fixed price.</div>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: #444B5C; margin-bottom: 28px;">
+            <div style="display: flex; gap: 8px; align-items: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A468" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Stakeholder interviews &amp; process mapping</div>
+            <div style="display: flex; gap: 8px; align-items: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A468" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Clickable prototype of the core flow</div>
+            <div style="display: flex; gap: 8px; align-items: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A468" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Build plan with cost &amp; timeline</div>
+          </div>
+          <button style="margin-top: auto; height: 44px; border-radius: 8px; background: #fff; color: #2B3990; border: 1.5px solid #2B3990; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer;" style-hover="background: #EEF0FB;">Book a sprint</button>
+        </div>
+        <div style="border: 2px solid #2B3990; border-radius: 16px; padding: 36px 32px; display: flex; flex-direction: column; position: relative; box-shadow: 0 12px 24px rgba(43,57,144,0.10);">
+          <span style="position: absolute; top: -11px; left: 32px; background: linear-gradient(90deg, #07B7D1, #2B3990); color: #fff; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; padding: 3px 12px; border-radius: 999px;">MOST COMMON</span>
+          <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; color: #565E72;">Product Build</div>
+          <div style="display: flex; align-items: baseline; gap: 6px; margin: 14px 0 4px;"><span style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em;">Custom</span></div>
+          <div style="font-size: 13px; color: #717A8F; margin-bottom: 22px;">Scoped after discovery · milestone billing</div>
+          <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: #444B5C; margin-bottom: 28px;">
+            <div style="display: flex; gap: 8px; align-items: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A468" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Dedicated senior product team</div>
+            <div style="display: flex; gap: 8px; align-items: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A468" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Design, build, deploy — end to end</div>
+            <div style="display: flex; gap: 8px; align-items: center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16A468" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>90-day post-launch support included</div>
+          </div>
+          <button style="margin-top: auto; height: 44px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 14px; cursor: pointer;" style-hover="background: #232E74;">Talk to us</button>
+        </div>
+        <!-- Testimonial (dark) -->
+        <div style="background: #131840; border-radius: 16px; padding: 36px 32px; color: #fff; display: flex; flex-direction: column;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#2FCBE2" style="margin-bottom: 18px;"><path d="M10 8H6a4 4 0 0 0-4 4v6h8v-8a2 2 0 0 0 0-2zm12 0h-4a4 4 0 0 0-4 4v6h8v-8a2 2 0 0 0 0-2z" opacity="0.9"></path></svg>
+          <p style="font-family: Sora, sans-serif; font-size: 17px; line-height: 1.55; font-weight: 400; margin: 0 0 24px;">"Alio delivered in 14 weeks what two previous vendors couldn't in two years. The dashboard runs our whole operation now."</p>
+          <div style="margin-top: auto; display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #2E3340; color: #6EDFF0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;">JM</div>
+            <div>
+              <div style="font-size: 14px; font-weight: 600;">João M.</div>
+              <div style="font-size: 12.5px; color: #93A1E3;">Operations Director · Logistics group</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 13. NAVIGATION ============ -->
+  <section id="s13" data-screen-label="13 Navigation" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">13</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Navigation</h2>
+
+      <!-- Top navbar -->
+      <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Top navbar — marketing (desktop)</div>
+      <div style="border: 1px solid #EEF0F4; border-radius: 14px; overflow: hidden; margin-bottom: 28px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 0 28px; height: 64px; background: #fff;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <img src="assets/alio-icon.svg" alt="" style="height: 24px;">
+            <span style="font-family: Sora, sans-serif; font-size: 16px; letter-spacing: -0.02em;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+          </div>
+          <div style="display: flex; gap: 2px; font-size: 14px; font-weight: 500;">
+            <span style="padding: 8px 12px; border-radius: 8px; color: #12141D; background: #F7F8FA;">Services</span>
+            <span style="padding: 8px 12px; border-radius: 8px; color: #565E72; cursor: pointer;" style-hover="background: #F7F8FA; color: #12141D;">Work</span>
+            <span style="padding: 8px 12px; border-radius: 8px; color: #565E72; cursor: pointer;" style-hover="background: #F7F8FA; color: #12141D;">About</span>
+            <span style="padding: 8px 12px; border-radius: 8px; color: #565E72; cursor: pointer;" style-hover="background: #F7F8FA; color: #12141D;">Insights</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 13px; font-weight: 600; color: #565E72; cursor: pointer;">PT</span>
+            <button style="height: 38px; padding: 0 18px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer;" style-hover="background: #232E74;">Start a project</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mega menu -->
+      <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Mega menu — open state</div>
+      <div style="border: 1px solid #EEF0F4; border-radius: 14px; overflow: hidden; margin-bottom: 28px; box-shadow: 0 12px 24px rgba(19,24,64,0.06);">
+        <div style="display: flex; align-items: center; gap: 24px; padding: 0 28px; height: 56px; background: #fff; border-bottom: 1px solid #EEF0F4;">
+          <img src="assets/alio-icon.svg" alt="" style="height: 22px;">
+          <span style="font-size: 14px; font-weight: 600; color: #2B3990; border-bottom: 2px solid #07B7D1; padding: 17px 0;">Services ▾</span>
+          <span style="font-size: 14px; font-weight: 500; color: #565E72;">Work</span>
+          <span style="font-size: 14px; font-weight: 500; color: #565E72;">About</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; padding: 24px 28px; background: #fff;">
+          <sc-for list="{{ megaItems }}" as="m" hint-placeholder-count="6">
+            <div style="display: flex; gap: 12px; padding: 12px; border-radius: 10px; cursor: pointer;" style-hover="background: #F7F8FA;">
+              <div style="width: 36px; height: 36px; border-radius: 9px; background: #EEF0FB; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2B3990" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.icon }}"></path></svg>
+              </div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: #12141D;">{{ m.name }}</div>
+                <div style="font-size: 12.5px; color: #717A8F; line-height: 1.45;">{{ m.desc }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- Sidebar + mobile row -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-bottom: 28px; align-items: start;">
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">App sidebar — expanded</div>
+          <div style="width: 100%; max-width: 264px; background: #131840; border-radius: 14px; padding: 18px 12px; color: #fff;">
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 10px 16px;">
+              <img src="assets/alio-icon-white.svg" alt="" style="height: 20px;">
+              <span style="font-family: Sora, sans-serif; font-size: 14px;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">bi</span></span>
+            </div>
+            <sc-for list="{{ sideItems }}" as="si" hint-placeholder-count="6">
+              <div style="display: flex; align-items: center; gap: 11px; padding: 9px 10px; border-radius: 8px; font-size: 13.5px; font-weight: {{ si.w }}; color: {{ si.color }}; background: {{ si.bg }}; cursor: pointer; margin-bottom: 2px;" style-hover="background: rgba(255,255,255,0.07);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ si.icon }}"></path></svg>
+                {{ si.name }}
+                <sc-if value="{{ si.badge }}" hint-placeholder-val="{{ false }}"><span style="margin-left: auto; font-size: 10.5px; font-weight: 600; background: #2FCBE2; color: #0E1017; border-radius: 999px; padding: 1px 7px;">{{ si.badge }}</span></sc-if>
+              </div>
+            </sc-for>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 14px; padding-top: 12px; display: flex; align-items: center; gap: 10px; padding-left: 10px;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: #2E3340; color: #6EDFF0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600;">TS</div>
+              <div style="font-size: 12.5px;">Teresa S.<div style="color: #6B7CD5; font-size: 11px;">Admin</div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Collapsed</div>
+          <div style="width: 64px; background: #131840; border-radius: 14px; padding: 18px 0; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+            <img src="assets/alio-icon-white.svg" alt="" style="height: 20px; margin-bottom: 10px;">
+            <sc-for list="{{ sideItems }}" as="si">
+              <div style="width: 40px; height: 40px; border-radius: 9px; display: flex; align-items: center; justify-content: center; color: {{ si.color }}; background: {{ si.bg }}; cursor: pointer;" style-hover="background: rgba(255,255,255,0.07);">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ si.icon }}"></path></svg>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Mobile — drawer + bottom nav</div>
+          <div style="width: 100%; max-width: 250px; border: 1px solid #DDE1E8; border-radius: 22px; overflow: hidden; background: #fff;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid #EEF0F4;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12141D" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>
+              <img src="assets/alio-icon.svg" alt="" style="height: 18px;">
+              <div style="width: 26px; height: 26px; border-radius: 50%; background: #EEF0FB; color: #2B3990; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600;">TS</div>
+            </div>
+            <div style="padding: 10px 8px;">
+              <div style="padding: 11px 12px; border-radius: 9px; background: #EEF0FB; color: #2B3990; font-size: 14px; font-weight: 600;">Overview</div>
+              <div style="padding: 11px 12px; border-radius: 9px; color: #444B5C; font-size: 14px;">Reports</div>
+              <div style="padding: 11px 12px; border-radius: 9px; color: #444B5C; font-size: 14px;">Map layers</div>
+              <div style="padding: 11px 12px; border-radius: 9px; color: #444B5C; font-size: 14px;">Settings</div>
+            </div>
+            <div style="display: flex; border-top: 1px solid #EEF0F4;">
+              <div style="flex: 1; padding: 10px 0 12px; text-align: center; color: #2B3990;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><div style="font-size: 9.5px; font-weight: 600; margin-top: 2px;">Home</div></div>
+              <div style="flex: 1; padding: 10px 0 12px; text-align: center; color: #9AA2B3;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M3 3v18h18M8 17v-6m5 6V7m5 10v-4"></path></svg><div style="font-size: 9.5px; margin-top: 2px;">Data</div></div>
+              <div style="flex: 1; padding: 10px 0 12px; text-align: center; color: #9AA2B3;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"></path></svg><div style="font-size: 9.5px; margin-top: 2px;">Map</div></div>
+              <div style="flex: 1; padding: 10px 0 12px; text-align: center; color: #9AA2B3;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg><div style="font-size: 9.5px; margin-top: 2px;">Profile</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Breadcrumbs</div>
+            <div style="display: flex; align-items: center; gap: 7px; font-size: 13.5px; border: 1px solid #EEF0F4; border-radius: 10px; padding: 12px 16px; flex-wrap: wrap;">
+              <span style="color: #717A8F; cursor: pointer;" style-hover="color: #2B3990;">Projects</span>
+              <span style="color: #C4CAD6;">/</span>
+              <span style="color: #717A8F; cursor: pointer;" style-hover="color: #2B3990;">Cadastre Portal</span>
+              <span style="color: #C4CAD6;">/</span>
+              <span style="color: #12141D; font-weight: 600;">Map layers</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Dropdown menu — open</div>
+            <div style="width: 220px; background: #fff; border: 1px solid #EEF0F4; border-radius: 12px; box-shadow: 0 12px 24px rgba(19,24,64,0.10); padding: 6px; font-size: 13.5px;">
+              <div style="padding: 9px 12px; border-radius: 8px; color: #12141D; display: flex; gap: 9px; align-items: center; cursor: pointer;" style-hover="background: #F7F8FA;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#565E72" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>Rename</div>
+              <div style="padding: 9px 12px; border-radius: 8px; color: #12141D; display: flex; gap: 9px; align-items: center; cursor: pointer;" style-hover="background: #F7F8FA;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#565E72" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Duplicate</div>
+              <div style="height: 1px; background: #EEF0F4; margin: 5px 4px;"></div>
+              <div style="padding: 9px 12px; border-radius: 8px; color: #C42B31; display: flex; gap: 9px; align-items: center; cursor: pointer;" style-hover="background: #FDF0F0;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>Delete project</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs / pagination / stepper -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 28px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 20px;">Tabs — three styles (live)</div>
+          <div style="display: flex; border-bottom: 1.5px solid #EEF0F4; margin-bottom: 22px;">
+            <sc-for list="{{ tabsLine }}" as="t" hint-placeholder-count="3">
+              <div onClick="{{ t.go }}" style="padding: 10px 16px; font-size: 14px; font-weight: {{ t.w }}; color: {{ t.color }}; border-bottom: 2px solid {{ t.border }}; margin-bottom: -1.5px; cursor: pointer;">{{ t.label }}</div>
+            </sc-for>
+          </div>
+          <div style="display: inline-flex; background: #F7F8FA; border-radius: 10px; padding: 4px; margin-bottom: 22px;">
+            <sc-for list="{{ tabsPill }}" as="t" hint-placeholder-count="3">
+              <div onClick="{{ t.go }}" style="padding: 7px 16px; font-size: 13.5px; font-weight: {{ t.w }}; color: {{ t.color }}; background: {{ t.bg }}; border-radius: 8px; box-shadow: {{ t.shadow }}; cursor: pointer;">{{ t.label }}</div>
+            </sc-for>
+          </div>
+          <div style="display: flex;">
+            <sc-for list="{{ tabsEnc }}" as="t" hint-placeholder-count="3">
+              <div onClick="{{ t.go }}" style="padding: 9px 18px; font-size: 13.5px; font-weight: {{ t.w }}; color: {{ t.color }}; background: {{ t.bg }}; border: 1px solid #DDE1E8; border-bottom: {{ t.bottom }}; border-radius: 10px 10px 0 0; margin-right: -1px; cursor: pointer; position: relative; z-index: {{ t.z }};">{{ t.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 20px;">Pagination (live)</div>
+          <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 32px; flex-wrap: wrap;">
+            <button onClick="{{ pagePrev }}" style="width: 34px; height: 34px; border-radius: 8px; border: 1px solid #DDE1E8; background: #fff; color: #565E72; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;" style-hover="background: #F7F8FA;">‹</button>
+            <sc-for list="{{ pages }}" as="pg" hint-placeholder-count="6">
+              <button onClick="{{ pg.go }}" style="min-width: 34px; height: 34px; padding: 0 8px; border-radius: 8px; border: 1px solid {{ pg.border }}; background: {{ pg.bg }}; color: {{ pg.color }}; font-weight: {{ pg.w }}; font-family: 'Instrument Sans', sans-serif; font-size: 13.5px; cursor: pointer;">{{ pg.label }}</button>
+            </sc-for>
+            <button onClick="{{ pageNext }}" style="width: 34px; height: 34px; border-radius: 8px; border: 1px solid #DDE1E8; background: #fff; color: #565E72; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;" style-hover="background: #F7F8FA;">›</button>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 18px;">Stepper / wizard</div>
+          <div style="display: flex; align-items: center;">
+            <sc-for list="{{ steps }}" as="stp" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; flex: {{ stp.flex }};">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                  <div style="width: 30px; height: 30px; border-radius: 50%; background: {{ stp.bg }}; border: 2px solid {{ stp.border }}; color: {{ stp.color }}; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600;">{{ stp.mark }}</div>
+                  <div style="font-size: 11px; font-weight: 500; color: {{ stp.labelColor }}; white-space: nowrap;">{{ stp.label }}</div>
+                </div>
+                <sc-if value="{{ stp.line }}" hint-placeholder-val="{{ true }}"><div style="flex: 1; height: 2px; background: {{ stp.lineColor }}; margin: 0 8px 18px;"></div></sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footers -->
+      <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Footer — marketing</div>
+      <div style="background: #131840; border-radius: 16px; padding: 48px 40px 32px; color: #fff; margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 40px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 14px;">
+              <img src="assets/alio-icon-white.svg" alt="" style="height: 22px;">
+              <span style="font-family: Sora, sans-serif; font-size: 16px;"><span style="font-weight: 700;">alio</span><span style="font-weight: 300;">analytics</span></span>
+            </div>
+            <p style="font-size: 13.5px; line-height: 1.6; color: #93A1E3; max-width: 280px; margin: 0;">Clarity from complexity. Software, data, and GIS — built in Luanda to a world standard.</p>
+          </div>
+          <div><div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B7CD5; margin-bottom: 14px;">Services</div><div style="display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; color: #C4CAD6;"><span>Custom software</span><span>GIS solutions</span><span>Data &amp; BI</span><span>Cloud</span></div></div>
+          <div><div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B7CD5; margin-bottom: 14px;">Company</div><div style="display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; color: #C4CAD6;"><span>About</span><span>Work</span><span>Careers</span><span>Contact</span></div></div>
+          <div><div style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B7CD5; margin-bottom: 14px;">Contact</div><div style="display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; color: #C4CAD6;"><span>hello@alio.ao</span><span>+244 9xx xxx xxx</span><span>Nova Vida, Luanda</span></div></div>
+        </div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; font-size: 12.5px; color: #6B7CD5; flex-wrap: wrap; gap: 10px;">
+          <span>© 2026 Alio Analytics, Lda. NIF 5001021800</span>
+          <span>Privacy · Terms · PT / EN</span>
+        </div>
+      </div>
+      <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Footer — app (minimal)</div>
+      <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 16px 24px; display: flex; justify-content: space-between; font-size: 12.5px; color: #717A8F; flex-wrap: wrap; gap: 8px;">
+        <span>© 2026 Alio Analytics · v2.4.1</span>
+        <span style="display: flex; gap: 16px;"><span>Docs</span><span>Status: <span style="color: #0D8454; font-weight: 600;">● Operational</span></span><span>Support</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 14. FEEDBACK & OVERLAYS ============ -->
+  <section id="s14" data-screen-label="14 Feedback and Overlays" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">14</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Feedback &amp; Overlays</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <!-- Alerts -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 6px;">Alerts</div>
+          <sc-for list="{{ alerts }}" as="al" hint-placeholder-count="4">
+            <div style="display: flex; gap: 11px; padding: 13px 15px; border-radius: 10px; background: {{ al.bg }}; border: 1px solid {{ al.border }};">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="{{ al.ink }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><path d="{{ al.icon }}"></path></svg>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: {{ al.ink }};">{{ al.title }}</div>
+                <div style="font-size: 13px; line-height: 1.5; color: {{ al.body }};">{{ al.text }}</div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin: 12px 0 6px;">Banner</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 16px; border-radius: 10px; background: linear-gradient(90deg, #131840, #2B3990); color: #fff;">
+            <div style="font-size: 13px;"><strong>Scheduled maintenance</strong> — Sunday 02:00–04:00 WAT. Dashboards stay read-only.</div>
+            <span style="font-size: 12.5px; font-weight: 600; color: #6EDFF0; cursor: pointer; white-space: nowrap;">Details →</span>
+          </div>
+        </div>
+
+        <!-- Toasts + tooltips + popover -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Toasts</div>
+          <div style="display: flex; align-items: center; gap: 11px; padding: 13px 16px; border-radius: 12px; background: #12141D; color: #fff; box-shadow: 0 12px 24px rgba(19,24,64,0.25); max-width: 340px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#37BC83" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            <span style="font-size: 13.5px; flex: 1;">Report exported successfully.</span>
+            <span style="font-size: 12.5px; font-weight: 600; color: #6EDFF0; cursor: pointer;">View</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 11px; padding: 13px 16px; border-radius: 12px; background: #12141D; color: #fff; box-shadow: 0 12px 24px rgba(19,24,64,0.25); max-width: 340px;">
+            <span style="width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.25); border-top-color: #2FCBE2; border-radius: 50%; animation: alio-spin 0.7s linear infinite; flex-shrink: 0;"></span>
+            <span style="font-size: 13.5px; flex: 1;">Syncing 3 data sources…</span>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin: 10px 0 2px;">Tooltip &amp; popover</div>
+          <div style="display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap;">
+            <div>
+              <div style="background: #12141D; color: #fff; font-size: 12px; padding: 6px 10px; border-radius: 7px; display: inline-block;">Refresh data (⌘R)</div>
+              <div style="width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #12141D; margin-left: 16px;"></div>
+              <button style="width: 36px; height: 36px; border-radius: 8px; border: 1px solid #DDE1E8; background: #fff; color: #565E72; cursor: pointer; margin-left: 4px;">⟳</button>
+            </div>
+            <div style="width: 240px; background: #fff; border: 1px solid #EEF0F4; border-radius: 12px; box-shadow: 0 12px 24px rgba(19,24,64,0.12); padding: 16px;">
+              <div style="font-size: 13.5px; font-weight: 600; margin-bottom: 4px;">Filter by province</div>
+              <div style="font-size: 12.5px; color: #717A8F; margin-bottom: 12px;">Applies to all widgets on this page.</div>
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #EEF0FB; color: #2B3990;">Luanda ✕</span>
+                <span style="font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; border: 1px solid #DDE1E8; color: #565E72;">Benguela</span>
+                <span style="font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 999px; border: 1px solid #DDE1E8; color: #565E72;">Huambo</span>
+              </div>
+            </div>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin: 10px 0 2px;">Progress &amp; loaders</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: #717A8F; margin-bottom: 5px;"><span>Uploading shapefile…</span><span style="font-family: 'JetBrains Mono', monospace;">68%</span></div>
+              <div style="height: 7px; border-radius: 999px; background: #EEF0F4; overflow: hidden;"><div style="width: 68%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #07B7D1, #2B3990);"></div></div>
+            </div>
+            <div style="height: 7px; border-radius: 999px; background: #EEF0F4; overflow: hidden; position: relative;"><div style="position: absolute; width: 35%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #07B7D1, #2B3990); animation: alio-indet 1.4s ease-in-out infinite;"></div></div>
+            <div style="display: flex; gap: 20px; align-items: center;">
+              <span style="width: 22px; height: 22px; border: 2.5px solid #EEF0F4; border-top-color: #2B3990; border-radius: 50%; animation: alio-spin 0.8s linear infinite;"></span>
+              <span style="width: 16px; height: 16px; border: 2px solid #EEF0F4; border-top-color: #07B7D1; border-radius: 50%; animation: alio-spin 0.7s linear infinite;"></span>
+              <span style="font-size: 12.5px; color: #9AA2B3;">Spinner 22 / 16 px</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skeleton + empty -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Skeleton loading</div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; padding: 18px; margin-bottom: 24px;">
+            <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 14px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(90deg, #EEF0F4 25%, #F7F8FA 37%, #EEF0F4 63%); background-size: 400px 100%; animation: alio-shimmer 1.4s linear infinite;"></div>
+              <div style="flex: 1;">
+                <div style="height: 11px; width: 60%; border-radius: 5px; background: linear-gradient(90deg, #EEF0F4 25%, #F7F8FA 37%, #EEF0F4 63%); background-size: 400px 100%; animation: alio-shimmer 1.4s linear infinite; margin-bottom: 7px;"></div>
+                <div style="height: 9px; width: 40%; border-radius: 5px; background: linear-gradient(90deg, #EEF0F4 25%, #F7F8FA 37%, #EEF0F4 63%); background-size: 400px 100%; animation: alio-shimmer 1.4s linear infinite;"></div>
+              </div>
+            </div>
+            <div style="height: 9px; border-radius: 5px; background: linear-gradient(90deg, #EEF0F4 25%, #F7F8FA 37%, #EEF0F4 63%); background-size: 400px 100%; animation: alio-shimmer 1.4s linear infinite; margin-bottom: 7px;"></div>
+            <div style="height: 9px; width: 85%; border-radius: 5px; background: linear-gradient(90deg, #EEF0F4 25%, #F7F8FA 37%, #EEF0F4 63%); background-size: 400px 100%; animation: alio-shimmer 1.4s linear infinite;"></div>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Empty state</div>
+          <div style="border: 1px dashed #DDE1E8; border-radius: 12px; padding: 32px 24px; text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #ECFCFF; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0793AC" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8c4.97 0 9-1.34 9-3s-4.03-3-9-3-9 1.34-9 3 4.03 3 9 3zm9-3v14c0 1.66-4.03 3-9 3s-9-1.34-9-3V5m18 7c0 1.66-4.03 3-9 3s-9-1.34-9-3"></path></svg>
+            </div>
+            <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600; margin-bottom: 5px;">No data yet</div>
+            <div style="font-size: 13px; color: #717A8F; line-height: 1.55; margin-bottom: 16px;">Connect a source and your first insights appear here within minutes.</div>
+            <button style="height: 36px; padding: 0 16px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13px; cursor: pointer;">Connect source</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal + drawer + error pages -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Modal — confirm (shown on scrim)</div>
+          <div style="background: rgba(18,20,29,0.55); border-radius: 16px; padding: 40px 32px; display: flex; align-items: center; justify-content: center;">
+            <div style="background: #fff; border-radius: 16px; padding: 28px; max-width: 380px; box-shadow: 0 24px 48px rgba(19,24,64,0.3);">
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: #FDF0F0; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C42B31" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </div>
+              <div style="font-family: Sora, sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 7px;">Delete "Q2 revenue" dashboard?</div>
+              <p style="font-size: 13.5px; line-height: 1.55; color: #565E72; margin: 0 0 22px;">This removes the dashboard for all 14 members. Underlying data sources are not affected. This action can't be undone.</p>
+              <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button style="height: 38px; padding: 0 16px; border-radius: 8px; background: #fff; color: #444B5C; border: 1px solid #DDE1E8; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer;">Cancel</button>
+                <button style="height: 38px; padding: 0 16px; border-radius: 8px; background: #C42B31; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer;" style-hover="background: #A42226;">Delete dashboard</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Drawer / side panel</div>
+          <div style="background: rgba(18,20,29,0.55); border-radius: 16px; height: 320px; display: flex; justify-content: flex-end; overflow: hidden;">
+            <div style="width: 78%; max-width: 340px; background: #fff; padding: 24px; box-shadow: -12px 0 32px rgba(19,24,64,0.25); display: flex; flex-direction: column;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+                <div style="font-family: Sora, sans-serif; font-size: 16px; font-weight: 600;">Layer settings</div>
+                <span style="width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #717A8F; cursor: pointer;" style-hover="background: #F7F8FA;">✕</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13.5px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;"><span>Choropleth opacity</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #2B3990;">80%</span></div>
+                <div style="height: 6px; border-radius: 999px; background: #EEF0F4;"><div style="width: 80%; height: 100%; border-radius: 999px; background: #2B3990;"></div></div>
+                <div style="display: flex; justify-content: space-between; align-items: center;"><span>Show labels</span><div style="width: 36px; height: 21px; border-radius: 999px; background: #2B3990; padding: 2px;"><div style="width: 17px; height: 17px; border-radius: 50%; background: #fff; transform: translateX(15px);"></div></div></div>
+                <div style="display: flex; justify-content: space-between; align-items: center;"><span>Cluster markers</span><div style="width: 36px; height: 21px; border-radius: 999px; background: #C4CAD6; padding: 2px;"><div style="width: 17px; height: 17px; border-radius: 50%; background: #fff;"></div></div></div>
+              </div>
+              <button style="margin-top: auto; height: 40px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13.5px; cursor: pointer;">Apply changes</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Error pages — 404 / 500</div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 36px 28px; text-align: center; margin-bottom: 16px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #0793AC; margin-bottom: 8px;">404</div>
+            <div style="font-family: Sora, sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 6px;">This page doesn't exist.</div>
+            <div style="font-size: 13.5px; color: #717A8F; margin-bottom: 18px;">The link may be outdated, or the page was moved.</div>
+            <button style="height: 38px; padding: 0 18px; border-radius: 8px; background: #2B3990; color: #fff; border: none; font-weight: 600; font-size: 13.5px; font-family: 'Instrument Sans', sans-serif; cursor: pointer;">Back to home</button>
+          </div>
+          <div style="background: #12141D; border-radius: 16px; padding: 36px 28px; text-align: center; color: #fff;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #2FCBE2; margin-bottom: 8px;">500</div>
+            <div style="font-family: Sora, sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 6px;">Something broke on our side.</div>
+            <div style="font-size: 13.5px; color: #9AA2B3; margin-bottom: 18px;">Your data is safe. We've been notified and are on it.</div>
+            <button style="height: 38px; padding: 0 18px; border-radius: 8px; background: #6B7CD5; color: #0E1017; border: none; font-weight: 600; font-size: 13.5px; font-family: 'Instrument Sans', sans-serif; cursor: pointer;">Retry</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 15. DISPLAY ============ -->
+  <section id="s15" data-screen-label="15 Display Components" style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 80px 48px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #0793AC; margin-bottom: 16px;">15</div>
+      <h2 style="font-family: Sora, sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 40px;">Display Components</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 24px;">
+        <!-- Badges + avatars + dividers -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Badges, tags &amp; chips</div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;">
+            <sc-for list="{{ badges }}" as="b" hint-placeholder-count="6">
+              <span style="font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: {{ b.bg }}; color: {{ b.ink }}; border: 1px solid {{ b.border }};">{{ b.label }}</span>
+            </sc-for>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 500; padding: 5px 11px; border-radius: 8px; background: #F7F8FA; border: 1px solid #DDE1E8; color: #444B5C;">GIS <span style="color: #9AA2B3; cursor: pointer;">✕</span></span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 500; padding: 5px 11px; border-radius: 8px; background: #F7F8FA; border: 1px solid #DDE1E8; color: #444B5C;">Luanda <span style="color: #9AA2B3; cursor: pointer;">✕</span></span>
+            <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 8px; background: #EEF0FB; color: #2B3990;">+ Add filter</span>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Avatars &amp; groups</div>
+          <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 24px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: flex-end; gap: 10px;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, #07B7D1, #2B3990); color: #fff; font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center;">TS</div>
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #07B7D1, #2B3990); color: #fff; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center;">TS</div>
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #07B7D1, #2B3990); color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center;">TS</div>
+              <div style="position: relative; width: 48px; height: 48px;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #07B7D1, #2B3990); color: #fff; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center;">TS</div>
+                <span style="position: absolute; bottom: 1px; right: 1px; width: 12px; height: 12px; border-radius: 50%; background: #16A468; border: 2px solid #fff;"></span>
+              </div>
+            </div>
+            <div style="display: flex;">
+              <div style="width: 34px; height: 34px; border-radius: 50%; background: #2B3990; color: #fff; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 2px solid #fff;">AM</div>
+              <div style="width: 34px; height: 34px; border-radius: 50%; background: #0793AC; color: #fff; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; margin-left: -9px;">JK</div>
+              <div style="width: 34px; height: 34px; border-radius: 50%; background: #7C5CD6; color: #fff; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; margin-left: -9px;">RN</div>
+              <div style="width: 34px; height: 34px; border-radius: 50%; background: #EEF0F4; color: #565E72; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; margin-left: -9px;">+5</div>
+            </div>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Dividers</div>
+          <div style="height: 1px; background: #EEF0F4; margin-bottom: 12px;"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;"><div style="flex: 1; height: 1px; background: #DDE1E8;"></div><span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #9AA2B3;">OR</span><div style="flex: 1; height: 1px; background: #DDE1E8;"></div></div>
+          <div style="height: 2px; background: linear-gradient(90deg, #07B7D1, #2B3990); border-radius: 2px; width: 64px;"></div>
+        </div>
+
+        <!-- Accordion + list + stats -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Accordion (live)</div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; overflow: hidden; margin-bottom: 24px;">
+            <sc-for list="{{ accordion }}" as="ac" hint-placeholder-count="3">
+              <div style="border-bottom: 1px solid #EEF0F4;">
+                <div onClick="{{ ac.toggle }}" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 18px; cursor: pointer; background: {{ ac.headBg }};" style-hover="background: #F7F8FA;">
+                  <span style="font-size: 14px; font-weight: 600; color: #12141D;">{{ ac.q }}</span>
+                  <span style="color: #717A8F; transform: {{ ac.chev }}; transition: transform 0.2s; font-size: 12px;">▼</span>
+                </div>
+                <sc-if value="{{ ac.open }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding: 0 18px 16px; font-size: 13.5px; line-height: 1.6; color: #565E72;">{{ ac.a }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Stats / metric block</div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #EEF0F4; border: 1px solid #EEF0F4; border-radius: 12px; overflow: hidden; margin-bottom: 24px;">
+            <div style="background: #fff; padding: 16px 14px;"><div style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 700;">45+</div><div style="font-size: 11.5px; color: #717A8F;">Systems shipped</div></div>
+            <div style="background: #fff; padding: 16px 14px;"><div style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 700;">6</div><div style="font-size: 11.5px; color: #717A8F;">Provinces covered</div></div>
+            <div style="background: #fff; padding: 16px 14px;"><div style="font-family: Sora, sans-serif; font-size: 22px; font-weight: 700;">99.9%</div><div style="font-size: 11.5px; color: #717A8F;">Uptime SLA</div></div>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">List</div>
+          <div style="border: 1px solid #EEF0F4; border-radius: 12px; overflow: hidden;">
+            <sc-for list="{{ listItems }}" as="li" hint-placeholder-count="3">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #F7F8FA; cursor: pointer;" style-hover="background: #F7F8FA;">
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: {{ li.iconBg }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{ li.iconInk }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="{{ li.icon }}"></path></svg>
+                </div>
+                <div style="flex: 1; min-width: 0;">
+                  <div style="font-size: 13.5px; font-weight: 600; color: #12141D;">{{ li.title }}</div>
+                  <div style="font-size: 12px; color: #9AA2B3;">{{ li.sub }}</div>
+                </div>
+                <span style="color: #C4CAD6;">›</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Timeline + code -->
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 18px;">Timeline</div>
+          <div style="margin-bottom: 26px;">
+            <sc-for list="{{ timeline }}" as="tl" hint-placeholder-count="4">
+              <div style="display: flex; gap: 14px;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                  <div style="width: 11px; height: 11px; border-radius: 50%; background: {{ tl.dot }}; border: 2.5px solid {{ tl.dotRing }}; flex-shrink: 0; margin-top: 3px;"></div>
+                  <sc-if value="{{ tl.line }}" hint-placeholder-val="{{ true }}"><div style="width: 2px; flex: 1; background: #EEF0F4; margin: 4px 0;"></div></sc-if>
+                </div>
+                <div style="padding-bottom: 20px;">
+                  <div style="font-size: 13.5px; font-weight: 600; color: #12141D;">{{ tl.title }}</div>
+                  <div style="font-size: 12.5px; color: #717A8F; line-height: 1.5; margin-top: 2px;">{{ tl.desc }}</div>
+                  <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #9AA2B3; margin-top: 4px;">{{ tl.time }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 14px;">Code block</div>
+          <div style="background: #12141D; border-radius: 12px; overflow: hidden;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid #1F2330;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #717A8F;">query.sql</span>
+              <span style="font-size: 11.5px; font-weight: 600; color: #6EDFF0; cursor: pointer;">Copy</span>
+            </div>
+            <pre style="margin: 0; padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; color: #C4CAD6; overflow-x: auto;"><span style="color: #6B7CD5;">SELECT</span> province, <span style="color: #2FCBE2;">SUM</span>(volume) <span style="color: #6B7CD5;">AS</span> total
+<span style="color: #6B7CD5;">FROM</span> pipeline_metrics
+<span style="color: #6B7CD5;">WHERE</span> year = <span style="color: #F2C859;">2026</span>
+<span style="color: #6B7CD5;">GROUP BY</span> province;</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div style="font-size: 13px; font-weight: 600; color: #565E72; margin-bottom: 10px;">Table — sortable · selectable · paginated</div>
+      <div style="border: 1px solid #EEF0F4; border-radius: 14px; overflow: hidden; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid #EEF0F4; flex-wrap: wrap; gap: 10px;">
+          <div style="font-family: Sora, sans-serif; font-size: 15px; font-weight: 600;">Client projects</div>
+          <div style="display: flex; gap: 10px;">
+            <div style="position: relative;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9AA2B3" stroke-width="2" stroke-linecap="round" style="position: absolute; left: 10px; top: 9px;"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M21 21l-4.34-4.34"></path></svg>
+              <input placeholder="Search…" style="height: 32px; padding: 0 10px 0 30px; border: 1px solid #DDE1E8; border-radius: 8px; font-size: 13px; font-family: 'Instrument Sans', sans-serif; outline: none; width: 180px;">
+            </div>
+            <button style="height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #DDE1E8; background: #fff; font-size: 12.5px; font-weight: 600; color: #444B5C; font-family: 'Instrument Sans', sans-serif; cursor: pointer;">Export ↓</button>
+          </div>
+        </div>
+        <div style="overflow-x: auto;">
+        <div style="min-width: 760px;">
+        <div style="display: grid; grid-template-columns: 44px 2fr 1.2fr 1fr 1fr 0.9fr; background: #F7F8FA; border-bottom: 1px solid #EEF0F4; font-size: 12px; font-weight: 600; color: #717A8F;">
+          <div style="padding: 11px 0 11px 20px;"><span style="width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid #C4CAD6; display: inline-block;"></span></div>
+          <div style="padding: 11px 16px; display: flex; align-items: center; gap: 4px; cursor: pointer; color: #2B3990;">Project <span style="font-size: 9px;">▲</span></div>
+          <div style="padding: 11px 16px;">Client</div>
+          <div style="padding: 11px 16px; cursor: pointer;">Status</div>
+          <div style="padding: 11px 16px; text-align: right; cursor: pointer;">Value</div>
+          <div style="padding: 11px 16px;">Lead</div>
+        </div>
+        <sc-for list="{{ tableRows }}" as="row" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 44px 2fr 1.2fr 1fr 1fr 0.9fr; border-bottom: 1px solid #F7F8FA; font-size: 13.5px; align-items: center; background: {{ row.bg }};" style-hover="background: #F7F8FA;">
+            <div style="padding: 12px 0 12px 20px;"><span style="width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid {{ row.cbBorder }}; background: {{ row.cbBg }}; display: inline-flex; align-items: center; justify-content: center;"><sc-if value="{{ row.selected }}" hint-placeholder-val="{{ false }}"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if></span></div>
+            <div style="padding: 12px 16px; font-weight: 600; color: #12141D;">{{ row.project }}</div>
+            <div style="padding: 12px 16px; color: #565E72;">{{ row.client }}</div>
+            <div style="padding: 12px 16px;"><span style="font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: {{ row.stBg }}; color: {{ row.stInk }};">{{ row.status }}</span></div>
+            <div style="padding: 12px 16px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: #12141D;">{{ row.value }}</div>
+            <div style="padding: 12px 16px;"><div style="width: 26px; height: 26px; border-radius: 50%; background: {{ row.avBg }}; color: #fff; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center;">{{ row.lead }}</div></div>
+          </div>
+        </sc-for>
+        </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; font-size: 12.5px; color: #717A8F;">
+          <span>2 of 24 selected</span>
+          <span style="display: flex; align-items: center; gap: 6px;">Rows: <strong style="color: #12141D;">10</strong> · Page 1 of 3 <button style="width: 28px; height: 28px; border-radius: 7px; border: 1px solid #DDE1E8; background: #fff; cursor: pointer; color: #565E72;">‹</button><button style="width: 28px; height: 28px; border-radius: 7px; border: 1px solid #DDE1E8; background: #fff; cursor: pointer; color: #565E72;">›</button></span>
+        </div>
+      </div>
+
+      <!-- Kanban + calendar -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px; background: #F7F8FA;">
+          <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 16px;">Kanban card</div>
+          <div style="background: #fff; border: 1px solid #EEF0F4; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(19,24,64,0.08); max-width: 300px; cursor: grab;" style-hover="box-shadow: 0 4px 12px rgba(19,24,64,0.10);">
+            <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+              <span style="font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #ECFCFF; color: #0C7589;">GIS</span>
+              <span style="font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: #FEF9EC; color: #A95214;">High</span>
+            </div>
+            <div style="font-size: 14px; font-weight: 600; color: #12141D; line-height: 1.4; margin-bottom: 10px;">Import Benguela cadastre shapefiles into staging</div>
+            <div style="height: 5px; border-radius: 999px; background: #EEF0F4; margin-bottom: 12px;"><div style="width: 60%; height: 100%; border-radius: 999px; background: #07B7D1;"></div></div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: #9AA2B3;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 2v4m8-4v4M3 8h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path></svg>Jul 14</div>
+              <div style="display: flex;">
+                <div style="width: 22px; height: 22px; border-radius: 50%; background: #2B3990; color: #fff; font-size: 8.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 1.5px solid #fff;">AM</div>
+                <div style="width: 22px; height: 22px; border-radius: 50%; background: #0793AC; color: #fff; font-size: 8.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 1.5px solid #fff; margin-left: -6px;">JK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border: 1px solid #EEF0F4; border-radius: 16px; padding: 28px; grid-column: span 2; min-width: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div style="font-family: Sora, sans-serif; font-size: 14px; font-weight: 600;">Calendar view — July 2026</div>
+            <div style="display: flex; gap: 6px;">
+              <button style="width: 28px; height: 28px; border-radius: 7px; border: 1px solid #DDE1E8; background: #fff; cursor: pointer; color: #565E72;">‹</button>
+              <button style="width: 28px; height: 28px; border-radius: 7px; border: 1px solid #DDE1E8; background: #fff; cursor: pointer; color: #565E72;">›</button>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;">
+            <sc-for list="{{ calHead }}" as="d"><div style="font-size: 11px; font-weight: 600; color: #9AA2B3; text-align: center; padding: 6px 0;">{{ d }}</div></sc-for>
+            <sc-for list="{{ calDays }}" as="cd" hint-placeholder-count="35">
+              <div style="min-height: 52px; border: 1px solid {{ cd.border }}; border-radius: 8px; padding: 5px 7px; background: {{ cd.bg }};">
+                <div style="font-size: 11.5px; font-weight: {{ cd.w }}; color: {{ cd.ink }};">{{ cd.n }}</div>
+                <sc-if value="{{ cd.event }}" hint-placeholder-val="{{ false }}"><div style="font-size: 9.5px; font-weight: 600; color: #fff; background: {{ cd.eventBg }}; border-radius: 4px; padding: 1px 5px; margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ cd.event }}</div></sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MORE-SECTIONS -->
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid #EEF0F4;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 40px 48px; display: flex; justify-content: space-between; align-items: center;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="assets/alio-icon.svg" alt="" style="height: 18px;">
+        <span style="font-size: 13px; color: #717A8F;">Alio Analytics — Design System · Part II</span>
+      </div>
+      <a href="03 Data Motion Imagery.dc.html" style="font-size: 14px; font-weight: 600; color: #2B3990; text-decoration: none;">Next: Data &amp; Motion →</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { switchOn: true, radio: 1, checks: [true, false, false], sliderVal: 30, tab: 0, tabPill: 1, tabEnc: 0, accOpen: 0, page: 3 };
+
+  buttonVariants(dark) {
+    const heads = ['Default', 'Hover', 'Focus', 'Active', 'Disabled', 'Loading'];
+    const ring = dark ? '0 0 0 3px rgba(47,203,226,0.28)' : '0 0 0 3px rgba(7,183,209,0.25)';
+    const none = 'none';
+    const mk = (label, base, over) => Object.assign({ label, bg: base.bg, color: base.color, border: base.border || 'none', shadow: none, opacity: 1, deco: 'none', spinner: false, spinTrack: 'rgba(255,255,255,0.3)' }, over);
+    const v = (name, base, hover, active) => ({
+      name,
+      states: [
+        mk('Button', base, {}),
+        mk('Button', base, hover),
+        mk('Button', base, { shadow: ring }),
+        mk('Button', base, active),
+        mk('Button', base, { opacity: 0.45 }),
+        mk('Loading', base, { spinner: true }),
+      ],
+    });
+    if (!dark) {
+      return [
+        v('Primary', { bg: '#2B3990', color: '#fff' }, { bg: '#232E74' }, { bg: '#1D265C' }),
+        v('Secondary', { bg: '#EEF0FB', color: '#2B3990' }, { bg: '#DDE2F7' }, { bg: '#BCC5EF' }),
+        v('Outline', { bg: '#FFFFFF', color: '#12141D', border: '1px solid #DDE1E8' }, { bg: '#F7F8FA' }, { bg: '#EEF0F4' }),
+        v('Ghost', { bg: 'transparent', color: '#444B5C' }, { bg: '#F7F8FA' }, { bg: '#EEF0F4' }),
+        v('Danger', { bg: '#C42B31', color: '#fff' }, { bg: '#A42226' }, { bg: '#872024' }),
+        v('Success', { bg: '#0D8454', color: '#fff' }, { bg: '#0C6A45' }, { bg: '#0C5439' }),
+        v('Link', { bg: 'transparent', color: '#2B3990' }, { deco: 'underline' }, { color: '#1D265C', deco: 'underline' }),
+      ];
+    }
+    return [
+      v('Primary', { bg: '#6B7CD5', color: '#0E1017' }, { bg: '#93A1E3' }, { bg: '#4C5DC2', color: '#fff' }),
+      v('Secondary', { bg: 'rgba(107,124,213,0.16)', color: '#93A1E3' }, { bg: 'rgba(107,124,213,0.26)' }, { bg: 'rgba(107,124,213,0.36)' }),
+      v('Outline', { bg: 'transparent', color: '#F7F8FA', border: '1px solid #2E3340' }, { bg: '#1F2330' }, { bg: '#2E3340' }),
+      v('Ghost', { bg: 'transparent', color: '#C4CAD6' }, { bg: '#1F2330' }, { bg: '#2E3340' }),
+      v('Danger', { bg: '#E7666B', color: '#0E1017' }, { bg: '#F09496' }, { bg: '#DC3D43', color: '#fff' }),
+      v('Success', { bg: '#37BC83', color: '#0E1017' }, { bg: '#6DD4A6' }, { bg: '#16A468', color: '#fff' }),
+      v('Link', { bg: 'transparent', color: '#2FCBE2' }, { deco: 'underline' }, { color: '#6EDFF0', deco: 'underline' }),
+    ];
+  }
+
+  renderVals() {
+    const s = this.state;
+    const stateHeads = ['Default', 'Hover', 'Focus', 'Active', 'Disabled', 'Loading'];
+    const buttonPanels = [
+      { label: '☀ Light mode', bg: '#FFFFFF', borderCol: '#EEF0F4', title: '#12141D', muted: '#9AA2B3', stateHeads, variants: this.buttonVariants(false) },
+      { label: '☾ Dark mode', bg: '#12141D', borderCol: '#12141D', title: '#F7F8FA', muted: '#565E72', stateHeads, variants: this.buttonVariants(true) },
+    ];
+
+    const cbLabels = ['Checked by default', 'Unchecked option', 'Another option'];
+    const checkboxes = cbLabels.map((label, i) => {
+      const on = s.checks[i];
+      return {
+        label, on,
+        labelColor: '#2E3340',
+        border: on ? '#2B3990' : '#C4CAD6',
+        bg: on ? '#2B3990' : '#fff',
+        toggle: () => this.setState(st => { const c = [...st.checks]; c[i] = !c[i]; return { checks: c }; }),
+      };
+    });
+    const rdLabels = ['Monthly billing', 'Quarterly billing', 'Annual billing'];
+    const radios = rdLabels.map((label, i) => ({
+      label, on: s.radio === i,
+      border: s.radio === i ? '#2B3990' : '#C4CAD6',
+      pick: () => this.setState({ radio: i }),
+    }));
+
+    const kpis = [
+      { label: 'Active pipelines', value: '128', sub: 'across 12 client systems', delta: '+12.4%', deltaBg: '#EBFAF3', deltaInk: '#0C6A45', sparkColor: '#07B7D1', spark: 'M0 26 L15 22 L30 24 L45 18 L60 20 L75 12 L90 14 L105 8 L120 4' },
+      { label: 'Data processed / day', value: '4.2 TB', sub: '99.98% pipeline uptime', delta: '+3.1%', deltaBg: '#EBFAF3', deltaInk: '#0C6A45', sparkColor: '#2B3990', spark: 'M0 20 L15 18 L30 22 L45 16 L60 17 L75 13 L90 15 L105 10 L120 9' },
+      { label: 'Open incidents', value: '3', sub: '2 low · 1 medium · 0 critical', delta: '−40%', deltaBg: '#FDF0F0', deltaInk: '#A42226', sparkColor: '#E5971B', spark: 'M0 8 L15 12 L30 10 L45 16 L60 14 L75 20 L90 18 L105 24 L120 26' },
+    ];
+
+    return {
+      buttonPanels,
+      checkboxes, radios,
+      switchBg: s.switchOn ? '#2B3990' : '#C4CAD6',
+      switchKnob: s.switchOn ? 'translateX(17px)' : 'translateX(0)',
+      switchLabel: s.switchOn ? 'on' : 'off',
+      toggleSwitch: () => this.setState(st => ({ switchOn: !st.switchOn })),
+      sliderVal: s.sliderVal,
+      onSlider: (e) => this.setState({ sliderVal: Number(e.target.value) }),
+      kpis,
+      megaItems: [
+        { name: 'Custom Software', desc: 'Systems built end-to-end', icon: 'M16 18l6-6-6-6M8 6l-6 6 6 6' },
+        { name: 'Mobile Apps', desc: 'iOS & Android products', icon: 'M12 18h.01M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z' },
+        { name: 'GIS Solutions', desc: 'Mapping & spatial analytics', icon: 'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z' },
+        { name: 'Data & BI', desc: 'Dashboards & pipelines', icon: 'M3 3v18h18M8 17v-6m5 6V7m5 10v-4' },
+        { name: 'AI & Analytics', desc: 'Models that decide', icon: 'M9 9h6v6H9zM5 5h14v14H5zM9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3' },
+        { name: 'Cloud & Integration', desc: 'Deploy, connect, scale', icon: 'M17.5 19a4.5 4.5 0 0 0 .42-8.98 7 7 0 0 0-13.6 1.9A4 4 0 0 0 6 19h11.5z' },
+      ],
+      sideItems: [
+        { name: 'Overview', icon: 'm3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', color: '#FFFFFF', bg: 'rgba(47,203,226,0.16)', w: 600, badge: false },
+        { name: 'Dashboards', icon: 'M3 3v18h18M8 17v-6m5 6V7m5 10v-4', color: '#93A1E3', bg: 'transparent', w: 400, badge: false },
+        { name: 'Map layers', icon: 'M12 2 2 7.5l10 5.5 10-5.5L12 2zM2 12.5 12 18l10-5.5', color: '#93A1E3', bg: 'transparent', w: 400, badge: '3' },
+        { name: 'Reports', icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 0v6h6', color: '#93A1E3', bg: 'transparent', w: 400, badge: false },
+        { name: 'Data sources', icon: 'M12 8c4.97 0 9-1.34 9-3s-4.03-3-9-3-9 1.34-9 3 4.03 3 9 3zm9-3v14c0 1.66-4.03 3-9 3s-9-1.34-9-3V5m18 7c0 1.66-4.03 3-9 3s-9-1.34-9-3', color: '#93A1E3', bg: 'transparent', w: 400, badge: false },
+        { name: 'Settings', icon: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M19.4 12a7.4 7.4 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-2-1.2L14.5 3h-5L9 5.6a7.4 7.4 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7.5 7.5 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 2 1.2L9.5 21h5l.4-2.6a7.4 7.4 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.07-.4.1-.8.1-1.2z', color: '#93A1E3', bg: 'transparent', w: 400, badge: false },
+      ],
+      tabsLine: ['Overview', 'Performance', 'Settings'].map((label, i) => ({
+        label, go: () => this.setState({ tab: i }),
+        color: s.tab === i ? '#2B3990' : '#717A8F',
+        w: s.tab === i ? 600 : 500,
+        border: s.tab === i ? '#2B3990' : 'transparent',
+      })),
+      tabsPill: ['Day', 'Week', 'Month'].map((label, i) => ({
+        label, go: () => this.setState({ tabPill: i }),
+        color: s.tabPill === i ? '#12141D' : '#717A8F',
+        w: s.tabPill === i ? 600 : 500,
+        bg: s.tabPill === i ? '#FFFFFF' : 'transparent',
+        shadow: s.tabPill === i ? '0 1px 3px rgba(19,24,64,0.12)' : 'none',
+      })),
+      tabsEnc: ['Details', 'Files', 'Activity'].map((label, i) => ({
+        label, go: () => this.setState({ tabEnc: i }),
+        color: s.tabEnc === i ? '#2B3990' : '#717A8F',
+        w: s.tabEnc === i ? 600 : 500,
+        bg: s.tabEnc === i ? '#FFFFFF' : '#F7F8FA',
+        bottom: s.tabEnc === i ? '1px solid #FFFFFF' : '1px solid #DDE1E8',
+        z: s.tabEnc === i ? 2 : 1,
+      })),
+      pages: [1, 2, 3, 4, 5, 8].map((n, i) => ({
+        label: i === 5 ? '…8' : String(n),
+        go: () => this.setState({ page: n }),
+        bg: s.page === n ? '#2B3990' : '#fff',
+        color: s.page === n ? '#fff' : '#565E72',
+        border: s.page === n ? '#2B3990' : '#DDE1E8',
+        w: s.page === n ? 600 : 500,
+      })),
+      pagePrev: () => this.setState(st => ({ page: Math.max(1, st.page - 1) })),
+      pageNext: () => this.setState(st => ({ page: Math.min(8, st.page + 1) })),
+      steps: [
+        { label: 'Scope', mark: '✓', bg: '#2B3990', border: '#2B3990', color: '#fff', labelColor: '#12141D', line: true, lineColor: '#2B3990', flex: '1' },
+        { label: 'Design', mark: '✓', bg: '#2B3990', border: '#2B3990', color: '#fff', labelColor: '#12141D', line: true, lineColor: '#2B3990', flex: '1' },
+        { label: 'Build', mark: '3', bg: '#fff', border: '#2B3990', color: '#2B3990', labelColor: '#2B3990', line: true, lineColor: '#DDE1E8', flex: '1' },
+        { label: 'Launch', mark: '4', bg: '#fff', border: '#DDE1E8', color: '#9AA2B3', labelColor: '#9AA2B3', line: false, lineColor: '', flex: '0 0 auto' },
+      ],
+      alerts: [
+        { title: 'Heads up', text: 'A new data connector for INE statistics is available.', bg: '#EFF6FF', border: '#BFDCFE', ink: '#1D50D8', body: '#1E42AF', icon: 'M12 16v-4m0-4h.01M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z' },
+        { title: 'Success', text: 'Pipeline deployed. First sync completes in ~4 minutes.', bg: '#EBFAF3', border: '#A3E7C7', ink: '#0C6A45', body: '#0D8454', icon: 'M22 11.1V12a10 10 0 1 1-5.93-9.14M22 4 12 14l-3-3' },
+        { title: 'Warning', text: 'API quota at 85%. Consider upgrading before month end.', bg: '#FEF9EC', border: '#F7DE92', ink: '#A95214', body: '#8A4017', icon: 'M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4m0 4h.01' },
+        { title: 'Error', text: 'Sync failed: credentials for "erp-prod" expired.', bg: '#FDF0F0', border: '#F7BFC0', ink: '#A42226', body: '#872024', icon: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm3-13-6 6m0-6 6 6' },
+      ],
+      badges: [
+        { label: 'Default', bg: '#F7F8FA', ink: '#444B5C', border: '#DDE1E8' },
+        { label: 'Brand', bg: '#EEF0FB', ink: '#2B3990', border: 'transparent' },
+        { label: 'Accent', bg: '#ECFCFF', ink: '#0C7589', border: 'transparent' },
+        { label: 'Success', bg: '#EBFAF3', ink: '#0C6A45', border: 'transparent' },
+        { label: 'Warning', bg: '#FEF9EC', ink: '#A95214', border: 'transparent' },
+        { label: 'Danger', bg: '#FDF0F0', ink: '#A42226', border: 'transparent' },
+      ],
+      accordion: ['How long does a typical build take?', 'Do you work with existing IT teams?', 'Where is our data hosted?'].map((q, i) => ({
+        q,
+        a: ['Discovery takes 2 weeks; most systems ship a first production version in 12–16 weeks, with milestone demos every 2 weeks.',
+            'Yes — most engagements pair our engineers with your internal team, with full handover documentation and training.',
+            'Your choice: Angolan data-centre partners for residency requirements, or major cloud regions for global workloads.'][i],
+        open: s.accOpen === i,
+        headBg: s.accOpen === i ? '#F7F8FA' : '#fff',
+        chev: s.accOpen === i ? 'rotate(180deg)' : 'rotate(0)',
+        toggle: () => this.setState(st => ({ accOpen: st.accOpen === i ? -1 : i })),
+      })),
+      listItems: [
+        { title: 'Q2 pipeline report.pdf', sub: '2.4 MB · updated 2h ago', icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 0v6h6', iconBg: '#EEF0FB', iconInk: '#2B3990' },
+        { title: 'Benguela cadastre layer', sub: 'GeoJSON · 14,203 features', icon: 'M12 2 2 7.5l10 5.5 10-5.5L12 2zM2 12.5 12 18l10-5.5', iconBg: '#ECFCFF', iconInk: '#0C7589' },
+        { title: 'ERP nightly sync', sub: 'Last run: success · 03:00', icon: 'M12 8c4.97 0 9-1.34 9-3s-4.03-3-9-3-9 1.34-9 3 4.03 3 9 3zm9-3v14c0 1.66-4.03 3-9 3s-9-1.34-9-3V5', iconBg: '#EBFAF3', iconInk: '#0D8454' },
+      ],
+      timeline: [
+        { title: 'Dashboard shared with Ministry team', desc: '14 viewers added by Teresa S.', time: 'TODAY · 09:42', dot: '#07B7D1', dotRing: '#D0F6FC', line: true },
+        { title: 'Pipeline v2 deployed to production', desc: 'Zero-downtime migration completed.', time: 'YESTERDAY · 17:05', dot: '#2B3990', dotRing: '#DDE2F7', line: true },
+        { title: 'Anomaly detected in region feed', desc: 'Auto-resolved after source retry.', time: 'JUL 03 · 22:18', dot: '#E5971B', dotRing: '#FBEFCB', line: true },
+        { title: 'Project kickoff', desc: 'Scope signed — 14-week build begins.', time: 'JUN 28', dot: '#C4CAD6', dotRing: '#EEF0F4', line: false },
+      ],
+      tableRows: [
+        { project: 'Cadastre Portal', client: 'Gov · Land Institute', status: 'In build', stBg: '#EEF0FB', stInk: '#2B3990', value: 'Kz 84,0M', lead: 'AM', avBg: '#2B3990', selected: true, bg: '#F7FBFF', cbBorder: '#2B3990', cbBg: '#2B3990' },
+        { project: 'Pipeline BI Suite', client: 'Oil & Gas operator', status: 'Live', stBg: '#EBFAF3', stInk: '#0C6A45', value: 'Kz 126,5M', lead: 'JK', avBg: '#0793AC', selected: true, bg: '#F7FBFF', cbBorder: '#2B3990', cbBg: '#2B3990' },
+        { project: 'Branch Analytics', client: 'Retail bank', status: 'Discovery', stBg: '#ECFCFF', stInk: '#0C7589', value: 'Kz 12,4M', lead: 'RN', avBg: '#7C5CD6', selected: false, bg: '#fff', cbBorder: '#C4CAD6', cbBg: '#fff' },
+        { project: 'Fleet Tracker', client: 'Logistics group', status: 'On hold', stBg: '#FEF9EC', stInk: '#A95214', value: 'Kz 31,8M', lead: 'TS', avBg: '#DC3D43', selected: false, bg: '#fff', cbBorder: '#C4CAD6', cbBg: '#fff' },
+        { project: 'Health Registry', client: 'NGO consortium', status: 'Live', stBg: '#EBFAF3', stInk: '#0C6A45', value: 'Kz 56,2M', lead: 'AM', avBg: '#2B3990', selected: false, bg: '#fff', cbBorder: '#C4CAD6', cbBg: '#fff' },
+      ],
+      calHead: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      calDays: this.buildCalendar(),
+    };
+  }
+
+  buildCalendar() {
+    const days = [];
+    const events = { 6: { label: 'Sprint review', bg: '#2B3990' }, 9: { label: 'Deploy v2.5', bg: '#0793AC' }, 14: { label: 'GIS import', bg: '#7C5CD6' }, 21: { label: 'Client demo', bg: '#16A468' }, 28: { label: 'Invoice run', bg: '#E5971B' } };
+    for (let i = 0; i < 35; i++) {
+      const n = i - 2; // July 2026 starts Wednesday
+      const inMonth = n >= 1 && n <= 31;
+      const today = n === 6;
+      const ev = inMonth && events[n];
+      days.push({
+        n: inMonth ? String(n) : (n < 1 ? String(29 + i) : String(n - 31)),
+        ink: today ? '#fff' : inMonth ? '#12141D' : '#C4CAD6',
+        w: today ? 700 : inMonth ? 500 : 400,
+        bg: today ? '#2B3990' : inMonth ? '#fff' : '#FBFCFD',
+        border: today ? '#2B3990' : '#F0F2F5',
+        event: ev ? ev.label : false,
+        eventBg: ev ? ev.bg : '',
+      });
+    }
+    return days;
+  }
+}
+</script>
+</body>
+</html>
