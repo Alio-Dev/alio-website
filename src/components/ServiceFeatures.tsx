@@ -1,5 +1,8 @@
 import React from 'react';
 import { CheckCircle, ArrowRight, Code, Database, Smartphone, Globe, Palette, BarChart3, Shield, Server, Cloud, Monitor, Lock, Headphones, TrendingUp, Eye, Brain, Layers, PenTool, Brush, MousePointer, Image, Map, Navigation, Satellite, Building, type LucideIcon } from 'lucide-react';
+import { useLanguage } from '../hooks/useLanguage';
+import { Card } from './ui/Card';
+import { Button } from './ui/Button';
 
 interface Feature {
   title: string;
@@ -141,57 +144,49 @@ const getTechnologyIcon = (tech: string, serviceType: string) => {
 };
 
 const ServiceFeatures: React.FC<ServiceFeaturesProps> = ({ title, features, technologies, serviceType, onContactClick }) => {
+  const { currentLanguage } = useLanguage();
+  const isPt = currentLanguage === 'pt';
+
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up">
-            {title}
-          </h2>
+    <section className="bg-bg-subtle py-20">
+      <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+        <div className="mb-16 text-center">
+          <h2 className="font-display text-h2 text-primary md:text-display-m">{title}</h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <div className="mb-16 grid grid-cols-1 gap-12 lg:grid-cols-2">
           {/* Features */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {features.map((feature, index) => (
-              <div 
-                key={index}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-slide-in-left"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <CheckCircle size={20} className="text-white" />
-                    </div>
+              <Card key={index} interactive padding="lg">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-brand-135 text-white">
+                    <CheckCircle size={18} />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-700 transition-colors">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
+                    <h3 className="mb-2 font-display text-h5 text-primary">{feature.title}</h3>
+                    <p className="text-body-m text-secondary">{feature.description}</p>
                   </div>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
 
           {/* Technologies */}
-          <div className="bg-gradient-to-br from-blue-700 to-teal-600 rounded-3xl p-8 text-white animate-slide-in-right">
-            <h3 className="text-2xl font-bold mb-8">Tecnologias & Ferramentas</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="rounded-2xl bg-gradient-brand-135 p-8 text-white">
+            <h3 className="mb-8 font-display text-h4">
+              {isPt ? 'Tecnologias & Ferramentas' : 'Technologies & Tools'}
+            </h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {technologies.map((tech, index) => {
                 const IconComponent = getTechnologyIcon(tech, serviceType);
                 return (
-                  <div 
+                  <div
                     key={index}
-                    className="bg-white/20 backdrop-blur-sm rounded-xl p-4 hover:bg-white/30 transition-all duration-300 transform hover:scale-105 animate-fade-in flex items-center space-x-3"
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                    className="flex items-center gap-3 rounded-xl bg-white/15 p-4 backdrop-blur-sm transition-colors hover:bg-white/25"
                   >
-                    <IconComponent size={20} className="text-white flex-shrink-0" />
-                    <span className="font-semibold text-sm">{tech}</span>
+                    <IconComponent size={20} className="shrink-0 text-white" />
+                    <span className="text-body-s font-semibold">{tech}</span>
                   </div>
                 );
               })}
@@ -199,22 +194,20 @@ const ServiceFeatures: React.FC<ServiceFeaturesProps> = ({ title, features, tech
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center bg-white rounded-3xl p-12 shadow-xl animate-fade-in-up">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4">
-            Pronto para começar seu projeto?
+        {/* CTA */}
+        <Card padding="lg" className="text-center">
+          <h3 className="mb-4 font-display text-h3 text-primary">
+            {isPt ? 'Pronto para começar o seu projeto?' : 'Ready to start your project?'}
           </h3>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Entre em contacto connosco para discutir como podemos transformar suas ideias em realidade digital.
+          <p className="mx-auto mb-8 max-w-2xl text-body-l text-secondary">
+            {isPt
+              ? 'Entre em contacto connosco para discutir como podemos transformar as suas ideias em realidade digital.'
+              : 'Get in touch to discuss how we can turn your ideas into digital reality.'}
           </p>
-          <button 
-            onClick={onContactClick}
-            className="bg-gradient-to-r from-blue-700 to-teal-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 mx-auto"
-          >
-            Contactar Agora
-            <ArrowRight size={20} />
-          </button>
-        </div>
+          <Button size="lg" onClick={onContactClick} rightIcon={<ArrowRight size={20} />} className="mx-auto">
+            {isPt ? 'Contactar Agora' : 'Contact Us Now'}
+          </Button>
+        </Card>
       </div>
     </section>
   );

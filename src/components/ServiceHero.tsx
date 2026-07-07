@@ -6,39 +6,39 @@ interface ServiceHeroProps {
   title: string;
   subtitle: string;
   description: string;
+  /** Per-service Tailwind gradient background classes. */
   gradient: string;
 }
 
-const ServiceHero: React.FC<ServiceHeroProps> = ({ 
-  icon: Icon, 
-  title, 
-  subtitle, 
-  description, 
-  gradient 
+const ServiceHero: React.FC<ServiceHeroProps> = ({
+  icon: Icon,
+  title,
+  subtitle,
+  description,
+  gradient,
 }) => {
   return (
-    <section className={`relative min-h-[70vh] flex items-center justify-center overflow-hidden ${gradient}`}>
-      <div className="absolute inset-0 bg-black/20"></div>
-      
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float-delayed"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-2xl animate-pulse"></div>
+    <section className={`relative flex min-h-[70vh] items-center justify-center overflow-hidden ${gradient}`}>
+      <div className="absolute inset-0 bg-primary-950/25" />
+
+      {/* Ambient brand orbs */}
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="animate-float absolute -right-40 -top-40 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
+        <div className="animate-float-delayed absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
         <div className="animate-fade-in-up">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-white/20 backdrop-blur-sm rounded-2xl mb-8 animate-bounce-gentle">
+          <div className="mb-8 inline-flex h-24 w-24 items-center justify-center rounded-2xl border border-white/20 bg-white/20 backdrop-blur-sm">
             <Icon size={48} className="text-white" />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+          <h1 className="mb-4 font-display text-4xl font-bold leading-tight text-white md:text-display-m">
             {title}
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-6 font-medium">
+          <p className="mb-6 font-display text-h4 font-medium text-white/90 md:text-h3">
             {subtitle}
           </p>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-3xl text-body-l text-white/80">
             {description}
           </p>
         </div>
