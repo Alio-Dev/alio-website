@@ -1,8 +1,189 @@
+@import 'tailwindcss';
 @import './styles/tokens.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ============================================================
+   TAILWIND v4 THEME — Alio Analytics Design System
+   Design VALUES live in styles/tokens.css (:root + .dark) — the
+   single source of truth. Here we only MAP those tokens into
+   Tailwind's utility namespaces. `@theme inline` is used for every
+   token backed by a CSS variable so NO duplicate variables are
+   emitted and the light/dark switching in tokens.css is preserved
+   exactly (identical output to the previous Tailwind 3 config).
+   ============================================================ */
+
+/* Dark mode = class strategy (.dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  /* ---- Raw colour scales ---- */
+  --color-primary-50: var(--primary-50);   --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200); --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400); --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600); --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800); --color-primary-900: var(--primary-900);
+  --color-primary-950: var(--primary-950);
+
+  --color-accent-50: var(--accent-50);   --color-accent-100: var(--accent-100);
+  --color-accent-200: var(--accent-200); --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400); --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600); --color-accent-700: var(--accent-700);
+  --color-accent-800: var(--accent-800); --color-accent-900: var(--accent-900);
+  --color-accent-950: var(--accent-950);
+
+  --color-neutral-50: var(--neutral-50);   --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200); --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400); --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600); --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800); --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+
+  --color-success-50: var(--success-50);   --color-success-100: var(--success-100);
+  --color-success-200: var(--success-200); --color-success-300: var(--success-300);
+  --color-success-400: var(--success-400); --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600); --color-success-700: var(--success-700);
+  --color-success-800: var(--success-800); --color-success-900: var(--success-900);
+  --color-success-950: var(--success-950);
+
+  --color-warning-50: var(--warning-50);   --color-warning-100: var(--warning-100);
+  --color-warning-200: var(--warning-200); --color-warning-300: var(--warning-300);
+  --color-warning-400: var(--warning-400); --color-warning-500: var(--warning-500);
+  --color-warning-600: var(--warning-600); --color-warning-700: var(--warning-700);
+  --color-warning-800: var(--warning-800); --color-warning-900: var(--warning-900);
+  --color-warning-950: var(--warning-950);
+
+  --color-danger-50: var(--danger-50);   --color-danger-100: var(--danger-100);
+  --color-danger-200: var(--danger-200); --color-danger-300: var(--danger-300);
+  --color-danger-400: var(--danger-400); --color-danger-500: var(--danger-500);
+  --color-danger-600: var(--danger-600); --color-danger-700: var(--danger-700);
+  --color-danger-800: var(--danger-800); --color-danger-900: var(--danger-900);
+  --color-danger-950: var(--danger-950);
+
+  --color-info-50: var(--info-50);   --color-info-100: var(--info-100);
+  --color-info-200: var(--info-200); --color-info-300: var(--info-300);
+  --color-info-400: var(--info-400); --color-info-500: var(--info-500);
+  --color-info-600: var(--info-600); --color-info-700: var(--info-700);
+  --color-info-800: var(--info-800); --color-info-900: var(--info-900);
+  --color-info-950: var(--info-950);
+
+  --color-chart-1: var(--chart-1); --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3); --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5); --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7); --color-chart-8: var(--chart-8);
+
+  /* ---- Semantic surface / border / brand colours ---- */
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-focus: var(--focus-ring);
+
+  /* ---- Fonts ---- */
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  /* ---- Tracking ---- */
+  --tracking-display: var(--tracking-display);
+  --tracking-heading: var(--tracking-heading);
+  --tracking-overline: var(--tracking-overline);
+
+  /* ---- Radius ---- */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+
+  /* ---- Shadows (theme-aware via tokens.css .dark) ---- */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-float: var(--shadow-float);
+
+  /* ---- Easing ---- */
+  --ease-standard: var(--ease-standard);
+  --ease-enter: var(--ease-enter);
+  --ease-exit: var(--ease-exit);
+  --ease-spring: var(--ease-spring);
+
+  /* ---- Type scale ---- inline so it is NOT emitted as a :root variable
+     (tokens.css already defines --text-* as a `font` shorthand with a
+     different meaning; emitting these would collide and break font-size). */
+  --text-display-xl: 72px; --text-display-xl--line-height: 76px; --text-display-xl--letter-spacing: -0.03em; --text-display-xl--font-weight: 700;
+  --text-display-l: 60px;  --text-display-l--line-height: 64px;  --text-display-l--letter-spacing: -0.03em; --text-display-l--font-weight: 700;
+  --text-display-m: 48px;  --text-display-m--line-height: 54px;  --text-display-m--letter-spacing: -0.02em; --text-display-m--font-weight: 700;
+  --text-h1: 40px; --text-h1--line-height: 48px; --text-h1--letter-spacing: -0.02em; --text-h1--font-weight: 700;
+  --text-h2: 32px; --text-h2--line-height: 40px; --text-h2--letter-spacing: -0.02em; --text-h2--font-weight: 700;
+  --text-h3: 26px; --text-h3--line-height: 34px; --text-h3--letter-spacing: -0.01em; --text-h3--font-weight: 600;
+  --text-h4: 22px; --text-h4--line-height: 30px; --text-h4--letter-spacing: -0.01em; --text-h4--font-weight: 600;
+  --text-h5: 18px; --text-h5--line-height: 26px; --text-h5--font-weight: 600;
+  --text-h6: 16px; --text-h6--line-height: 24px; --text-h6--font-weight: 600;
+  --text-body-l: 18px; --text-body-l--line-height: 28px;
+  --text-body-m: 16px; --text-body-m--line-height: 24px;
+  --text-body-s: 14px; --text-body-s--line-height: 20px;
+  --text-caption: 12px; --text-caption--line-height: 16px; --text-caption--letter-spacing: 0.01em;
+  --text-overline: 12px; --text-overline--line-height: 16px; --text-overline--letter-spacing: 0.08em; --text-overline--font-weight: 500;
+  --text-code: 14px; --text-code--line-height: 22px;
+}
+
+@theme {
+  /* ---- Animations (keyframes defined below). fade-in & slide-in-right
+     are intentionally omitted — the marketing classes define those. ---- */
+  --animate-fade-up: fade-up 300ms cubic-bezier(0, 0, 0.2, 1) both;
+  --animate-scale-in: scale-in 200ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  --animate-spin-fast: spin 0.7s linear infinite;
+}
+
+/* Design-system keyframes not already defined by the marketing CSS below. */
+@keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scale-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Semantic text colours as explicit utilities: `primary` and `accent` are
+   also colour scales, so text-primary / text-accent would otherwise collide
+   with the scale in v4's unified colour space. */
+@utility text-primary { color: var(--text-primary); }
+@utility text-secondary { color: var(--text-secondary); }
+@utility text-tertiary { color: var(--text-tertiary); }
+@utility text-disabled { color: var(--text-disabled); }
+@utility text-inverse { color: var(--text-inverse); }
+@utility text-accent { color: var(--accent); }
+
+/* Brand gradient surfaces */
+@utility bg-gradient-brand { background-image: var(--gradient-brand); }
+@utility bg-gradient-brand-135 { background-image: linear-gradient(135deg, #07B7D1, #2B3990); }
+
+/* Named z-index scale */
+@utility z-base { z-index: 0; }
+@utility z-dropdown { z-index: 1000; }
+@utility z-sticky { z-index: 1100; }
+@utility z-drawer { z-index: 1200; }
+@utility z-modal { z-index: 1300; }
+@utility z-popover { z-index: 1400; }
+@utility z-toast { z-index: 1500; }
+@utility z-tooltip { z-index: 1600; }
+
+/* Container widths */
+@utility max-w-container { max-width: 1200px; }
+@utility max-w-prose { max-width: 680px; }
+
+/* Preserve the Tailwind 3 default border colour (gray-200) so the marketing
+   site renders identically under v4's preflight (v4 defaults to currentColor). */
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    border-color: #e5e7eb;
+  }
+}
 
 /* Enhanced Animations */
 @keyframes fade-in-up {
