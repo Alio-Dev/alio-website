@@ -3,27 +3,22 @@ import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
 import { Alert } from '../components/ui/Alert';
 import { useLanguage } from '../hooks/useLanguage';
+import { PRIVACY, TERMS } from '../data/legal';
 
 /**
- * SCAFFOLD — /privacy and /terms. Section headings are placeholders; the real
- * legal text must be supplied (ideally reviewed by counsel). Do not ship the
- * placeholder body as binding legal copy.
+ * /privacy and /terms. Content is drafted for Angola (Law No. 22/11 + the APD)
+ * in src/data/legal.ts. It is a good-faith draft, not legal advice — have
+ * counsel review before relying on it.
  */
 export default function LegalPage({ kind }: { kind: 'privacy' | 'terms' }) {
   const { currentLanguage } = useLanguage();
-  const isPt = currentLanguage === 'pt';
+  const lang = currentLanguage === 'pt' ? 'pt' : 'en';
+  const isPt = lang === 'pt';
 
+  const doc = kind === 'privacy' ? PRIVACY : TERMS;
   const title = kind === 'privacy'
     ? (isPt ? 'Política de Privacidade' : 'Privacy Policy')
     : (isPt ? 'Termos e Condições' : 'Terms & Conditions');
-
-  const sections = kind === 'privacy'
-    ? (isPt
-        ? ['Dados que recolhemos', 'Como usamos os dados', 'Base legal', 'Partilha com terceiros', 'Retenção', 'Os seus direitos', 'Cookies', 'Contacto']
-        : ['Data we collect', 'How we use data', 'Legal basis', 'Third-party sharing', 'Retention', 'Your rights', 'Cookies', 'Contact'])
-    : (isPt
-        ? ['Aceitação dos termos', 'Utilização do serviço', 'Propriedade intelectual', 'Limitação de responsabilidade', 'Rescisão', 'Lei aplicável', 'Alterações', 'Contacto']
-        : ['Acceptance of terms', 'Use of the service', 'Intellectual property', 'Limitation of liability', 'Termination', 'Governing law', 'Changes', 'Contact']);
 
   useEffect(() => {
     document.title = `${title} · Alio Analytics`;
@@ -31,29 +26,37 @@ export default function LegalPage({ kind }: { kind: 'privacy' | 'terms' }) {
 
   return (
     <Layout showBackButton>
-      <MarketingHero draft eyebrow={isPt ? 'Legal' : 'Legal'} title={title} />
+      <MarketingHero eyebrow={isPt ? 'Legal' : 'Legal'} title={title} />
 
       <section className="bg-bg py-16">
         <div className="mx-auto max-w-prose px-4 sm:px-6 lg:px-8">
-          <Alert variant="warning" title={isPt ? 'Texto legal por fornecer' : 'Legal text to be provided'} className="mb-10">
+          <p className="mb-2 text-body-s text-tertiary">
+            {isPt ? 'Última actualização' : 'Last updated'}:{' '}
+            <time dateTime={doc.updated}>{doc.updated}</time>
+          </p>
+
+          <Alert variant="info" className="mb-10">
             {isPt
-              ? 'Este é um modelo com a estrutura de secções. Substitua por texto legal real, revisto por assessoria jurídica, antes de publicar.'
-              : 'This is a scaffold with the section structure. Replace with real legal text, reviewed by counsel, before publishing.'}
+              ? 'Este documento foi elaborado de boa-fé e alinhado à legislação angolana. Não constitui aconselhamento jurídico — recomenda-se a validação por assessoria jurídica antes da publicação definitiva.'
+              : 'This document is drafted in good faith and aligned with Angolan law. It does not constitute legal advice — validation by legal counsel is recommended before final publication.'}
           </Alert>
 
+          <p className="mb-10 text-body-l text-secondary">{doc.intro[lang]}</p>
+
           <div className="flex flex-col gap-8">
-            {sections.map((heading, i) => (
+            {doc.sections.map((s, i) => (
               <div key={i}>
-                <h2 className="mb-2 font-display text-h4 text-primary">{i + 1}. {heading}</h2>
-                <p className="text-body-m text-secondary">
-                  {isPt ? 'Conteúdo por adicionar.' : 'Content to be added.'}
-                </p>
+                <h2 className="mb-2 font-display text-h4 text-primary">
+                  {i + 1}. {s.heading[lang]}
+                </h2>
+                <p className="text-body-m text-secondary">{s.body[lang]}</p>
               </div>
             ))}
           </div>
 
           <p className="mt-12 border-t border-border-subtle pt-6 text-body-s text-tertiary">
-            Alio Analytics, Lda · NIF 5001021800 · Kilamba Kiaxi, Luanda, Angola
+            Alio Analytics, Lda · NIF 5001021800 · Rua 49, Bairro Nova Vida, Edifício E-67,
+            Kilamba Kiaxi, Luanda, Angola · info@alio.ao
           </p>
         </div>
       </section>
