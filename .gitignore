@@ -30,3 +30,6 @@ dist-ssr
 
 # Handoff archive (large; source folder is kept for reference)
 *.zip
+
+.vercel
+.env*
