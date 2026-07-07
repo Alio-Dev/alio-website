@@ -22,12 +22,16 @@ System.
 | UI icons | lucide-react | 1.23 |
 | Brand/social icons | react-icons (FontAwesome set) | 5.7 |
 | Contact form | @formspree/react | 3.0 |
+| Analytics | @vercel/analytics · @vercel/speed-insights | 2.0 |
 | Lint | ESLint (flat config) + typescript-eslint | 10 / 8 |
 | Image tooling (dev) | sharp | 0.35 |
 | Package manager | **pnpm** | 11+ |
 | Runtime | Node.js | ≥ 20.19 (built on 24) |
+| Hosting | **Vercel** (auto-deploy from `main`) | — |
 
 No CMS or database — all content lives in the repo (see **Content model**).
+The site is **live** at https://www.alio.ao, deployed on Vercel from the `main`
+branch of `Alio-Dev/alio-2025`.
 
 ---
 
@@ -173,46 +177,48 @@ Case Studies, Blog posts, Careers roles, and any official partner/social logos a
 
 ---
 
-## Deployment
+## Deployment (Vercel)
 
-Static SPA — build and serve `dist/` on any static host (Netlify, Vercel,
-Cloudflare Pages, S3+CloudFront, etc.).
+The site is hosted on **Vercel** and **auto-deploys on every push to `main`**
+(project `alio-website` ← `Alio-Dev/alio-2025`). No environment variables are
+required.
 
+**Project settings** (Vercel → Settings):
+- Framework preset: **Vite** · Build: `pnpm build` · Output: `dist` · Install: `pnpm install`
+- Node.js: **≥ 20.19**
+- **Production Branch: `main`** (Settings → Git)
+- SPA routing is handled by the committed **`vercel.json`**
+  (`{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }`) so deep
+  links like `/services/gis` resolve on refresh.
+
+**⚠️ Commit email must match a GitHub account.** Vercel blocks a deploy if the
+commit author's email isn't linked to a GitHub account with access to the repo
+(*"commit email … could not be matched to a GitHub account"*). Always commit with:
 ```bash
-pnpm install
-pnpm build      # outputs dist/
+git config user.name  "Aristoteles Bernardo"
+git config user.email "aristoteles.bernardo@alio.ao"   # must be VERIFIED on GitHub
 ```
+(Or use the account's `…@users.noreply.github.com` email, which always matches.)
 
-**SPA rewrite (required):** deep links like `/services/gis` must fall back to
-`index.html`, or they 404 on refresh.
+**Manual deploy** (bypasses Git, e.g. to hotfix): `pnpm dlx vercel --prod`.
+Do **not** add the `vercel` CLI as a project dependency — use `pnpm dlx`.
 
-- **Netlify** — `netlify.toml`:
-  ```toml
-  [build]
-    command = "pnpm build"
-    publish = "dist"
-  [[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
-  ```
-- **Vercel** — `vercel.json`:
-  ```json
-  { "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }
-  ```
-- **Static / S3** — configure the error document / rewrite to `index.html`.
+**Analytics:** `@vercel/analytics` and `@vercel/speed-insights` are mounted in
+`src/App.tsx`; enable the **Analytics** and **Speed Insights** tabs in the Vercel
+project to collect data.
 
-Set the host's build command to `pnpm build`, publish directory to `dist`, and
-Node to **≥ 20.19**. No environment variables are required.
+Other static hosts work too (serve `dist/` with an SPA fallback to `index.html`;
+Netlify: `/* → /index.html 200`).
 
 ---
 
 ## Contributing / branch conventions
 
-- Work on branches; never commit directly to `main`. The redesign lives on
-  `redesign/design-system`.
+- Work on feature branches; open a PR into `main`. `main` is the production branch
+  (a push to it deploys). `master` and `development` are kept in sync.
 - Conventional-commit style: `feat(...)`, `build(deps): ...`, `a11y(...)`,
   `perf,seo(...)`, `chore: ...`.
+- **Set the commit identity** (see Deployment) so Vercel doesn't block the deploy.
 - Before pushing: `pnpm lint`, `pnpm exec tsc --noEmit -p tsconfig.app.json`,
   and `pnpm build` must all pass.
 - New UI must use design-system tokens/components and work in light **and** dark.
