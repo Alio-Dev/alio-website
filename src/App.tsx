@@ -1,5 +1,8 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+// Vite + React app → use the /react entrypoints (not /next).
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { useLanguage } from './hooks/useLanguage';
 import HomePage from './pages/HomePage';
 import DigitalSolutionsPage from './pages/services/DigitalSolutionsPage';
@@ -41,7 +44,8 @@ function useHtmlLang() {
 function App() {
   useHtmlLang();
   return (
-    <Routes>
+    <>
+      <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/services/digital-solutions" element={<DigitalSolutionsPage />} />
       <Route path="/services/web-mobile" element={<WebMobilePage />} />
@@ -70,7 +74,10 @@ function App() {
       />
       <Route path="/docs" element={<Navigate to="/design-system" replace />} />
       <Route path="/docs/*" element={<Navigate to="/design-system" replace />} />
-    </Routes>
+      </Routes>
+      <Analytics />
+      <SpeedInsights />
+    </>
   );
 }
 
