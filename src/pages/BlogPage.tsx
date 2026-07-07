@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
+import { Seo } from '../components/Seo';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { useLanguage } from '../hooks/useLanguage';
@@ -21,6 +22,11 @@ export default function BlogPage() {
 
   return (
     <Layout showBackButton>
+      <Seo
+        title={isPt ? 'Blog e Insights' : 'Blog & Insights'}
+        description={isPt ? 'Ideias sobre engenharia, dados e design da Alio Analytics.' : 'Notes on engineering, data and design from Alio Analytics.'}
+        path="/blog"
+      />
       <MarketingHero
         draft
         eyebrow={isPt ? 'Insights' : 'Insights'}

@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/Layout';
+import { Seo } from '../components/Seo';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Breadcrumb } from '../components/ui/Breadcrumb';
@@ -18,6 +19,11 @@ export default function BlogArticlePage() {
 
   return (
     <Layout showBackButton>
+      <Seo
+        title={post?.title ?? (isPt ? 'Artigo' : 'Article')}
+        description={post?.excerpt}
+        path={`/blog/${slug ?? ''}`}
+      />
       <article className="bg-bg py-16">
         <div className="mx-auto max-w-prose px-4 sm:px-6 lg:px-8">
           <Breadcrumb

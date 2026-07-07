@@ -1,5 +1,6 @@
 import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
+import { Seo } from '../components/Seo';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { EmptyState } from '../components/ui/EmptyState';
@@ -23,6 +24,11 @@ export default function CaseStudiesPage() {
 
   return (
     <Layout showBackButton>
+      <Seo
+        title={isPt ? 'Casos de Estudo' : 'Case Studies'}
+        description={isPt ? 'Como a Alio transforma sistemas complexos em software claro e fiável.' : 'How Alio turns complex systems into clear, reliable software.'}
+        path="/case-studies"
+      />
       <MarketingHero
         draft
         eyebrow={isPt ? 'Portfólio' : 'Portfolio'}

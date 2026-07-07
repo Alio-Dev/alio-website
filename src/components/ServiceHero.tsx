@@ -1,5 +1,7 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import type { LucideIcon } from 'lucide-react';
+import { Seo } from './Seo';
 
 interface ServiceHeroProps {
   icon: LucideIcon;
@@ -17,8 +19,10 @@ const ServiceHero: React.FC<ServiceHeroProps> = ({
   description,
   gradient,
 }) => {
+  const { pathname } = useLocation();
   return (
     <section className={`relative flex min-h-[70vh] items-center justify-center overflow-hidden ${gradient}`}>
+      <Seo title={`${title} — ${subtitle}`} description={description} path={pathname} />
       <div className="absolute inset-0 bg-primary-950/25" />
 
       {/* Ambient brand orbs */}

@@ -16,22 +16,22 @@ const ScreenshotsModal: React.FC<ScreenshotsModalProps> = ({ isOpen, onClose, ap
   // Define screenshots for each app
   const appScreenshots: { [key: string]: string[] } = {
     'Mwenhu': [
-      '/start.jpg',
-      '/Geo Muenho Triagem.jpg',
-      '/Geo Muenho Triagem 4.jpg',
-      '/Geo Muenho Caminho.jpg'
+      '/start.webp',
+      '/Geo Muenho Triagem.webp',
+      '/Geo Muenho Triagem 4.webp',
+      '/Geo Muenho Caminho.webp'
     ],
     'Okwenda': [
-      '/Okwenda 1.jpeg',
-      '/Okwenda 2.jpeg',
-      '/Okwenda 3.jpeg',
-      '/Okwenda 4.jpeg',
-      '/Okwenda 5.jpeg'
+      '/Okwenda 1.webp',
+      '/Okwenda 2.webp',
+      '/Okwenda 3.webp',
+      '/Okwenda 4.webp',
+      '/Okwenda 5.webp'
     ],
     'Kelesa Klean': [
-      '/kelesa 1.png',
-      '/kelesa 2.png',
-      '/kelesa 3.png'
+      '/kelesa 1.webp',
+      '/kelesa 2.webp',
+      '/kelesa 3.webp'
     ]
   };
 

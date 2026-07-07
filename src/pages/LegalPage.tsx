@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
+import { Seo } from '../components/Seo';
 import { Alert } from '../components/ui/Alert';
 import { useLanguage } from '../hooks/useLanguage';
 import { PRIVACY, TERMS } from '../data/legal';
@@ -20,12 +20,9 @@ export default function LegalPage({ kind }: { kind: 'privacy' | 'terms' }) {
     ? (isPt ? 'Política de Privacidade' : 'Privacy Policy')
     : (isPt ? 'Termos e Condições' : 'Terms & Conditions');
 
-  useEffect(() => {
-    document.title = `${title} · Alio Analytics`;
-  }, [title]);
-
   return (
     <Layout showBackButton>
+      <Seo title={title} description={doc.intro[lang].slice(0, 155)} path={kind === 'privacy' ? '/privacy' : '/terms'} />
       <MarketingHero eyebrow={isPt ? 'Legal' : 'Legal'} title={title} />
 
       <section className="bg-bg py-16">

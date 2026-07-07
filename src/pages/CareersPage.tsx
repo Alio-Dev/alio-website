@@ -1,5 +1,6 @@
 import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
+import { Seo } from '../components/Seo';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
@@ -26,6 +27,11 @@ export default function CareersPage() {
 
   return (
     <Layout showBackButton>
+      <Seo
+        title={isPt ? 'Carreiras' : 'Careers'}
+        description={isPt ? 'Junte-se à Alio Analytics — engenharia e design de classe mundial a partir de Luanda.' : 'Join Alio Analytics — world-class engineering and design from Luanda.'}
+        path="/careers"
+      />
       <MarketingHero
         draft
         eyebrow={isPt ? 'Carreiras' : 'Careers'}

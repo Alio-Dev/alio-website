@@ -10,6 +10,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 import ContactModal from '../components/ContactModal';
 import ScreenshotsModal from '../components/ScreenshotsModal';
 import Footer from '../components/Footer';
+import { Seo } from '../components/Seo';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { ThemeToggle } from '../components/ui/ThemeToggle';
@@ -45,9 +46,9 @@ function HomePage() {
     logo?: string; icon?: LucideIcon; title: string; subtitle: string;
     description: string; features: string[]; status: string; gradient: string; comingSoon: boolean;
   }> = [
-    { logo: '/kelesa.png', ...t.solutions.kelesaKlean, features: t.solutions.kelesaKlean.features.slice(0, 4), gradient: 'from-green-600 to-emerald-700', comingSoon: true },
-    { logo: '/okwenda.png', ...t.solutions.okwenda, features: t.solutions.okwenda.features.slice(0, 4), gradient: 'from-blue-600 to-cyan-700', comingSoon: true },
-    { logo: '/Mwenhu.png', ...t.solutions.mwenhu, features: t.solutions.mwenhu.features.slice(0, 4), gradient: 'from-red-500 to-pink-600', comingSoon: true },
+    { logo: '/kelesa.webp', ...t.solutions.kelesaKlean, features: t.solutions.kelesaKlean.features.slice(0, 4), gradient: 'from-green-600 to-emerald-700', comingSoon: true },
+    { logo: '/okwenda.webp', ...t.solutions.okwenda, features: t.solutions.okwenda.features.slice(0, 4), gradient: 'from-blue-600 to-cyan-700', comingSoon: true },
+    { logo: '/Mwenhu.webp', ...t.solutions.mwenhu, features: t.solutions.mwenhu.features.slice(0, 4), gradient: 'from-red-500 to-pink-600', comingSoon: true },
     { icon: Settings, title: t.solutions.customSolutions.title, subtitle: isPt ? 'Desenvolvimento Sob Medida' : 'Bespoke Development', description: t.solutions.customSolutions.description, features: t.solutions.customSolutions.features, status: isPt ? 'Disponível' : 'Available', gradient: 'from-purple-600 to-indigo-700', comingSoon: false },
   ];
 
@@ -67,6 +68,11 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-bg font-sans text-primary">
+      <Seo
+        title={isPt ? 'Soluções Digitais e IT em Angola' : 'Digital & IT Solutions in Angola'}
+        description={t.hero.description}
+        path="/"
+      />
       {/* ---------- Navigation ---------- */}
       <nav
         className={cn(
@@ -137,7 +143,7 @@ function HomePage() {
 
       {/* ---------- Hero ---------- */}
       <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden">
-        <img src="/hero_section_background.png" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+        <img src="/hero_section_background.webp" alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-primary-950/60" />
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           <div className="animate-float absolute -right-40 -top-40 h-80 w-80 rounded-full bg-gradient-brand opacity-20 blur-3xl" />

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { CheckCircle, Target, Eye, Heart } from 'lucide-react';
 import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
+import { Seo } from '../components/Seo';
 import { Card } from '../components/ui/Card';
 import { useLanguage } from '../hooks/useLanguage';
 
@@ -11,10 +11,6 @@ export default function AboutPage() {
   const isPt = currentLanguage === 'pt';
   const yearsExperience = new Date().getFullYear() - 2022;
 
-  useEffect(() => {
-    document.title = `${t.about.title} ${t.about.subtitle} · Alio Analytics`;
-  }, [t]);
-
   const pillars = [
     { icon: Target, title: t.about.mission.title, body: t.about.mission.description },
     { icon: Eye, title: t.about.vision.title, body: t.about.vision.description },
@@ -22,6 +18,7 @@ export default function AboutPage() {
 
   return (
     <Layout showBackButton>
+      <Seo title={`${t.about.title} ${t.about.subtitle}`} description={t.about.description1} path="/about" />
       <MarketingHero
         eyebrow={isPt ? 'Sobre nós' : 'About us'}
         title={`${t.about.title} ${t.about.subtitle}`}
