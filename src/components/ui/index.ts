@@ -29,3 +29,4 @@ export * from './EmptyState';
 export * from './Charts';
 export * from './AppShell';
 export * from './MapSurface';
+export * from './BrandIcon';

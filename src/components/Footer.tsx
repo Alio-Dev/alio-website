@@ -1,7 +1,5 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Youtube } from 'lucide-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAws, faMicrosoft } from '@fortawesome/free-brands-svg-icons';
 import { useLanguage } from '../hooks/useLanguage';
 
 const socialLinks = [
@@ -95,9 +93,19 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between mt-6">
           <p className="text-xs text-blue-100">© 2025 Alio Analytics. {currentLanguage === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}</p>
           <div className="flex items-center space-x-4 mt-2 md:mt-0">
-            <span className="text-xs text-blue-100 mr-2">{currentLanguage === 'pt' ? 'Nossos Parceiros::' : 'Our Partners::'}</span>
-            <FontAwesomeIcon icon={faAws} size="2x" className="text-white hover:text-orange-400 transition-colors" title="AWS" />
-            <FontAwesomeIcon icon={faMicrosoft} size="2x" className="text-white hover:text-orange-400 transition-colors" title="Microsoft" />
+            <span className="text-xs text-blue-100 mr-2">{currentLanguage === 'pt' ? 'Nossos Parceiros:' : 'Our Partners:'}</span>
+            {/* Partner marks: AWS & Microsoft are trademarked and were removed
+               from simple-icons — swap these badges for official partner logo
+               assets during the Phase 3 footer rebuild. */}
+            {['AWS', 'Microsoft'].map((partner) => (
+              <span
+                key={partner}
+                className="rounded-md border border-white/25 px-2 py-1 text-xs font-semibold text-white transition-colors hover:border-white/60"
+                title={partner}
+              >
+                {partner}
+              </span>
+            ))}
           </div>
         </div>
       </div>
