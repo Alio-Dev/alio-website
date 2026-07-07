@@ -31,7 +31,7 @@ System.
 
 No CMS or database — all content lives in the repo (see **Content model**).
 The site is **live** at https://www.alio.ao, deployed on Vercel from the `main`
-branch of `Alio-Dev/alio-2025`.
+branch of `Alio-Dev/alio-website`..
 
 ---
 
