@@ -1,95 +1,176 @@
 import {
   Download, FileText, CreditCard, Mail, Presentation, FileSpreadsheet,
-  Share2, Package, ImageIcon,
+  Share2, ImageIcon, Info,
 } from 'lucide-react';
 import { Seo } from './components/Seo';
 import { PageHeader, Section } from './components/DocPrimitives';
 import { Card } from '../../components/ui/Card';
-import { Badge } from '../../components/ui/Badge';
 import { Alert } from '../../components/ui/Alert';
 import { BASE } from './nav';
 
-interface Asset {
+interface LogoAsset {
   icon: typeof FileText;
   title: string;
   desc: string;
-  href?: string;
-  ready?: boolean;
+  href: string;
 }
 
-const LOGO_PACK: Asset[] = [
-  { icon: ImageIcon, title: 'Logo — gradient', desc: 'Primary lockup, SVG', href: '/Alio.svg', ready: true },
-  { icon: ImageIcon, title: 'Symbol — navy', desc: 'Mono navy mark, SVG', href: '/brand/alio-icon-navy.svg', ready: true },
-  { icon: ImageIcon, title: 'Symbol — white', desc: 'For dark surfaces, SVG', href: '/brand/alio-icon-white.svg', ready: true },
-  { icon: ImageIcon, title: 'Symbol — black', desc: 'Mono black mark, SVG', href: '/brand/alio-icon-black.svg', ready: true },
+const LOGO_PACK: LogoAsset[] = [
+  { icon: ImageIcon, title: 'Logo — gradient', desc: 'Primary lockup, SVG', href: '/Alio.svg' },
+  { icon: ImageIcon, title: 'Symbol — navy', desc: 'Mono navy mark, SVG', href: '/brand/alio-icon-navy.svg' },
+  { icon: ImageIcon, title: 'Symbol — white', desc: 'For dark surfaces, SVG', href: '/brand/alio-icon-white.svg' },
+  { icon: ImageIcon, title: 'Symbol — black', desc: 'Mono black mark, SVG', href: '/brand/alio-icon-black.svg' },
 ];
 
-const DOCUMENTS: Asset[] = [
-  { icon: CreditCard, title: 'Business card', desc: 'Print-ready, 85×55mm' },
-  { icon: Mail, title: 'Letterhead', desc: 'A4 with fiscal footer' },
-  { icon: Presentation, title: 'Presentation template', desc: '16:9 deck' },
-  { icon: FileText, title: 'Proposal template', desc: 'Structured document' },
-  { icon: FileSpreadsheet, title: 'Invoice template', desc: 'IVA 14% · AGT-compliant' },
-  { icon: Share2, title: 'Social media kit', desc: 'LinkedIn / Instagram sizes' },
+interface DocAsset {
+  icon: typeof FileText;
+  title: string;
+  desc: string;
+  preview: string;
+  files: { label: string; href: string }[];
+}
+
+const K = '/brand-kit';
+const DOCUMENTS: DocAsset[] = [
+  {
+    icon: CreditCard, title: 'Business card', desc: 'Print-ready · 85×55mm + 3mm bleed',
+    preview: `${K}/alio-business-card-front.png`,
+    files: [
+      { label: 'Front SVG', href: `${K}/alio-business-card-front.svg` },
+      { label: 'Back SVG', href: `${K}/alio-business-card-back.svg` },
+      { label: 'PNG', href: `${K}/alio-business-card-front.png` },
+    ],
+  },
+  {
+    icon: Mail, title: 'Letterhead', desc: 'A4 · logo header + fiscal footer',
+    preview: `${K}/alio-letterhead.png`,
+    files: [
+      { label: 'SVG', href: `${K}/alio-letterhead.svg` },
+      { label: 'PNG', href: `${K}/alio-letterhead.png` },
+    ],
+  },
+  {
+    icon: Presentation, title: 'Presentation template', desc: '16:9 · title, section & content slides',
+    preview: `${K}/alio-presentation-title.png`,
+    files: [
+      { label: 'Title', href: `${K}/alio-presentation-title.svg` },
+      { label: 'Section', href: `${K}/alio-presentation-section.svg` },
+      { label: 'Content', href: `${K}/alio-presentation-content.svg` },
+    ],
+  },
+  {
+    icon: FileText, title: 'Proposal template', desc: 'A4 · cover + structured sections',
+    preview: `${K}/alio-proposal-cover.png`,
+    files: [
+      { label: 'Cover', href: `${K}/alio-proposal-cover.svg` },
+      { label: 'Content', href: `${K}/alio-proposal-content.svg` },
+    ],
+  },
+  {
+    icon: FileSpreadsheet, title: 'Invoice template', desc: 'A4 · IVA 14% · AGT-compliant',
+    preview: `${K}/alio-invoice-template.png`,
+    files: [
+      { label: 'SVG', href: `${K}/alio-invoice-template.svg` },
+      { label: 'PNG', href: `${K}/alio-invoice-template.png` },
+    ],
+  },
+  {
+    icon: Share2, title: 'Social media kit', desc: 'LinkedIn banner + Instagram post & story',
+    preview: `${K}/alio-social-instagram-post.png`,
+    files: [
+      { label: 'LinkedIn', href: `${K}/alio-social-linkedin-banner.png` },
+      { label: 'IG post', href: `${K}/alio-social-instagram-post.png` },
+      { label: 'IG story', href: `${K}/alio-social-instagram-story.png` },
+    ],
+  },
 ];
 
-function AssetCard({ icon: Icon, title, desc, href, ready }: Asset) {
-  const inner = (
-    <Card interactive={ready} className="flex h-full items-start gap-4">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-subtle text-brand">
-        <Icon size={20} />
-      </span>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-body-m font-semibold text-primary">{title}</h3>
-          {ready ? (
+function LogoCard({ icon: Icon, title, desc, href }: LogoAsset) {
+  return (
+    <a href={href} download className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded-lg">
+      <Card interactive className="flex h-full items-start gap-4">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-subtle text-brand">
+          <Icon size={20} />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="text-body-m font-semibold text-primary">{title}</h3>
             <Download size={16} className="shrink-0 text-tertiary" />
-          ) : (
-            <Badge variant="neutral" size="sm">Soon</Badge>
-          )}
+          </div>
+          <p className="mt-0.5 text-body-s text-tertiary">{desc}</p>
         </div>
-        <p className="mt-0.5 text-body-s text-tertiary">{desc}</p>
+      </Card>
+    </a>
+  );
+}
+
+function DocumentCard({ icon: Icon, title, desc, preview, files }: DocAsset) {
+  return (
+    <Card padding="none" className="flex h-full flex-col overflow-hidden">
+      <div className="flex h-44 items-center justify-center border-b border-border-subtle bg-bg-subtle p-4">
+        <img
+          src={preview}
+          alt={`${title} preview`}
+          loading="lazy"
+          className="max-h-full max-w-full rounded shadow-sm"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-1 flex items-center gap-2">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-subtle text-brand">
+            <Icon size={16} />
+          </span>
+          <h3 className="text-body-m font-semibold text-primary">{title}</h3>
+        </div>
+        <p className="mb-4 text-body-s text-tertiary">{desc}</p>
+        <div className="mt-auto flex flex-wrap gap-2">
+          {files.map((f) => (
+            <a
+              key={f.label}
+              href={f.href}
+              download
+              className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-caption font-medium text-secondary transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+            >
+              <Download size={13} />
+              {f.label}
+            </a>
+          ))}
+        </div>
       </div>
     </Card>
-  );
-  return ready && href ? (
-    <a href={href} download className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded-lg">
-      {inner}
-    </a>
-  ) : (
-    <div>{inner}</div>
   );
 }
 
 export default function BrandKitPage() {
   return (
     <>
-      <Seo title="Brand kit" description="Downloadable Alio Analytics assets — logos, documents and social templates." path={`${BASE}/brand-kit`} />
+      <Seo title="Brand kit" description="Downloadable Alio Analytics assets — logos, document templates and social media kit." path={`${BASE}/brand-kit`} />
       <PageHeader
         eyebrow="Resources"
         title="Brand kit"
-        description="Everything you need to represent Alio consistently. Logo files are ready now; document templates are marked “Soon” — drop the files into /public/brand to activate the links."
+        description="Everything you need to represent Alio consistently — logos, print & document templates, and a social media kit. Every file is built to the design-system specification (colour, type, logo, fiscal details)."
       />
 
-      <Alert variant="info" title="Placeholder links" className="mb-8" icon={<Package size={18} />}>
-        Items marked “Soon” are wired and waiting for their source files. Upload
-        the asset to <code className="font-mono">/public/brand</code> and set its{' '}
-        <code className="font-mono">href</code> to publish.
+      <Alert variant="info" title="Formats & editing" className="mb-8" icon={<Info size={18} />}>
+        Templates ship as <strong>SVG</strong> (vector — open in a browser, Figma, Illustrator or
+        Inkscape to edit) and <strong>PNG</strong> (ready to use). Brand fonts (Sora · Instrument
+        Sans · JetBrains Mono) are embedded, so they render correctly everywhere. Placeholders in
+        <code className="mx-1 font-mono">[ brackets ]</code> are meant to be replaced.
       </Alert>
 
       <Section title="Logo pack">
         <div className="grid gap-4 sm:grid-cols-2">
-          {LOGO_PACK.map((a) => <AssetCard key={a.title} {...a} />)}
+          {LOGO_PACK.map((a) => <LogoCard key={a.title} {...a} />)}
         </div>
       </Section>
 
       <Section title="Documents & templates">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {DOCUMENTS.map((a) => <AssetCard key={a.title} {...a} />)}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {DOCUMENTS.map((a) => <DocumentCard key={a.title} {...a} />)}
         </div>
       </Section>
 
-      <Section title="Fiscal details" description="For invoices and formal documents.">
+      <Section title="Fiscal details" description="Used in the invoice, letterhead and proposal templates.">
         <Card className="font-mono text-body-s text-secondary">
           <dl className="grid gap-2 sm:grid-cols-2">
             <div><dt className="text-tertiary">Entity</dt><dd className="text-primary">Alio Analytics, Lda</dd></div>
