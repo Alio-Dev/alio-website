@@ -51,6 +51,21 @@ const sizes: Record<ButtonSize, string> = {
   lg: 'h-12 px-6 text-body-m',
 };
 
+/** Shared class builder so Button and LinkButton stay visually identical. */
+function buttonClassNames({
+  variant = 'primary',
+  size = 'md',
+  fullWidth,
+  className,
+}: {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  fullWidth?: boolean;
+  className?: string;
+}) {
+  return cn(base, variants[variant], variant !== 'link' && sizes[size], fullWidth && 'w-full', className);
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
     variant = 'primary',
@@ -71,13 +86,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={cn(
-        base,
-        variants[variant],
-        variant !== 'link' && sizes[size],
-        fullWidth && 'w-full',
-        className,
-      )}
+      className={buttonClassNames({ variant, size, fullWidth, className })}
       {...props}
     >
       {loading ? (
@@ -88,5 +97,32 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       {children}
       {!loading && rightIcon}
     </button>
+  );
+});
+
+export interface LinkButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  fullWidth?: boolean;
+}
+
+/**
+ * LinkButton — the Button component's visual system on a real `<a>`, for
+ * actions that must be a hyperlink (file downloads, external links). Native
+ * anchors are keyboard-focusable and Enter-activatable without extra wiring,
+ * and `download`/`href` only make sense on an anchor, not a `<button>`.
+ */
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(function LinkButton(
+  { variant = 'primary', size = 'md', leftIcon, rightIcon, fullWidth, className, children, ...props },
+  ref,
+) {
+  return (
+    <a ref={ref} className={buttonClassNames({ variant, size, fullWidth, className })} {...props}>
+      {leftIcon}
+      {children}
+      {rightIcon}
+    </a>
   );
 });

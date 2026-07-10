@@ -1,11 +1,12 @@
 import {
   Download, FileText, CreditCard, Mail, Presentation, FileSpreadsheet,
-  Share2, ImageIcon, Info,
+  Share2, ImageIcon, Info, FileEdit,
 } from 'lucide-react';
 import { Seo } from './components/Seo';
 import { PageHeader, Section } from './components/DocPrimitives';
 import { Card } from '../../components/ui/Card';
 import { Alert } from '../../components/ui/Alert';
+import { LinkButton } from '../../components/ui/Button';
 import { BASE } from './nav';
 
 interface LogoAsset {
@@ -22,12 +23,22 @@ const LOGO_PACK: LogoAsset[] = [
   { icon: ImageIcon, title: 'Symbol — black', desc: 'Mono black mark, SVG', href: '/brand/alio-icon-black.svg' },
 ];
 
+interface EditableFile {
+  /** Short format label shown on the button, e.g. "DOCX". */
+  format: string;
+  href: string;
+  /** Optional secondary file (e.g. the .dotx/.potx template variant). */
+  templateHref?: string;
+  templateFormat?: string;
+}
+
 interface DocAsset {
   icon: typeof FileText;
   title: string;
   desc: string;
   preview: string;
   files: { label: string; href: string }[];
+  editable?: EditableFile;
 }
 
 const K = '/brand-kit';
@@ -40,6 +51,7 @@ const DOCUMENTS: DocAsset[] = [
       { label: 'Back SVG', href: `${K}/alio-business-card-back.svg` },
       { label: 'PNG', href: `${K}/alio-business-card-front.png` },
     ],
+    editable: { format: 'Print PDF', href: `${K}/alio-business-card-print.pdf` },
   },
   {
     icon: Mail, title: 'Letterhead', desc: 'A4 · logo header + fiscal footer',
@@ -48,31 +60,44 @@ const DOCUMENTS: DocAsset[] = [
       { label: 'SVG', href: `${K}/alio-letterhead.svg` },
       { label: 'PNG', href: `${K}/alio-letterhead.png` },
     ],
+    editable: {
+      format: 'DOCX', href: `${K}/alio-letterhead.docx`,
+      templateFormat: 'DOTX template', templateHref: `${K}/alio-letterhead.dotx`,
+    },
   },
   {
-    icon: Presentation, title: 'Presentation template', desc: '16:9 · title, section & content slides',
+    icon: Presentation, title: 'Presentation template', desc: '16:9 · 8 layouts — title, section, content, two-column, data, quote, team, closing',
     preview: `${K}/alio-presentation-title.png`,
     files: [
       { label: 'Title', href: `${K}/alio-presentation-title.svg` },
       { label: 'Section', href: `${K}/alio-presentation-section.svg` },
       { label: 'Content', href: `${K}/alio-presentation-content.svg` },
     ],
+    editable: {
+      format: 'PPTX', href: `${K}/alio-presentation.pptx`,
+      templateFormat: 'POTX template', templateHref: `${K}/alio-presentation.potx`,
+    },
   },
   {
-    icon: FileText, title: 'Proposal template', desc: 'A4 · cover + structured sections',
+    icon: FileText, title: 'Proposal template', desc: 'A4 · cover + structured sections + pricing & signature',
     preview: `${K}/alio-proposal-cover.png`,
     files: [
       { label: 'Cover', href: `${K}/alio-proposal-cover.svg` },
       { label: 'Content', href: `${K}/alio-proposal-content.svg` },
     ],
+    editable: {
+      format: 'DOCX', href: `${K}/alio-proposal.docx`,
+      templateFormat: 'DOTX template', templateHref: `${K}/alio-proposal.dotx`,
+    },
   },
   {
-    icon: FileSpreadsheet, title: 'Invoice template', desc: 'A4 · IVA 14% · AGT-compliant',
+    icon: FileSpreadsheet, title: 'Invoice template', desc: 'A4 · IVA 14% auto-calculated · AGT-compliant',
     preview: `${K}/alio-invoice-template.png`,
     files: [
       { label: 'SVG', href: `${K}/alio-invoice-template.svg` },
       { label: 'PNG', href: `${K}/alio-invoice-template.png` },
     ],
+    editable: { format: 'XLSX', href: `${K}/alio-invoice.xlsx` },
   },
   {
     icon: Share2, title: 'Social media kit', desc: 'LinkedIn banner + Instagram post & story',
@@ -104,7 +129,7 @@ function LogoCard({ icon: Icon, title, desc, href }: LogoAsset) {
   );
 }
 
-function DocumentCard({ icon: Icon, title, desc, preview, files }: DocAsset) {
+function DocumentCard({ icon: Icon, title, desc, preview, files, editable }: DocAsset) {
   return (
     <Card padding="none" className="flex h-full flex-col overflow-hidden">
       <div className="flex h-44 items-center justify-center border-b border-border-subtle bg-bg-subtle p-4">
@@ -123,12 +148,46 @@ function DocumentCard({ icon: Icon, title, desc, preview, files }: DocAsset) {
           <h3 className="text-body-m font-semibold text-primary">{title}</h3>
         </div>
         <p className="mb-4 text-body-s text-tertiary">{desc}</p>
-        <div className="mt-auto flex flex-wrap gap-2">
+
+        {editable && (
+          <div className="mb-3">
+            <p className="mb-1.5 font-mono text-[11px] uppercase tracking-wide text-tertiary">
+              Editable
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <LinkButton
+                href={editable.href}
+                download
+                size="sm"
+                variant="primary"
+                leftIcon={<FileEdit size={14} />}
+                aria-label={`Download editable ${editable.format} for ${title}`}
+              >
+                {editable.format}
+              </LinkButton>
+              {editable.templateHref && (
+                <LinkButton
+                  href={editable.templateHref}
+                  download
+                  size="sm"
+                  variant="outline"
+                  leftIcon={<Download size={13} />}
+                  aria-label={`Download ${editable.templateFormat} for ${title}`}
+                >
+                  {editable.templateFormat}
+                </LinkButton>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-auto flex flex-wrap gap-2 pt-1">
           {files.map((f) => (
             <a
               key={f.label}
               href={f.href}
               download
+              aria-label={`Download ${title} — ${f.label}`}
               className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-2.5 py-1.5 text-caption font-medium text-secondary transition-colors hover:border-brand hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
             >
               <Download size={13} />
@@ -144,18 +203,23 @@ function DocumentCard({ icon: Icon, title, desc, preview, files }: DocAsset) {
 export default function BrandKitPage() {
   return (
     <>
-      <Seo title="Brand kit" description="Downloadable Alio Analytics assets — logos, document templates and social media kit." path={`${BASE}/brand-kit`} />
+      <Seo title="Brand kit" description="Downloadable Alio Analytics assets — logos, editable document templates and social media kit." path={`${BASE}/brand-kit`} />
       <PageHeader
         eyebrow="Resources"
         title="Brand kit"
-        description="Everything you need to represent Alio consistently — logos, print & document templates, and a social media kit. Every file is built to the design-system specification (colour, type, logo, fiscal details)."
+        description="Everything you need to represent Alio consistently — logos, editable document templates, and a social media kit. Every file is built to the design-system specification (colour, type, logo, fiscal details)."
       />
 
       <Alert variant="info" title="Formats & editing" className="mb-8" icon={<Info size={18} />}>
-        Templates ship as <strong>SVG</strong> (vector — open in a browser, Figma, Illustrator or
-        Inkscape to edit) and <strong>PNG</strong> (ready to use). Brand fonts (Sora · Instrument
-        Sans · JetBrains Mono) are embedded, so they render correctly everywhere. Placeholders in
-        <code className="mx-1 font-mono">[ brackets ]</code> are meant to be replaced.
+        Each template offers an <strong>editable</strong> version (Word/PowerPoint/Excel/print PDF —
+        the file you reopen and fill in) alongside <strong>SVG</strong> (vector export) and{' '}
+        <strong>PNG</strong> (ready to use) exports. Editable files use the brand fonts (Sora ·
+        Instrument Sans · JetBrains Mono) by name — they render correctly if installed, and fall
+        back safely otherwise so layout never breaks. Placeholders in{' '}
+        <code className="mx-1 font-mono">{'{{ }}'}</code> or{' '}
+        <code className="mx-1 font-mono">[ brackets ]</code> are meant to be replaced. The invoice's
+        totals are live formulas — editing a quantity or price recalculates IVA (14%) and the
+        grand total automatically.
       </Alert>
 
       <Section title="Logo pack">
