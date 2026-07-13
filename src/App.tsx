@@ -20,6 +20,9 @@ import LegalPage from './pages/LegalPage';
 
 // The design system is code-split so it never weighs down the marketing site.
 const DesignSystemApp = lazy(() => import('./pages/design-system/DesignSystemApp'));
+// Client proposal pages are lazy too — each embeds a heavy standalone asset
+// via iframe and has no reason to load unless someone visits that exact URL.
+const SonagasRoletaDigitalPage = lazy(() => import('./pages/proposals/SonagasRoletaDigitalPage'));
 
 function DesignSystemFallback() {
   return (
@@ -31,6 +34,10 @@ function DesignSystemFallback() {
       />
     </div>
   );
+}
+
+function BlankFallback() {
+  return <div className="fixed inset-0 bg-bg" />;
 }
 
 /** Keep <html lang> in sync with the active language (WCAG 3.1.1). */
@@ -62,6 +69,16 @@ function App() {
       <Route path="/careers" element={<CareersPage />} />
       <Route path="/privacy" element={<LegalPage kind="privacy" />} />
       <Route path="/terms" element={<LegalPage kind="terms" />} />
+
+      {/* Client proposals — unlisted, direct-link only (noindex, not in sitemap) */}
+      <Route
+        path="/propostas/sonagas/roleta-digital"
+        element={
+          <Suspense fallback={<BlankFallback />}>
+            <SonagasRoletaDigitalPage />
+          </Suspense>
+        }
+      />
 
       {/* Design system — canonical at /design-system, with /docs as an alias */}
       <Route
