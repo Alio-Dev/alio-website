@@ -17,6 +17,7 @@ import BlogPage from './pages/BlogPage';
 import BlogArticlePage from './pages/BlogArticlePage';
 import CareersPage from './pages/CareersPage';
 import LegalPage from './pages/LegalPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 // The design system is code-split so it never weighs down the marketing site.
 const DesignSystemApp = lazy(() => import('./pages/design-system/DesignSystemApp'));
@@ -91,6 +92,9 @@ function App() {
       />
       <Route path="/docs" element={<Navigate to="/design-system" replace />} />
       <Route path="/docs/*" element={<Navigate to="/design-system" replace />} />
+
+      {/* Catch-all — must stay last */}
+      <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Analytics />
       <SpeedInsights />
