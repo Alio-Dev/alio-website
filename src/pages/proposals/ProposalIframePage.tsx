@@ -1,20 +1,25 @@
 import { useEffect } from 'react';
 
-const ASSET_SRC = '/propostas/sonagas/roleta-digital.html';
+export interface ProposalIframePageProps {
+  /** Path under /public to the self-contained exported bundle. */
+  assetSrc: string;
+  /** Browser tab title and iframe accessible title. */
+  title: string;
+}
 
 /**
- * Client proposal — Sonagás "Roleta Digital". This embeds a self-contained
- * exported presentation (its own fonts/images/runtime bundled inside the
- * file) untouched, via iframe, so its internal asset-unpacking script is
+ * Shared shell for client proposal/prototype pages. Each embeds a
+ * self-contained exported bundle (its own fonts/images/runtime baked in)
+ * untouched, via iframe, so the bundle's internal asset-unpacking script is
  * never at risk of breaking. No site chrome (Layout/Nav/Footer): the
- * presentation is full-screen and carries its own branding.
+ * prototype is full-screen and carries its own branding.
  *
  * Unlisted by design — direct-link only for the client, not indexed or in
- * the sitemap (see the noindex meta tag below).
+ * the sitemap (sets a noindex meta tag for the lifetime of the page).
  */
-export default function SonagasRoletaDigitalPage() {
+export default function ProposalIframePage({ assetSrc, title }: ProposalIframePageProps) {
   useEffect(() => {
-    document.title = 'Roleta Digital — Proposta Sonagás · Alio Analytics';
+    document.title = title;
 
     let meta = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
     const hadMeta = Boolean(meta);
@@ -36,12 +41,12 @@ export default function SonagasRoletaDigitalPage() {
         meta.setAttribute('content', previousContent);
       }
     };
-  }, []);
+  }, [title]);
 
   return (
     <iframe
-      src={ASSET_SRC}
-      title="Roleta Digital — Proposta Sonagás"
+      src={assetSrc}
+      title={title}
       style={{ position: 'fixed', inset: 0, width: '100vw', height: '100vh', border: 0 }}
       allow="clipboard-write"
     />

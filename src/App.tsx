@@ -23,7 +23,7 @@ import NotFoundPage from './pages/NotFoundPage';
 const DesignSystemApp = lazy(() => import('./pages/design-system/DesignSystemApp'));
 // Client proposal pages are lazy too — each embeds a heavy standalone asset
 // via iframe and has no reason to load unless someone visits that exact URL.
-const SonagasRoletaDigitalPage = lazy(() => import('./pages/proposals/SonagasRoletaDigitalPage'));
+const ProposalIframePage = lazy(() => import('./pages/proposals/ProposalIframePage'));
 
 function DesignSystemFallback() {
   return (
@@ -76,7 +76,21 @@ function App() {
         path="/propostas/sonagas/roleta-digital"
         element={
           <Suspense fallback={<BlankFallback />}>
-            <SonagasRoletaDigitalPage />
+            <ProposalIframePage
+              assetSrc="/propostas/sonagas/roleta-digital.html"
+              title="Roleta Digital — Proposta Sonagás · Alio Analytics"
+            />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/propostas/sonagas/rota-do-gas-seguro"
+        element={
+          <Suspense fallback={<BlankFallback />}>
+            <ProposalIframePage
+              assetSrc="/propostas/sonagas/rota-do-gas-seguro.html"
+              title="Rota do Gás Seguro — Proposta Sonagás · Alio Analytics"
+            />
           </Suspense>
         }
       />
