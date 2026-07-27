@@ -25,6 +25,9 @@ const DesignSystemApp = lazy(() => import('./pages/design-system/DesignSystemApp
 // via iframe and has no reason to load unless someone visits that exact URL.
 const ProposalIframePage = lazy(() => import('./pages/proposals/ProposalIframePage'));
 const SonagasRoletaAppPage = lazy(() => import('./pages/proposals/SonagasRoletaAppPage'));
+// Internal document vault — unlisted, noindex, Supabase-auth-gated. Never
+// linked from site nav or the sitemap.
+const DocumentVaultPage = lazy(() => import('./pages/vault/DocumentVaultPage'));
 
 function DesignSystemFallback() {
   return (
@@ -89,6 +92,16 @@ function App() {
               assetSrc="/propostas/sonagas/rota-do-gas-seguro.html"
               title="Rota do Gás Seguro — Proposta Sonagás · Alio Analytics"
             />
+          </Suspense>
+        }
+      />
+
+      {/* Internal document vault — unlisted, direct-link only */}
+      <Route
+        path="/documentos"
+        element={
+          <Suspense fallback={<BlankFallback />}>
+            <DocumentVaultPage />
           </Suspense>
         }
       />

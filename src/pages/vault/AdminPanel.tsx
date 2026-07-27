@@ -1,0 +1,176 @@
+import { useRef, useState } from 'react';
+import { Trash2, UploadCloud } from 'lucide-react';
+import { Card } from '../../components/ui/Card';
+import { Field } from '../../components/ui/Field';
+import { Input } from '../../components/ui/Input';
+import { Textarea } from '../../components/ui/Textarea';
+import { Select } from '../../components/ui/Select';
+import { Button } from '../../components/ui/Button';
+import { Switch } from '../../components/ui/Switch';
+import { Table, THead, TBody, TR, TH, TD } from '../../components/ui/Table';
+import { Badge } from '../../components/ui/Badge';
+import { useToast } from '../../components/ui/Toast';
+import { uploadDocument, updateDocument, deleteDocument } from './api';
+import type { VaultDocument, DocumentCategory } from './types';
+
+export function AdminPanel({
+  documents,
+  onChanged,
+}: {
+  documents: VaultDocument[];
+  onChanged: () => void;
+}) {
+  const { toast } = useToast();
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState<DocumentCategory>('empresa');
+  const [uploading, setUploading] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const file = fileRef.current?.files?.[0];
+    if (!file) {
+      toast({ title: 'Escolhe um ficheiro', variant: 'warning' });
+      return;
+    }
+    setUploading(true);
+    try {
+      await uploadDocument({
+        file,
+        title: title || file.name,
+        description,
+        category,
+        visibility: 'protected',
+      });
+      toast({ title: 'Documento carregado', description: title || file.name, variant: 'success' });
+      setTitle('');
+      setDescription('');
+      if (fileRef.current) fileRef.current.value = '';
+      onChanged();
+    } catch (err) {
+      toast({
+        title: 'Falha ao carregar',
+        description: err instanceof Error ? err.message : String(err),
+        variant: 'danger',
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const toggleVisibility = async (doc: VaultDocument) => {
+    const next = doc.visibility === 'public' ? 'protected' : 'public';
+    try {
+      await updateDocument(doc.id, { visibility: next });
+      toast({
+        title: next === 'public' ? 'Documento tornado público' : 'Documento tornado protegido',
+        description: doc.title,
+        variant: 'success',
+      });
+      onChanged();
+    } catch (err) {
+      toast({
+        title: 'Falha ao actualizar',
+        description: err instanceof Error ? err.message : String(err),
+        variant: 'danger',
+      });
+    }
+  };
+
+  const remove = async (doc: VaultDocument) => {
+    if (!window.confirm(`Apagar "${doc.title}"? Esta acção não pode ser desfeita.`)) return;
+    try {
+      await deleteDocument(doc);
+      toast({ title: 'Documento apagado', description: doc.title, variant: 'success' });
+      onChanged();
+    } catch (err) {
+      toast({
+        title: 'Falha ao apagar',
+        description: err instanceof Error ? err.message : String(err),
+        variant: 'danger',
+      });
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-8">
+      <Card>
+        <h3 className="text-h6 text-primary">Carregar novo documento</h3>
+        <form onSubmit={submit} className="mt-4 grid gap-4 sm:grid-cols-2">
+          <Field label="Título" className="sm:col-span-2">
+            <Input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ex: Alvará Comercial" />
+          </Field>
+          <Field label="Categoria">
+            <Select value={category} onChange={(e) => setCategory(e.target.value as DocumentCategory)}>
+              <option value="empresa">Empresa</option>
+              <option value="pessoal">Pessoal</option>
+            </Select>
+          </Field>
+          <Field label="Ficheiro">
+            <input
+              ref={fileRef}
+              type="file"
+              accept="application/pdf,image/*"
+              className="block w-full text-body-s text-secondary file:mr-3 file:rounded-md file:border-0 file:bg-brand-subtle file:px-3 file:py-2 file:text-body-s file:font-semibold file:text-brand"
+            />
+          </Field>
+          <Field label="Descrição (opcional)" className="sm:col-span-2">
+            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={2} />
+          </Field>
+          <div className="sm:col-span-2">
+            <Button type="submit" loading={uploading} leftIcon={<UploadCloud size={16} />}>
+              Carregar (entra como Protegido)
+            </Button>
+          </div>
+        </form>
+      </Card>
+
+      <Card padding="none">
+        <div className="p-5 pb-0">
+          <h3 className="text-h6 text-primary">Gerir documentos</h3>
+        </div>
+        <Table className="mt-4">
+          <THead>
+            <TR>
+              <TH>Título</TH>
+              <TH>Categoria</TH>
+              <TH>Visibilidade</TH>
+              <TH>Acções</TH>
+            </TR>
+          </THead>
+          <TBody>
+            {documents.map((doc) => (
+              <TR key={doc.id}>
+                <TD className="font-medium text-primary">{doc.title}</TD>
+                <TD>
+                  <Badge variant="neutral" size="sm">
+                    {doc.category === 'empresa' ? 'Empresa' : 'Pessoal'}
+                  </Badge>
+                </TD>
+                <TD>
+                  <Switch
+                    checked={doc.visibility === 'public'}
+                    onChange={() => toggleVisibility(doc)}
+                    label={doc.visibility === 'public' ? 'Público' : 'Protegido'}
+                  />
+                </TD>
+                <TD>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    leftIcon={<Trash2 size={14} />}
+                    onClick={() => remove(doc)}
+                    aria-label={`Apagar ${doc.title}`}
+                  >
+                    Apagar
+                  </Button>
+                </TD>
+              </TR>
+            ))}
+          </TBody>
+        </Table>
+      </Card>
+    </div>
+  );
+}

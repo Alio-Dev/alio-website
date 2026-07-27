@@ -35,3 +35,7 @@ dist-ssr
 .env*
 __pycache__/
 *.pyc
+
+# Sensitive source documents staged for the Supabase document vault —
+# never committed; they get uploaded to Supabase Storage, not to git.
+docs/upload/
