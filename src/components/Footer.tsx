@@ -1,21 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { IconType } from 'react-icons';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { FaLinkedinIn, FaFacebookF, FaXTwitter, FaYoutube, FaAws, FaMicrosoft } from 'react-icons/fa6';
 import { useLanguage } from '../hooks/useLanguage';
+import { getSiteSettings } from '../lib/cms/api';
+import type { SiteSettings } from '../lib/cms/types';
 
 // Brand/social glyphs come from react-icons (FontAwesome brand set) — one
 // maintained, tree-shakeable source that carries the marks lucide/simple-icons
-// dropped (LinkedIn, X, AWS, Microsoft).
-const socialLinks: { label: string; href: string; Icon: IconType }[] = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/alioanalytics/', Icon: FaLinkedinIn },
-  { label: 'Facebook', href: 'https://www.facebook.com/alioanalytics', Icon: FaFacebookF },
-  { label: 'X', href: 'https://twitter.com/alioanalytics', Icon: FaXTwitter },
-  { label: 'YouTube', href: 'https://www.youtube.com/@alioanalytics', Icon: FaYoutube },
-];
+// dropped (LinkedIn, X, AWS, Microsoft). Icon components stay code-defined;
+// only the href + which ones to show come from /gestao (alio_site_settings).
+const SOCIAL_ICONS: Record<string, IconType> = {
+  LinkedIn: FaLinkedinIn,
+  Facebook: FaFacebookF,
+  X: FaXTwitter,
+  YouTube: FaYoutube,
+};
+
+const FALLBACK_SETTINGS = {
+  phone: '+244 923 710 906',
+  email: 'info@alio.ao',
+  address: 'Urbanização Nova Vida, Rua 49, Luanda, Angola',
+  social_links: [
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/company/alioanalytics/' },
+    { label: 'Facebook', href: 'https://www.facebook.com/alioanalytics' },
+    { label: 'X', href: 'https://twitter.com/alioanalytics' },
+    { label: 'YouTube', href: 'https://www.youtube.com/@alioanalytics' },
+  ],
+};
 
 const Footer: React.FC = () => {
   const { t, currentLanguage } = useLanguage();
+  const [settings, setSettings] = useState<Pick<SiteSettings, 'phone' | 'email' | 'address' | 'social_links'>>(
+    FALLBACK_SETTINGS,
+  );
+
+  useEffect(() => {
+    getSiteSettings()
+      .then((s) => {
+        if (s) setSettings({ phone: s.phone, email: s.email, address: s.address, social_links: s.social_links });
+      })
+      .catch(() => {
+        /* keep FALLBACK_SETTINGS — the footer must never look broken */
+      });
+  }, []);
+
+  const socialLinks = settings.social_links
+    .map((l) => ({ ...l, Icon: SOCIAL_ICONS[l.label] }))
+    .filter((l): l is typeof l & { Icon: IconType } => Boolean(l.Icon));
 
   // Use translation keys for all text
   const services = [
@@ -86,15 +118,15 @@ const Footer: React.FC = () => {
             <h4 className="font-bold text-lg mb-4 text-white">{t.nav.contact}</h4>
             <div className="flex items-start mb-4">
               <MapPin className="text-orange-400 mt-1" size={20} />
-              <span className="ml-3 text-blue-100 text-sm">Urbanização Nova Vida, Rua 49,<br />Luanda, Angola</span>
+              <span className="ml-3 text-blue-100 text-sm">{settings.address}</span>
             </div>
             <div className="flex items-center mb-4">
               <Phone className="text-orange-400" size={20} />
-              <span className="ml-3 text-blue-100 text-sm">+244 923 710 906</span>
+              <span className="ml-3 text-blue-100 text-sm">{settings.phone}</span>
             </div>
             <div className="flex items-center">
               <Mail className="text-orange-400" size={20} />
-              <span className="ml-3 text-blue-100 text-sm">info@alio.ao</span>
+              <span className="ml-3 text-blue-100 text-sm">{settings.email}</span>
             </div>
           </div>
         </div>

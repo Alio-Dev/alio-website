@@ -1,26 +1,29 @@
+import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
 import { Seo } from '../components/Seo';
 import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
+import { Skeleton } from '../components/ui/Skeleton';
 import { EmptyState } from '../components/ui/EmptyState';
-import { Button } from '../components/ui/Button';
-import { FolderOpen, ArrowRight } from 'lucide-react';
+import { FolderOpen } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
+import { useLocalizedPicker } from '../lib/cms/useLocalized';
+import { listCaseStudies, getMediaPublicUrl } from '../lib/cms/api';
+import type { CaseStudy } from '../lib/cms/types';
 
-/**
- * SCAFFOLD — /case-studies. Replace PLACEHOLDER_CASES with real client work
- * (title, client, sector, summary, result metrics, cover image, slug).
- */
-const PLACEHOLDER_CASES = [
-  { title: 'Case study title', client: 'Client / sector', tag: 'GIS', summary: 'One or two sentences on the problem, what Alio built, and the measurable outcome.' },
-  { title: 'Case study title', client: 'Client / sector', tag: 'Data & BI', summary: 'One or two sentences on the problem, what Alio built, and the measurable outcome.' },
-  { title: 'Case study title', client: 'Client / sector', tag: 'Web & Mobile', summary: 'One or two sentences on the problem, what Alio built, and the measurable outcome.' },
-];
-
+/** /case-studies — entries edited from /gestao (alio_case_studies). */
 export default function CaseStudiesPage() {
   const { currentLanguage } = useLanguage();
   const isPt = currentLanguage === 'pt';
+  const pick = useLocalizedPicker();
+  const [cases, setCases] = useState<CaseStudy[] | null>(null);
+
+  useEffect(() => {
+    listCaseStudies({ onlyPublished: true })
+      .then(setCases)
+      .catch(() => setCases([]));
+  }, []);
 
   return (
     <Layout showBackButton>
@@ -30,7 +33,6 @@ export default function CaseStudiesPage() {
         path="/case-studies"
       />
       <MarketingHero
-        draft
         eyebrow={isPt ? 'Portfólio' : 'Portfolio'}
         title={isPt ? 'Casos de Estudo' : 'Case Studies'}
         subtitle={isPt
@@ -40,35 +42,39 @@ export default function CaseStudiesPage() {
 
       <section className="bg-bg py-20">
         <div className="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {PLACEHOLDER_CASES.map((c, i) => (
-              <Card key={i} interactive padding="none" className="overflow-hidden">
-                <div className="flex h-40 items-center justify-center bg-gradient-brand-135">
-                  <span className="font-mono text-caption uppercase tracking-widest text-white/70">Cover image</span>
-                </div>
-                <div className="p-6">
-                  <Badge variant="brand" size="sm" className="mb-3">{c.tag}</Badge>
-                  <h3 className="font-display text-h5 text-primary">{c.title}</h3>
-                  <p className="mt-1 text-caption text-tertiary">{c.client}</p>
-                  <p className="mt-3 text-body-s text-secondary">{c.summary}</p>
-                  <div className="mt-4 flex items-center gap-1 text-body-s font-semibold text-brand">
-                    {isPt ? 'Ler caso' : 'Read case'} <ArrowRight size={15} />
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-12">
+          {cases === null ? (
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 3 }).map((_, i) => <Skeleton key={i} className="h-64" />)}
+            </div>
+          ) : cases.length === 0 ? (
             <EmptyState
               icon={<FolderOpen size={22} />}
-              title={isPt ? 'Conteúdo por adicionar' : 'Content to be added'}
+              title={isPt ? 'Ainda sem casos de estudo' : 'No case studies yet'}
               description={isPt
-                ? 'Este é um modelo. Envie os casos de estudo reais (cliente, desafio, solução, resultados e imagens) para publicar.'
-                : 'This is a scaffold. Provide the real case studies (client, challenge, solution, results and images) to publish.'}
-              action={<Button variant="outline">{isPt ? 'Falar connosco' : 'Talk to us'}</Button>}
+                ? 'Os casos publicados no painel de gestão aparecem aqui.'
+                : 'Case studies published from the management panel will appear here.'}
             />
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {cases.map((c) => (
+                <Card key={c.slug} interactive padding="none" className="h-full overflow-hidden">
+                  <div className="flex h-40 items-center justify-center bg-gradient-brand-135">
+                    {c.cover_path ? (
+                      <img src={getMediaPublicUrl(c.cover_path)} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <span className="font-mono text-caption uppercase tracking-widest text-white/70">Cover image</span>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    {c.industry && <Badge variant="brand" size="sm" className="mb-3">{c.industry}</Badge>}
+                    <h3 className="font-display text-h5 text-primary">{pick(c.title)}</h3>
+                    {c.client && <p className="mt-1 text-caption text-tertiary">{c.client}</p>}
+                    <p className="mt-3 text-body-s text-secondary">{pick(c.summary)}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </Layout>

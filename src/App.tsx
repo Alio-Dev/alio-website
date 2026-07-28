@@ -28,6 +28,8 @@ const SonagasRoletaAppPage = lazy(() => import('./pages/proposals/SonagasRoletaA
 // Internal document vault — unlisted, noindex, Supabase-auth-gated. Never
 // linked from site nav or the sitemap.
 const DocumentVaultPage = lazy(() => import('./pages/vault/DocumentVaultPage'));
+// Content-management console — unlisted, noindex, same @alio.ao auth gate.
+const GestaoPage = lazy(() => import('./pages/gestao/GestaoPage'));
 
 function DesignSystemFallback() {
   return (
@@ -102,6 +104,16 @@ function App() {
         element={
           <Suspense fallback={<BlankFallback />}>
             <DocumentVaultPage />
+          </Suspense>
+        }
+      />
+
+      {/* Content-management console — unlisted, direct-link only */}
+      <Route
+        path="/gestao"
+        element={
+          <Suspense fallback={<BlankFallback />}>
+            <GestaoPage />
           </Suspense>
         }
       />

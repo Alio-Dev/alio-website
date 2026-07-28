@@ -13,7 +13,8 @@ interface ServiceFeaturesProps {
   title: string;
   features: Feature[];
   technologies: string[];
-  serviceType: 'digital' | 'web-mobile' | 'it-services' | 'analytics' | 'design' | 'gis';
+  /** Drives the technology-icon fallback only — sourced from the CMS, so kept as a plain string rather than a fixed union. */
+  serviceType: string;
   onContactClick?: () => void;
 }
 
