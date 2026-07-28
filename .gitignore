@@ -38,4 +38,6 @@ __pycache__/
 
 # Sensitive source documents staged for the Supabase document vault —
 # never committed; they get uploaded to Supabase Storage, not to git.
-docs/upload/
+# Covers the whole docs/ staging folder (upload/, accounting exports,
+# anything else dropped here), not just the original subfolder.
+docs/
