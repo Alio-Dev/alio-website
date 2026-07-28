@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { Trash2, UploadCloud } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Trash2, UploadCloud, UserPlus, Mail } from 'lucide-react';
 import { Card } from '../../components/ui/Card';
 import { Field } from '../../components/ui/Field';
 import { Input } from '../../components/ui/Input';
@@ -10,8 +10,15 @@ import { Switch } from '../../components/ui/Switch';
 import { Table, THead, TBody, TR, TH, TD } from '../../components/ui/Table';
 import { Badge } from '../../components/ui/Badge';
 import { useToast } from '../../components/ui/Toast';
-import { uploadDocument, updateDocument, deleteDocument } from './api';
-import type { VaultDocument, DocumentCategory } from './types';
+import {
+  uploadDocument,
+  updateDocument,
+  deleteDocument,
+  listAuthorizedViewers,
+  addAuthorizedViewer,
+  removeAuthorizedViewer,
+} from './api';
+import type { VaultDocument, DocumentCategory, AuthorizedViewer } from './types';
 
 export function AdminPanel({
   documents,
@@ -171,6 +178,122 @@ export function AdminPanel({
           </TBody>
         </Table>
       </Card>
+
+      <AccessPanel />
     </div>
+  );
+}
+
+function AccessPanel() {
+  const { toast } = useToast();
+  const [viewers, setViewers] = useState<AuthorizedViewer[] | null>(null);
+  const [email, setEmail] = useState('');
+  const [note, setNote] = useState('');
+  const [adding, setAdding] = useState(false);
+
+  const refresh = () => {
+    listAuthorizedViewers()
+      .then(setViewers)
+      .catch(() => setViewers([]));
+  };
+
+  useEffect(() => {
+    refresh();
+  }, []);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAdding(true);
+    try {
+      await addAuthorizedViewer(email, note);
+      toast({ title: 'Acesso concedido', description: email, variant: 'success' });
+      setEmail('');
+      setNote('');
+      refresh();
+    } catch (err) {
+      toast({
+        title: 'Falha ao conceder acesso',
+        description: err instanceof Error ? err.message : String(err),
+        variant: 'danger',
+      });
+    } finally {
+      setAdding(false);
+    }
+  };
+
+  const remove = async (viewer: AuthorizedViewer) => {
+    if (!window.confirm(`Remover o acesso de "${viewer.email}"?`)) return;
+    try {
+      await removeAuthorizedViewer(viewer.id);
+      toast({ title: 'Acesso removido', description: viewer.email, variant: 'success' });
+      refresh();
+    } catch (err) {
+      toast({
+        title: 'Falha ao remover',
+        description: err instanceof Error ? err.message : String(err),
+        variant: 'danger',
+      });
+    }
+  };
+
+  return (
+    <Card>
+      <h3 className="text-h6 text-primary">Acessos</h3>
+      <p className="mt-1 text-body-s text-tertiary">
+        Qualquer email <strong>@alio.ao</strong> já tem acesso a documentos protegidos
+        automaticamente. Usa isto só para dar acesso a alguém sem email corporativo — ex: um
+        contabilista ou colaborador externo.
+      </p>
+
+      <form onSubmit={submit} className="mt-4 grid gap-3 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+        <Field label="Email">
+          <Input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="pessoa@exemplo.com"
+            leftIcon={<Mail size={16} />}
+          />
+        </Field>
+        <Field label="Nota (opcional)">
+          <Input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Ex: Contabilista" />
+        </Field>
+        <Button type="submit" loading={adding} leftIcon={<UserPlus size={15} />}>
+          Adicionar
+        </Button>
+      </form>
+
+      {viewers && viewers.length > 0 && (
+        <Table className="mt-5">
+          <THead>
+            <TR>
+              <TH>Email</TH>
+              <TH>Nota</TH>
+              <TH>Acções</TH>
+            </TR>
+          </THead>
+          <TBody>
+            {viewers.map((v) => (
+              <TR key={v.id}>
+                <TD className="font-medium text-primary">{v.email}</TD>
+                <TD>{v.note ?? '—'}</TD>
+                <TD>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    leftIcon={<Trash2 size={14} />}
+                    onClick={() => remove(v)}
+                    aria-label={`Remover acesso de ${v.email}`}
+                  >
+                    Remover
+                  </Button>
+                </TD>
+              </TR>
+            ))}
+          </TBody>
+        </Table>
+      )}
+    </Card>
   );
 }

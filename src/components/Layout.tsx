@@ -12,9 +12,11 @@ import { cn } from '../lib/cn';
 interface LayoutProps {
   children: React.ReactNode;
   showBackButton?: boolean;
+  /** Omit the light/dark toggle — for pages that force a single theme. */
+  hideThemeToggle?: boolean;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, showBackButton = false }) => {
+const Layout: React.FC<LayoutProps> = ({ children, showBackButton = false, hideThemeToggle = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const { t } = useLanguage();
@@ -69,7 +71,9 @@ const Layout: React.FC<LayoutProps> = ({ children, showBackButton = false }) => 
             <button onClick={() => goToSection('about')} className={linkCls}>{t.nav.about}</button>
             <div className="mx-1 flex items-center gap-1">
               <LanguageSwitcher textColorClass="text-secondary hover:text-brand" />
-              <ThemeToggle className="text-secondary hover:bg-bg-subtle hover:text-primary" />
+              {!hideThemeToggle && (
+                <ThemeToggle className="text-secondary hover:bg-bg-subtle hover:text-primary" />
+              )}
             </div>
             <Button size="sm" onClick={handleContactClick}>{t.nav.contact}</Button>
           </div>
@@ -77,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children, showBackButton = false }) => 
           {/* Mobile */}
           <div className="flex items-center gap-1 md:hidden">
             <LanguageSwitcher textColorClass="text-secondary" />
-            <ThemeToggle className="text-secondary hover:bg-bg-subtle" />
+            {!hideThemeToggle && <ThemeToggle className="text-secondary hover:bg-bg-subtle" />}
             <button
               onClick={() => setIsMenuOpen((o) => !o)}
               className="rounded-md p-2 text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"

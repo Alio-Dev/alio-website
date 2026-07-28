@@ -14,3 +14,10 @@ export interface VaultDocument {
   created_at: string;
   updated_at: string;
 }
+
+export interface AuthorizedViewer {
+  id: string;
+  email: string;
+  note: string | null;
+  created_at: string;
+}

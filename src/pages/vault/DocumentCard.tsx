@@ -3,7 +3,7 @@ import { FileText, Eye, Download, Lock, Globe } from 'lucide-react';
 import { Card } from '../../components/ui/Card';
 import { Badge } from '../../components/ui/Badge';
 import { Button } from '../../components/ui/Button';
-import { getDocumentUrl, logAccess } from './api';
+import { getDocumentUrl, logAccess, filenameForDocument } from './api';
 import type { VaultDocument } from './types';
 
 function formatSize(bytes: number) {
@@ -24,14 +24,15 @@ export function DocumentCard({
   const open = async (mode: 'view' | 'download') => {
     setBusy(mode);
     try {
-      const url = await getDocumentUrl(doc.storage_path);
+      const filename = filenameForDocument(doc);
+      const url = await getDocumentUrl(doc.storage_path, mode === 'download' ? filename : undefined);
       void logAccess(doc.id);
       if (mode === 'view') {
         onView(doc, url);
       } else {
         const a = document.createElement('a');
         a.href = url;
-        a.download = doc.title;
+        a.download = filename;
         a.click();
       }
     } finally {
