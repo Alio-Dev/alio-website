@@ -8,13 +8,25 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../components/ui/Ta
 import { Skeleton } from '../../components/ui/Skeleton';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { Button } from '../../components/ui/Button';
+import { Pagination } from '../../components/ui/Pagination';
 import { useVaultSession } from './useVaultSession';
 import { LoginPanel } from './LoginPanel';
 import { DocumentCard } from './DocumentCard';
 import { DocumentViewerModal } from './DocumentViewerModal';
 import { AdminPanel } from './AdminPanel';
 import { listDocuments } from './api';
-import type { VaultDocument } from './types';
+import type { VaultDocument, DocumentCategory } from './types';
+
+type CategoryFilter = 'todos' | DocumentCategory;
+
+const CATEGORY_LABEL: Record<CategoryFilter, string> = {
+  todos: 'Todos',
+  empresa: 'Empresa',
+  contabilidade: 'Contabilidade',
+  pessoal: 'Pessoal',
+};
+
+const PAGE_SIZE = 9;
 
 function VaultInner() {
   useProposalMeta('Documentos — Alio Analytics');
@@ -22,7 +34,8 @@ function VaultInner() {
   const { loading: sessionLoading, email, isCorporate, signOut } = useVaultSession();
 
   const [documents, setDocuments] = useState<VaultDocument[] | null>(null);
-  const [category, setCategory] = useState<'todos' | 'empresa' | 'pessoal'>('todos');
+  const [category, setCategory] = useState<CategoryFilter>('todos');
+  const [page, setPage] = useState(1);
   const [viewer, setViewer] = useState<{ doc: VaultDocument; url: string } | null>(null);
 
   const refresh = useCallback(() => {
@@ -35,7 +48,13 @@ function VaultInner() {
     refresh();
   }, [refresh, email]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [category]);
+
   const filtered = (documents ?? []).filter((d) => category === 'todos' || d.category === category);
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
     <Layout showBackButton hideThemeToggle>
@@ -44,7 +63,7 @@ function VaultInner() {
           <div>
             <h1 className="text-h3 text-primary">Documentos</h1>
             <p className="mt-1 text-body-s text-tertiary">
-              Documentos da empresa e pessoais — cada um com o seu próprio nível de acesso.
+              Documentos da empresa, contabilidade e pessoais — cada um com o seu próprio nível de acesso.
             </p>
           </div>
           {email && (
@@ -74,8 +93,8 @@ function VaultInner() {
             </TabsList>
 
             <TabsContent value="documentos">
-              <div className="mb-5 flex gap-2">
-                {(['todos', 'empresa', 'pessoal'] as const).map((c) => (
+              <div className="mb-5 flex flex-wrap gap-2">
+                {(['todos', 'empresa', 'contabilidade', 'pessoal'] as const).map((c) => (
                   <button
                     key={c}
                     onClick={() => setCategory(c)}
@@ -86,7 +105,7 @@ function VaultInner() {
                         : 'text-tertiary hover:text-primary')
                     }
                   >
-                    {c === 'todos' ? 'Todos' : c === 'empresa' ? 'Empresa' : 'Pessoal'}
+                    {CATEGORY_LABEL[c]}
                   </button>
                 ))}
               </div>
@@ -107,15 +126,25 @@ function VaultInner() {
                   }
                 />
               ) : (
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {filtered.map((doc) => (
-                    <DocumentCard
-                      key={doc.id}
-                      doc={doc}
-                      onView={(d, url) => setViewer({ doc: d, url })}
-                    />
-                  ))}
-                </div>
+                <>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {pageItems.map((doc) => (
+                      <DocumentCard
+                        key={doc.id}
+                        doc={doc}
+                        onView={(d, url) => setViewer({ doc: d, url })}
+                      />
+                    ))}
+                  </div>
+                  {pageCount > 1 && (
+                    <div className="mt-6 flex items-center justify-between">
+                      <p className="text-body-s text-tertiary">
+                        {filtered.length} documento{filtered.length === 1 ? '' : 's'} — página {page} de {pageCount}
+                      </p>
+                      <Pagination page={page} pageCount={pageCount} onPageChange={setPage} />
+                    </div>
+                  )}
+                </>
               )}
             </TabsContent>
 

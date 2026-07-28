@@ -9,6 +9,7 @@ import { Button } from '../../components/ui/Button';
 import { Switch } from '../../components/ui/Switch';
 import { Table, THead, TBody, TR, TH, TD } from '../../components/ui/Table';
 import { Badge } from '../../components/ui/Badge';
+import { Pagination } from '../../components/ui/Pagination';
 import { useToast } from '../../components/ui/Toast';
 import {
   uploadDocument,
@@ -19,6 +20,14 @@ import {
   removeAuthorizedViewer,
 } from './api';
 import type { VaultDocument, DocumentCategory, AuthorizedViewer } from './types';
+
+const CATEGORY_LABEL: Record<DocumentCategory, string> = {
+  empresa: 'Empresa',
+  pessoal: 'Pessoal',
+  contabilidade: 'Contabilidade',
+};
+
+const PAGE_SIZE = 10;
 
 export function AdminPanel({
   documents,
@@ -33,6 +42,13 @@ export function AdminPanel({
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState<DocumentCategory>('empresa');
   const [uploading, setUploading] = useState(false);
+  const [page, setPage] = useState(1);
+  const pageCount = Math.max(1, Math.ceil(documents.length / PAGE_SIZE));
+  const pageDocuments = documents.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  useEffect(() => {
+    if (page > pageCount) setPage(pageCount);
+  }, [page, pageCount]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,6 +127,7 @@ export function AdminPanel({
           <Field label="Categoria">
             <Select value={category} onChange={(e) => setCategory(e.target.value as DocumentCategory)}>
               <option value="empresa">Empresa</option>
+              <option value="contabilidade">Contabilidade</option>
               <option value="pessoal">Pessoal</option>
             </Select>
           </Field>
@@ -147,12 +164,12 @@ export function AdminPanel({
             </TR>
           </THead>
           <TBody>
-            {documents.map((doc) => (
+            {pageDocuments.map((doc) => (
               <TR key={doc.id}>
                 <TD className="font-medium text-primary">{doc.title}</TD>
                 <TD>
                   <Badge variant="neutral" size="sm">
-                    {doc.category === 'empresa' ? 'Empresa' : 'Pessoal'}
+                    {CATEGORY_LABEL[doc.category]}
                   </Badge>
                 </TD>
                 <TD>
@@ -177,6 +194,14 @@ export function AdminPanel({
             ))}
           </TBody>
         </Table>
+        {pageCount > 1 && (
+          <div className="flex items-center justify-between p-5 pt-4">
+            <p className="text-body-s text-tertiary">
+              {documents.length} documento{documents.length === 1 ? '' : 's'} — página {page} de {pageCount}
+            </p>
+            <Pagination page={page} pageCount={pageCount} onPageChange={setPage} />
+          </div>
+        )}
       </Card>
 
       <AccessPanel />

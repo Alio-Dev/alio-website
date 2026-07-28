@@ -75,7 +75,9 @@ export async function uploadDocument(params: {
 }): Promise<VaultDocument> {
   const { file, title, description, category, visibility } = params;
   const ext = file.name.includes('.') ? file.name.split('.').pop() : 'bin';
-  const subfolder = category === 'pessoal' ? 'pessoal/aristoteles_bernardo' : 'empresa';
+  const subfolder =
+    category === 'pessoal' ? 'pessoal/aristoteles_bernardo' :
+    category === 'contabilidade' ? 'contabilidade' : 'empresa';
   const storagePath = `documents/${subfolder}/${crypto.randomUUID()}.${ext}`;
 
   const { error: uploadError } = await supabase.storage

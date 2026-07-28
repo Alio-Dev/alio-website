@@ -1,4 +1,4 @@
-export type DocumentCategory = 'empresa' | 'pessoal';
+export type DocumentCategory = 'empresa' | 'pessoal' | 'contabilidade';
 export type DocumentVisibility = 'public' | 'protected';
 
 export interface VaultDocument {
