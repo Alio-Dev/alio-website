@@ -6,6 +6,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '../../../components/ui
 import { Skeleton } from '../../../components/ui/Skeleton';
 import { useToast } from '../../../components/ui/Toast';
 import { BilingualField } from '../components/BilingualField';
+import { RevisionHistory } from '../components/RevisionHistory';
+import { useDirtyGuard } from '../components/useDirtyGuard';
 import { getLegalDoc, upsertLegalDoc } from '../../../lib/cms/api';
 import type { LegalDocRow } from '../../../lib/cms/types';
 
@@ -13,16 +15,17 @@ function DocEditor({ kind }: { kind: 'privacy' | 'terms' }) {
   const { toast } = useToast();
   const [doc, setDoc] = useState<LegalDocRow | null | undefined>(undefined);
   const [saving, setSaving] = useState(false);
+  const { markPristine } = useDirtyGuard(doc ?? null);
 
-  useEffect(() => {
-    getLegalDoc(kind).then(setDoc).catch(() => setDoc(null));
-  }, [kind]);
+  const refresh = () => getLegalDoc(kind).then((d) => { setDoc(d); markPristine(d); }).catch(() => setDoc(null));
+  useEffect(() => { refresh(); }, [kind]);
 
   const save = async () => {
     if (!doc) return;
     setSaving(true);
     try {
       await upsertLegalDoc(doc);
+      markPristine(doc);
       toast({ title: 'Documento legal guardado', variant: 'success' });
     } catch (err) {
       toast({ title: 'Falha ao guardar', description: err instanceof Error ? err.message : String(err), variant: 'danger' });
@@ -93,6 +96,8 @@ function DocEditor({ kind }: { kind: 'privacy' | 'terms' }) {
           </div>
         ))}
       </Card>
+
+      <RevisionHistory tableName="alio_legal_docs" recordId={kind} onRestored={refresh} />
     </div>
   );
 }

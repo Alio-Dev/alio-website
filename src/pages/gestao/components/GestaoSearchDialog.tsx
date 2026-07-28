@@ -12,6 +12,7 @@ interface SearchItem {
   group: string;
   section: GestaoSection;
   keywords: string;
+  slug?: string;
 }
 
 const STATIC_ITEMS: SearchItem[] = [
@@ -36,7 +37,7 @@ export function GestaoSearchDialog({
 }: {
   isAdmin: boolean;
   onClose: () => void;
-  onNavigate: (s: GestaoSection) => void;
+  onNavigate: (s: GestaoSection, slug?: string) => void;
 }) {
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
@@ -47,10 +48,10 @@ export function GestaoSearchDialog({
     Promise.all([listServicePages(), listBlogPosts(), listCaseStudies(), listJobOpenings()])
       .then(([services, blog, cases, jobs]) => {
         setContentItems([
-          ...services.map((s) => ({ label: s.title.pt, group: 'Serviços', section: 'services' as const, keywords: s.slug })),
-          ...blog.map((b) => ({ label: b.title.pt || b.slug, group: 'Blog', section: 'blog' as const, keywords: b.slug })),
-          ...cases.map((c) => ({ label: c.title.pt || c.slug, group: 'Casos de Estudo', section: 'case-studies' as const, keywords: c.slug })),
-          ...jobs.map((j) => ({ label: j.title.pt || j.slug, group: 'Carreiras', section: 'careers' as const, keywords: j.slug })),
+          ...services.map((s) => ({ label: s.title.pt, group: 'Serviços', section: 'services' as const, keywords: s.slug, slug: s.slug })),
+          ...blog.map((b) => ({ label: b.title.pt || b.slug, group: 'Blog', section: 'blog' as const, keywords: b.slug, slug: b.slug })),
+          ...cases.map((c) => ({ label: c.title.pt || c.slug, group: 'Casos de Estudo', section: 'case-studies' as const, keywords: c.slug, slug: c.slug })),
+          ...jobs.map((j) => ({ label: j.title.pt || j.slug, group: 'Carreiras', section: 'careers' as const, keywords: j.slug, slug: j.slug })),
         ]);
       })
       .catch(() => setContentItems([]));
@@ -77,7 +78,7 @@ export function GestaoSearchDialog({
       if (e.key === 'ArrowUp') { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)); }
       if (e.key === 'Enter' && results[active]) {
         e.preventDefault();
-        onNavigate(results[active].section);
+        onNavigate(results[active].section, results[active].slug);
         onClose();
       }
     };
@@ -111,7 +112,7 @@ export function GestaoSearchDialog({
             results.map((item, i) => (
               <button
                 key={`${item.section}-${item.label}-${i}`}
-                onClick={() => { onNavigate(item.section); onClose(); }}
+                onClick={() => { onNavigate(item.section, item.slug); onClose(); }}
                 onMouseEnter={() => setActive(i)}
                 className={
                   'flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-body-s transition-colors ' +

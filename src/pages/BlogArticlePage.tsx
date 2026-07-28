@@ -10,6 +10,7 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { useLanguage } from '../hooks/useLanguage';
 import { useLocalizedPicker } from '../lib/cms/useLocalized';
 import { getBlogPostBySlug } from '../lib/cms/api';
+import { renderBody } from '../lib/cms/markdown';
 import type { BlogPost } from '../lib/cms/types';
 
 /** /blog/:slug — article template, content edited from /gestao. */
@@ -78,7 +79,7 @@ export default function BlogArticlePage() {
           </p>
 
           <div className="mt-8 flex flex-col gap-4 text-body-l text-secondary">
-            {body.split('\n\n').filter(Boolean).map((para, i) => <p key={i}>{para}</p>)}
+            {renderBody(body)}
           </div>
 
           <div className="mt-12 border-t border-border-subtle pt-8">

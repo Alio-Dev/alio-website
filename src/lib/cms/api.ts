@@ -12,6 +12,7 @@ import type {
   AuditLogEntry,
   ContactSubmission,
   ContactSubmissionStatus,
+  ContentRevision,
 } from './types';
 
 const BUCKET = 'alio';
@@ -240,6 +241,11 @@ export async function deleteMedia(asset: MediaAsset) {
   if (error) throw error;
 }
 
+export async function updateMediaAltText(id: string, altText: { pt: string; en: string }) {
+  const { error } = await supabase.from('alio_media').update({ alt_text: altText }).eq('id', id);
+  if (error) throw error;
+}
+
 // ---------------------------------------------------------------------
 // Contact form submissions (public insert, staff-only read/manage)
 // ---------------------------------------------------------------------
@@ -340,4 +346,68 @@ function readImageDimensions(file: File): Promise<{ width: number; height: numbe
     };
     img.src = url;
   });
+}
+
+// ---------------------------------------------------------------------
+// Content revisions (undo) — snapshots are captured by a DB trigger
+// (BEFORE UPDATE/DELETE) on every CMS table; this is read + restore only.
+// ---------------------------------------------------------------------
+
+export async function listRevisions(tableName: string, recordId: string): Promise<ContentRevision[]> {
+  const { data, error } = await supabase
+    .from('alio_content_revisions')
+    .select('*')
+    .eq('table_name', tableName)
+    .eq('record_id', recordId)
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data as ContentRevision[];
+}
+
+export async function restoreRevision(revision: ContentRevision): Promise<void> {
+  const data = revision.data;
+  let keyCol: string;
+  let keyVal: unknown;
+  if ('id' in data && data.id !== undefined) { keyCol = 'id'; keyVal = data.id; }
+  else if ('slug' in data) { keyCol = 'slug'; keyVal = data.slug; }
+  else if ('kind' in data) { keyCol = 'kind'; keyVal = data.kind; }
+  else { keyCol = 'id'; keyVal = true; }
+
+  const { data: updated, error } = await supabase
+    .from(revision.table_name)
+    .update(data)
+    .eq(keyCol, keyVal as string | boolean)
+    .select();
+  if (error) throw error;
+  if (!updated || updated.length === 0) {
+    throw new Error('Nenhum registo correspondente foi encontrado — pode ter sido apagado entretanto.');
+  }
+}
+
+// ---------------------------------------------------------------------
+// Slug uniqueness — RLS already scopes results to what the caller can
+// see, which is exactly what "is this slug free" needs to check against.
+// ---------------------------------------------------------------------
+
+export async function isSlugTaken(tableName: string, slug: string, excludeId?: string): Promise<boolean> {
+  if (!slug) return false;
+  let query = supabase.from(tableName).select('id').eq('slug', slug).limit(1);
+  if (excludeId) query = query.neq('id', excludeId);
+  const { data, error } = await query;
+  if (error) throw error;
+  return (data?.length ?? 0) > 0;
+}
+
+// ---------------------------------------------------------------------
+// Bulk actions — Blog / Case Studies / Careers list views
+// ---------------------------------------------------------------------
+
+export async function bulkSetPublished(tableName: string, ids: string[], published: boolean) {
+  const { error } = await supabase.from(tableName).update({ published }).in('id', ids);
+  if (error) throw error;
+}
+
+export async function bulkDelete(tableName: string, ids: string[]) {
+  const { error } = await supabase.from(tableName).delete().in('id', ids);
+  if (error) throw error;
 }

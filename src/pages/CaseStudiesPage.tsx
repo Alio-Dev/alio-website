@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { MarketingHero } from '../components/MarketingHero';
 import { Seo } from '../components/Seo';
@@ -57,21 +58,23 @@ export default function CaseStudiesPage() {
           ) : (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {cases.map((c) => (
-                <Card key={c.slug} interactive padding="none" className="h-full overflow-hidden">
-                  <div className="flex h-40 items-center justify-center bg-gradient-brand-135">
-                    {c.cover_path ? (
-                      <img src={getMediaPublicUrl(c.cover_path)} alt="" className="h-full w-full object-cover" />
-                    ) : (
-                      <span className="font-mono text-caption uppercase tracking-widest text-white/70">Cover image</span>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    {c.industry && <Badge variant="brand" size="sm" className="mb-3">{c.industry}</Badge>}
-                    <h3 className="font-display text-h5 text-primary">{pick(c.title)}</h3>
-                    {c.client && <p className="mt-1 text-caption text-tertiary">{c.client}</p>}
-                    <p className="mt-3 text-body-s text-secondary">{pick(c.summary)}</p>
-                  </div>
-                </Card>
+                <Link key={c.slug} to={`/case-studies/${c.slug}`} className="group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded-lg">
+                  <Card interactive padding="none" className="h-full overflow-hidden">
+                    <div className="flex h-40 items-center justify-center bg-gradient-brand-135">
+                      {c.cover_path ? (
+                        <img src={getMediaPublicUrl(c.cover_path)} alt="" className="h-full w-full object-cover" />
+                      ) : (
+                        <span className="font-mono text-caption uppercase tracking-widest text-white/70">Cover image</span>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      {c.industry && <Badge variant="brand" size="sm" className="mb-3">{c.industry}</Badge>}
+                      <h3 className="font-display text-h5 text-primary transition-colors group-hover:text-brand">{pick(c.title)}</h3>
+                      {c.client && <p className="mt-1 text-caption text-tertiary">{c.client}</p>}
+                      <p className="mt-3 text-body-s text-secondary">{pick(c.summary)}</p>
+                    </div>
+                  </Card>
+                </Link>
               ))}
             </div>
           )}

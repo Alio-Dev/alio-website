@@ -9,6 +9,8 @@ import { Badge } from '../../../components/ui/Badge';
 import { Table, THead, TBody, TR, TH, TD } from '../../../components/ui/Table';
 import { Skeleton } from '../../../components/ui/Skeleton';
 import { useToast } from '../../../components/ui/Toast';
+import { RevisionHistory } from '../components/RevisionHistory';
+import { useDirtyGuard } from '../components/useDirtyGuard';
 import { getSiteSettings, upsertSiteSettings, listStaff, upsertStaff, removeStaff } from '../../../lib/cms/api';
 import type { SiteSettings, Staff, StaffRole } from '../../../lib/cms/types';
 
@@ -95,16 +97,17 @@ export function SettingsSection() {
   const { toast } = useToast();
   const [settings, setSettings] = useState<SiteSettings | null | undefined>(undefined);
   const [saving, setSaving] = useState(false);
+  const { markPristine } = useDirtyGuard(settings ?? null);
 
-  useEffect(() => {
-    getSiteSettings().then(setSettings).catch(() => setSettings(null));
-  }, []);
+  const refreshSettings = () => getSiteSettings().then((s) => { setSettings(s); markPristine(s); }).catch(() => setSettings(null));
+  useEffect(() => { refreshSettings(); }, []);
 
   const save = async () => {
     if (!settings) return;
     setSaving(true);
     try {
       await upsertSiteSettings(settings);
+      markPristine(settings);
       toast({ title: 'Definições guardadas', variant: 'success' });
     } catch (err) {
       toast({ title: 'Falha ao guardar', description: err instanceof Error ? err.message : String(err), variant: 'danger' });
@@ -157,6 +160,8 @@ export function SettingsSection() {
           ))}
         </div>
       </Card>
+
+      <RevisionHistory tableName="alio_site_settings" recordId="true" onRestored={refreshSettings} />
 
       <StaffManager />
     </div>

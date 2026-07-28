@@ -1,7 +1,7 @@
 import { cn } from '../../lib/cn';
 
 export interface AppShellNavItem {
-  label: string;
+  label: React.ReactNode;
   icon?: React.ReactNode;
   active?: boolean;
   onClick?: () => void;

@@ -13,6 +13,7 @@ import DesignPage from './pages/services/DesignPage';
 import GISPage from './pages/services/GISPage';
 import AboutPage from './pages/AboutPage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
+import CaseStudyDetailPage from './pages/CaseStudyDetailPage';
 import BlogPage from './pages/BlogPage';
 import BlogArticlePage from './pages/BlogArticlePage';
 import CareersPage from './pages/CareersPage';
@@ -71,6 +72,7 @@ function App() {
       {/* Company & content pages */}
       <Route path="/about" element={<AboutPage />} />
       <Route path="/case-studies" element={<CaseStudiesPage />} />
+      <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
       <Route path="/blog" element={<BlogPage />} />
       <Route path="/blog/:slug" element={<BlogArticlePage />} />
       <Route path="/careers" element={<CareersPage />} />

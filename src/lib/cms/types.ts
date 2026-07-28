@@ -116,6 +116,16 @@ export interface AuditLogEntry {
   created_at: string;
 }
 
+export interface ContentRevision {
+  id: number;
+  table_name: string;
+  record_id: string;
+  data: Record<string, unknown>;
+  actor_email: string | null;
+  action: string;
+  created_at: string;
+}
+
 export type ContactSubmissionStatus = 'new' | 'read' | 'archived';
 
 export interface ContactSubmission {
