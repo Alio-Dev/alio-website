@@ -2,6 +2,7 @@ import React from 'react';
 import { X, Phone, Mail, MapPin, Send, User, Building, MessageSquare, Briefcase, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../hooks/useLanguage';
 import { useForm, ValidationError } from '@formspree/react';
+import { submitContactForm } from '../lib/cms/api';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -11,6 +12,22 @@ interface ContactModalProps {
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   const { t, currentLanguage } = useLanguage();
   const [state, handleSubmit] = useForm("xvgrqrve");
+
+  // Best-effort mirror into Supabase so submissions show up inside /gestao,
+  // alongside the existing Formspree email delivery — never blocks or can
+  // fail the real submission the form already relies on.
+  const handleSubmitWithMirror = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = new FormData(e.currentTarget);
+    submitContactForm({
+      name: String(form.get('name') ?? ''),
+      email: String(form.get('email') ?? ''),
+      phone: String(form.get('phone') ?? '') || undefined,
+      company: String(form.get('company') ?? '') || undefined,
+      service: String(form.get('service') ?? '') || undefined,
+      message: String(form.get('message') ?? ''),
+    }).catch(() => { /* Formspree is the source of truth; this mirror is best-effort */ });
+    handleSubmit(e);
+  };
 
   if (!isOpen) return null;
 
@@ -111,7 +128,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
                 {t.contact.title}
               </h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmitWithMirror} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">

@@ -7,6 +7,11 @@ import type {
   LegalDocRow,
   SiteSettings,
   MediaAsset,
+  Staff,
+  StaffRole,
+  AuditLogEntry,
+  ContactSubmission,
+  ContactSubmissionStatus,
 } from './types';
 
 const BUCKET = 'alio';
@@ -233,6 +238,88 @@ export async function deleteMedia(asset: MediaAsset) {
   await supabase.storage.from(BUCKET).remove([asset.storage_path]);
   const { error } = await supabase.from('alio_media').delete().eq('id', asset.id);
   if (error) throw error;
+}
+
+// ---------------------------------------------------------------------
+// Contact form submissions (public insert, staff-only read/manage)
+// ---------------------------------------------------------------------
+
+/**
+ * Public, unauthenticated insert — deliberately does NOT chain .select()
+ * back. Anon can insert (RLS check(true)) but cannot SELECT rows (that
+ * requires alio_is_authorized_viewer()), and Postgres evaluates an
+ * implicit RETURNING against the SELECT policy too — requesting the row
+ * back here would make a valid anonymous insert fail with a misleading
+ * "violates row-level security policy" error.
+ */
+export async function submitContactForm(input: {
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  service?: string;
+  message: string;
+}) {
+  const { error } = await supabase.from('alio_contact_submissions').insert(input);
+  if (error) throw error;
+}
+
+export async function listContactSubmissions(): Promise<ContactSubmission[]> {
+  const { data, error } = await supabase
+    .from('alio_contact_submissions')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data as ContactSubmission[];
+}
+
+export async function updateSubmissionStatus(id: string, status: ContactSubmissionStatus) {
+  const { error } = await supabase.from('alio_contact_submissions').update({ status }).eq('id', id);
+  if (error) throw error;
+}
+
+export async function deleteContactSubmission(id: string) {
+  const { error } = await supabase.from('alio_contact_submissions').delete().eq('id', id);
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------
+// Staff (roles) — gates Settings / Legal / Access / Audit to 'admin'
+// ---------------------------------------------------------------------
+
+export async function listStaff(): Promise<Staff[]> {
+  const { data, error } = await supabase.from('alio_staff').select('*').order('created_at');
+  if (error) throw error;
+  return data as Staff[];
+}
+
+export async function upsertStaff(email: string, name: string, role: StaffRole): Promise<Staff> {
+  const { data, error } = await supabase
+    .from('alio_staff')
+    .upsert({ email: email.trim().toLowerCase(), name, role }, { onConflict: 'email' })
+    .select()
+    .single();
+  if (error) throw error;
+  return data as Staff;
+}
+
+export async function removeStaff(email: string) {
+  const { error } = await supabase.from('alio_staff').delete().eq('email', email);
+  if (error) throw error;
+}
+
+// ---------------------------------------------------------------------
+// Audit log (read-only from the client — writes happen via DB triggers)
+// ---------------------------------------------------------------------
+
+export async function listAuditLog(limit = 50): Promise<AuditLogEntry[]> {
+  const { data, error } = await supabase
+    .from('alio_audit_log')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  return data as AuditLogEntry[];
 }
 
 function readImageDimensions(file: File): Promise<{ width: number; height: number }> {

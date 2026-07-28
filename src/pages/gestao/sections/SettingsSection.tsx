@@ -1,13 +1,93 @@
 import { useEffect, useState } from 'react';
-import { Save } from 'lucide-react';
+import { Save, UserPlus, Trash2 } from 'lucide-react';
 import { Card } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 import { Field } from '../../../components/ui/Field';
 import { Input } from '../../../components/ui/Input';
+import { Select } from '../../../components/ui/Select';
+import { Badge } from '../../../components/ui/Badge';
+import { Table, THead, TBody, TR, TH, TD } from '../../../components/ui/Table';
 import { Skeleton } from '../../../components/ui/Skeleton';
 import { useToast } from '../../../components/ui/Toast';
-import { getSiteSettings, upsertSiteSettings } from '../../../lib/cms/api';
-import type { SiteSettings } from '../../../lib/cms/types';
+import { getSiteSettings, upsertSiteSettings, listStaff, upsertStaff, removeStaff } from '../../../lib/cms/api';
+import type { SiteSettings, Staff, StaffRole } from '../../../lib/cms/types';
+
+function StaffManager() {
+  const { toast } = useToast();
+  const [staff, setStaff] = useState<Staff[] | null>(null);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [role, setRole] = useState<StaffRole>('editor');
+  const [saving, setSaving] = useState(false);
+
+  const refresh = () => listStaff().then(setStaff).catch(() => setStaff([]));
+  useEffect(() => { refresh(); }, []);
+
+  const add = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      await upsertStaff(email, name, role);
+      toast({ title: 'Membro guardado', description: email, variant: 'success' });
+      setEmail(''); setName(''); setRole('editor');
+      refresh();
+    } catch (err) {
+      toast({ title: 'Falha ao guardar', description: err instanceof Error ? err.message : String(err), variant: 'danger' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const remove = async (member: Staff) => {
+    if (!window.confirm(`Remover ${member.email} da equipa de gestão?`)) return;
+    try {
+      await removeStaff(member.email);
+      toast({ title: 'Membro removido', variant: 'success' });
+      refresh();
+    } catch (err) {
+      toast({ title: 'Falha ao remover', description: err instanceof Error ? err.message : String(err), variant: 'danger' });
+    }
+  };
+
+  return (
+    <Card className="flex flex-col gap-4">
+      <h3 className="text-h6 text-primary">Equipa & Permissões</h3>
+      <p className="text-body-s text-tertiary">
+        <strong>Admin</strong> acede a tudo, incluindo Definições, Legal e esta lista. <strong>Editor</strong> gere
+        conteúdo (Serviços, Blog, Casos, Carreiras, Mensagens, Média) mas não estas áreas sensíveis.
+      </p>
+      <form onSubmit={add} className="grid gap-3 sm:grid-cols-[1fr_1fr_auto_auto] sm:items-end">
+        <Field label="Email"><Input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="pessoa@alio.ao" /></Field>
+        <Field label="Nome"><Input value={name} onChange={(e) => setName(e.target.value)} /></Field>
+        <Field label="Papel">
+          <Select value={role} onChange={(e) => setRole(e.target.value as StaffRole)}>
+            <option value="editor">Editor</option>
+            <option value="admin">Admin</option>
+          </Select>
+        </Field>
+        <Button type="submit" loading={saving} leftIcon={<UserPlus size={15} />}>Adicionar</Button>
+      </form>
+
+      {staff === null ? <Skeleton className="h-24 w-full" /> : staff.length > 0 && (
+        <Table>
+          <THead><TR><TH>Email</TH><TH>Nome</TH><TH>Papel</TH><TH>Acções</TH></TR></THead>
+          <TBody>
+            {staff.map((s) => (
+              <TR key={s.email}>
+                <TD className="font-medium text-primary">{s.email}</TD>
+                <TD>{s.name ?? '—'}</TD>
+                <TD><Badge variant={s.role === 'admin' ? 'brand' : 'neutral'} size="sm">{s.role}</Badge></TD>
+                <TD>
+                  <Button size="sm" variant="ghost" leftIcon={<Trash2 size={14} />} onClick={() => remove(s)} aria-label={`Remover ${s.email}`} />
+                </TD>
+              </TR>
+            ))}
+          </TBody>
+        </Table>
+      )}
+    </Card>
+  );
+}
 
 const SOCIAL_LABELS = ['LinkedIn', 'Facebook', 'X', 'YouTube'];
 
@@ -77,6 +157,8 @@ export function SettingsSection() {
           ))}
         </div>
       </Card>
+
+      <StaffManager />
     </div>
   );
 }

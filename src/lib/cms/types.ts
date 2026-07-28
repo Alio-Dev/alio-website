@@ -96,3 +96,36 @@ export interface MediaAsset {
   height: number | null;
   created_at: string;
 }
+
+export type StaffRole = 'admin' | 'editor';
+
+export interface Staff {
+  email: string;
+  name: string | null;
+  role: StaffRole;
+  created_at: string;
+}
+
+export interface AuditLogEntry {
+  id: number;
+  actor_email: string | null;
+  action: string;
+  table_name: string;
+  record_id: string | null;
+  summary: string | null;
+  created_at: string;
+}
+
+export type ContactSubmissionStatus = 'new' | 'read' | 'archived';
+
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  company: string | null;
+  service: string | null;
+  message: string;
+  status: ContactSubmissionStatus;
+  created_at: string;
+}
